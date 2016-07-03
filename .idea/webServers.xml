@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="d8b2ae8e-ccf3-4226-9662-4aa9ff485fdf" name="auctionSite" url="http://107.180.26.160">
+        <fileTransfer host="107.180.26.160" port="21" rootFolder="/home/jh9222" password="dfe7dfc5dfdfdfc4dfdedfcbdfc3dfc4df93df98dfea" username="jh9222">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
