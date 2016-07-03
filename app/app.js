@@ -28,6 +28,18 @@ angular.module('myApp', [
                 controller: 'AdminCtrl'
             })
 
+            .state('contact', {
+                url: '/contact',
+                templateUrl: 'contact/contact.html?v=' + window.app_version,
+                controller: 'ContactCtrl'
+            })
+
+            .state('login', {
+                url: '/login',
+                templateUrl: 'login/login.html?v=' + window.app_version,
+                controller: 'LoginCtrl'
+            })
+
 
 
     });

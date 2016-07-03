@@ -6,16 +6,43 @@
     <title>My AngularJS App</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- STYLESHEETS -->
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/heroic-features.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Timeline CSS -->
+    <link href="dist/css/timeline.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="bower_components/morrisjs/morris.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- SCRIPTS -->
+    <!-- jQuery -->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="dist/js/sb-admin-2.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/ui-router/release/angular-ui-router.js"></script>
 </head>
 <body ng-app="myApp">
-<ul class="menu">
-    <li><a ui-sref="home" >Home</a></li>
-    <li><a ui-sref="items" >Items</a></li>
-    <li><a ui-sref="admin" >Admin</a></li>
-</ul>
-
 
 <div>
     <div ui-view></div>
@@ -25,8 +52,6 @@
     your browser</a> to improve your experience.</p>
 <![endif]-->
 
-<div>Angular seed app: vsadadasda<span app-version></span></div>
-
 <!-- In production use:
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
 -->
@@ -34,6 +59,8 @@
 <script src="home/homeCtrl.js"></script>
 <script src="admin/adminCtrl.js"></script>
 <script src="items/itemsCtrl.js"></script>
+<script src="contact/contactCtrl.js"></script>
+<script src="login/loginCtrl.js"></script>
 <script src="components/version/version.js"></script>
 <script src="components/version/version-directive.js"></script>
 <script src="components/version/interpolate-filter.js"></script>
