@@ -16,7 +16,12 @@ angular.module('myApp', [
                 controller: 'HomeCtrl'
             })
 
-        $stateProvider
+            .state('items', {
+                url: '/items',
+                templateUrl: 'items/items.html?v=' + window.app_version,
+                controller: 'ItemsCtrl'
+            })
+            
             .state('admin', {
                 url: '/admin',
                 templateUrl: 'admin/admin.html?v=' + window.app_version,
@@ -24,6 +29,6 @@ angular.module('myApp', [
             })
 
 
-        
+
     });
  

@@ -11,8 +11,9 @@
 </head>
 <body ng-app="myApp">
 <ul class="menu">
-    <li><a href="#/home">Home</a></li>
-    <li><a href="#/admin">Admin</a></li>
+    <li><a ui-sref="home" >Home</a></li>
+    <li><a ui-sref="items" >Items</a></li>
+    <li><a ui-sref="admin" >Admin</a></li>
 </ul>
 
 
@@ -32,6 +33,7 @@
 <script src="app.js"></script>
 <script src="home/homeCtrl.js"></script>
 <script src="admin/adminCtrl.js"></script>
+<script src="items/itemsCtrl.js"></script>
 <script src="components/version/version.js"></script>
 <script src="components/version/version-directive.js"></script>
 <script src="components/version/interpolate-filter.js"></script>
