@@ -37,7 +37,7 @@ angular.module('myApp').controller('ItemsCtrl', ['$scope', '$http', '$rootScope'
                 console.log(data);
             });
 
-
+//jnj
             /*$http({$app->run();//run
                 method: 'POST',
                 url: '../index.php/postBid',
