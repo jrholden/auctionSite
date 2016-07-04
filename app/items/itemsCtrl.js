@@ -20,12 +20,27 @@ angular.module('myApp').controller('ItemsCtrl', ['$scope', '$http', '$rootScope'
 
     $scope.makeBid = function(){
 
-        if($scope.name == undefined || $scope.name == ''){
+        if(/*$scope.name == undefined || $scope.name == ''*/false){
             alert("No Name");
         }else{
-            $scope.bid = {name: $scope.name, email: $scope.email, phone: $scope.phone, bid: $scope.bid, itemId: $scope.itemId}
+            //$scope.bid = {name: $scope.name, email: $scope.email, phone: $scope.phone, bid: $scope.bid, itemId: $scope.itemId};
 
+            $scope.bid = {name: "Corey Weber", email: "Test@Test.com", phone: "90299999999", bid: 1000000, itemId: 1};
+
+            $http({
+                method: 'postBid',
+                url: '/postBid',
+                data: $scope.bid,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).
+            success(function(response) {
+                $scope.codeStatus = response.data;
+            }).
+            error(function(response) {
+                $scope.codeStatus = response || "Request failed";
+            });
             //todo add to db
+            //http.post('/database.php', $scope.bid).then(successCallback, errorCallback);
         }
 
     };
@@ -36,5 +51,6 @@ angular.module('myApp').controller('ItemsCtrl', ['$scope', '$http', '$rootScope'
 
     //initialize
     $scope.getItems();
+    $scope.makeBid();
 
 }]);
