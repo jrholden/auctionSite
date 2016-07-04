@@ -27,9 +27,20 @@ angular.module('myApp').controller('ItemsCtrl', ['$scope', '$http', '$rootScope'
 
             $scope.bid = {name: "Corey Weber", email: "Test@Test.com", phone: "90299999999", bid: 1000000, itemId: 1};
 
-            $http({
-                method: 'postBid',
-                url: '/postBid',
+            /*$http.post('index.php/postBid', $scope.bid).success(function(response){
+                console.log("not fed up!", response);
+            }).error(function(response){
+                console.log("fed up!");
+            });*/
+
+            $http.get('index.php/').success(function(data){
+                console.log(data);
+            });
+
+
+            /*$http({$app->run();//run
+                method: 'POST',
+                url: '../index.php/postBid',
                 data: $scope.bid,
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             }).
@@ -38,7 +49,7 @@ angular.module('myApp').controller('ItemsCtrl', ['$scope', '$http', '$rootScope'
             }).
             error(function(response) {
                 $scope.codeStatus = response || "Request failed";
-            });
+            });*/
             //todo add to db
             //http.post('/database.php', $scope.bid).then(successCallback, errorCallback);
         }
