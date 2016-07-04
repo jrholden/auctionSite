@@ -8,7 +8,7 @@ $app = new Slim();
 //require 'vendor/autoload.php';
 //use Mailgun\Mailgun;
 
-$app->get('/getHours', 'getHours');
+$app->post('/postBid', 'postBid');
 $app->get('/getTodaysDate', 'getTodaysDate');
 $app->get('/getTodaysHours', 'getTodaysHours');
 $app->get('/getPrices', 'getPrices');
@@ -16,27 +16,20 @@ $app->get('/getPricesNew', 'getPricesNew');
 $app->post('/sendMail','sendMail');
 $app->run();//run
 
-function getHours(){
-    $theMonth = $_REQUEST['month'];
-    $sql = "SELECT * FROM cavent_hours WHERE month = $theMonth";
+function postBid(){
+    $bid = $_REQUEST['bid'];
+    $sql = "";
 
-    try {
-        $db = getConnection();
-        $stmt = $db->query($sql);
-        $hours = $stmt->fetchAll(PDO::FETCH_OBJ);
-        $db = null;
-        echo json_encode($hours);
-
-    } catch(PDOException $e) {
-        echo '{"error":{"text":'. $e->getMessage() .'}}';
-    }
+    echo "Hello";
 }
+
 function getTodaysDate(){
     $month = date('M');//Get month
     $date = date('j');//get day of month
 
     echo "<strong>Today:</strong> ".$month." ".$date."";
 }
+
 function getTodaysHours(){
 
     $month = date('n') - 1;//Get month (off by 1)
@@ -193,10 +186,7 @@ function sendMail(){
     $msg = wordwrap($msg,70);
 
     // send emails
-    /*mail("adam@maritimefun.com","Cavendish Entertainment Contact Request",$msg, "From: ". $email ."" . "\r\n");
-    mail("matt@maritimefun.com","Cavendish Entertainment Contact Request",$msg, "From: ". $email ."" . "\r\n");
-    mail("".$email."","Cavendish Entertainment Contact Request",$msg, "From: info@maritimefun.com" . "\r\n");*/
-    mail("corey.weber@hotmail.com","Cavendish Entertainment Contact Request",$msg, "From: ". $email ."" . "\r\n");
+    mail("corey.weber@hotmail.com","Contact Request",$msg, "From: ". $email ."" . "\r\n");
 }
 function getConnection() {
 	$dbhost="";
