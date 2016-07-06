@@ -43,19 +43,34 @@ angular.module('myApp').controller('ItemsCtrl', ['$scope', '$http', '$rootScope'
             /*$http.get('index.php').success(function (data) {
                 console.log(data);
             });*/
-            
+
+
+            $http({
+
+                url: "index.php/postBid",
+                data: $scope.bid,
+                method: 'POST',
+                headers : {'Content-Type':'application/json; charset=UTF-8'}
+
+            }).success(function(data){
+
+                console.log("OK", data)
+
+            }).error(function(err){"ERR", console.log(err)});
+
+
             /*$http({$app->run();//run
-             method: 'POST',
-             url: '../index.php/postBid',
-             data: $scope.bid,
-             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-             }).
-             success(function(response) {
-             $scope.codeStatus = response.data;
-             }).
-             error(function(response) {
-             $scope.codeStatus = response || "Request failed";
-             });*/
+                method: 'POST',
+                url: '../index.php/postBid',
+                data: $scope.bid,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).
+            success(function(response) {
+                $scope.codeStatus = response.data;
+            }).
+            error(function(response) {
+                $scope.codeStatus = response || "Request failed";
+            });*/
             //todo add to db
             //http.post('/database.php', $scope.bid).then(successCallback, errorCallback);
         }
