@@ -14,8 +14,12 @@ angular.module('myApp').controller('ItemsCtrl', ['$scope', '$http', '$rootScope'
 
     $scope.getItems = function () {
 
-        //todo get items from db
-        $scope.items = [{title: "Title 1"}, {title: "Title 2"}];
+        console.log("Testing");
+
+        $http.get("getItems.php")
+            .then(function (response) {
+                $scope.items = response.data;
+            });
     };
 
     $scope.makeBid = function () {
@@ -26,24 +30,6 @@ angular.module('myApp').controller('ItemsCtrl', ['$scope', '$http', '$rootScope'
             //$scope.bid = {name: $scope.name, email: $scope.email, phone: $scope.phone, bid: $scope.bid, itemId: $scope.itemId};
 
             $scope.bid = {name: "Corey Weber", email: "Test@Test.com", phone: "90299999999", bid: 1000000, itemId: 1};
-
-            /*$http.post('index.php/postBid', $scope.bid).success(function(response){
-             console.log("not fed up!", response);
-             }).error(function(response){
-             console.log("fed up!");
-             });*/
-
-            console.log("Testing");
-
-            $http.get("getItems.php")
-                .then(function (response) {
-                    console.log(response);
-                });
-
-            /*$http.get('index.php').success(function (data) {
-                console.log(data);
-            });*/
-
 
             $http({
 
@@ -58,21 +44,6 @@ angular.module('myApp').controller('ItemsCtrl', ['$scope', '$http', '$rootScope'
 
             }).error(function(err){"ERR", console.log(err)});
 
-
-            /*$http({$app->run();//run
-                method: 'POST',
-                url: '../index.php/postBid',
-                data: $scope.bid,
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-            }).
-            success(function(response) {
-                $scope.codeStatus = response.data;
-            }).
-            error(function(response) {
-                $scope.codeStatus = response || "Request failed";
-            });*/
-            //todo add to db
-            //http.post('/database.php', $scope.bid).then(successCallback, errorCallback);
         }
 
     };

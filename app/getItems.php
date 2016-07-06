@@ -19,11 +19,15 @@ if ($conn->connect_error) {
 $sql = "SELECT * FROM auction_items";
 $result = $conn->query($sql);
 
+$data = array();
+
 if ($result->num_rows > 0) {
     // output data of each row
     while ($row = $result->fetch_assoc()) {
-        echo $row["items_id"];
+        $data[] = $row;
     }
+    
+    echo json_encode($data);
 } else {
     echo "0 results";
 }
