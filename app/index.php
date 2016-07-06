@@ -40,18 +40,23 @@ $conn = new mysqli($dbhost, $dbuser, $dbpass, $dataBase);
 if ($conn->connect_error) {
 	die("Connection failed: " . $conn->connect_error);
 }
+$data = json_decode(file_get_contents("php://input"), true);
 
-$sql = "SELECT * FROM auction_bids";
-$result = $conn->query($sql);
+//$body = json_decode($REQUEST_[getBody()], true);
+echo($body);
 
-if ($result->num_rows > 0) {
-	// output data of each row
-	while($row = $result->fetch_assoc()) {
-		echo $row["bids_id"];
-	}
-} else {
-	echo "0 results";
+/*$sql = "INSERT INTO auction_bids ".
+	"(bids_name)".
+	"VALUES".
+	"('$name')";
+
+mysqli_select_db($dataBase);
+$retval = mysqli_query($conn, $sql);
+if(!$retval){
+	echo "Failed";
+}else{
+	echo "Success";
 }
-$conn->close();
+mysqli_close($conn);*/
 
 ?>

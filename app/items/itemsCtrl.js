@@ -47,7 +47,7 @@ angular.module('myApp').controller('ItemsCtrl', ['$scope', '$http', '$rootScope'
 
             $http({
 
-                url: "index.php/postBid",
+                url: "index.php",
                 data: $scope.bid,
                 method: 'POST',
                 headers : {'Content-Type':'application/json; charset=UTF-8'}
