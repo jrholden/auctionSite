@@ -35,7 +35,7 @@ angular.module('myApp').controller('ItemsCtrl', ['$scope', '$http', '$rootScope'
 
             console.log("Testing");
 
-            $http.get("index.php")
+            $http.get("getItems.php")
                 .then(function (response) {
                     console.log(response);
                 });
