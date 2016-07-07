@@ -18,9 +18,11 @@ angular.module('myApp').controller('ItemsCtrl', ['$scope', '$http', '$rootScope'
 
         $http.get("getItems.php")
             .then(function (response) {
-                $scope.items = response.data;
+                $rootScope.items = response.data;
             });
     };
+    
+
 
     $scope.makeBid = function () {
 
