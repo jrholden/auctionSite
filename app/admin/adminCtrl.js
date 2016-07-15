@@ -11,7 +11,7 @@ angular.module('myApp').controller('AdminCtrl', ['$scope', '$http', function($sc
         // Sets the scope variable for photo
         var picture = document.querySelector('input[type=file]').files[0];
 
-        var reader  = new FileReader();
+        var reader = new FileReader();
 
         reader.addEventListener("load", function() {
             $scope.picture = reader.result;
@@ -24,8 +24,11 @@ angular.module('myApp').controller('AdminCtrl', ['$scope', '$http', function($sc
 
     $scope.makeItem = function() {
 
+        var imageBase64 = $scope.picture;
+        var blob = new Blob([imageBase64], { type: 'image/png' });
+
         //todo error handling check if variables are empty before creating  (alerts if empty)
-        $scope.item = { name: $scope.name, price: $scope.price, image: $scope.picture, description: $scope.description }
+        $scope.item = { name: $scope.name, price: $scope.price, image: blob, description: $scope.description }
 
         $http({
             url: "api/item/insertItem.php",
