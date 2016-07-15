@@ -22,7 +22,7 @@ angular.module('myApp').controller('ItemsCtrl', ['$scope', '$http', '$rootScope'
             });
     };
 
-    $scope.makeBid = function () {
+    $scope.makeBid = function (itemId) {
 
         if ($scope.name == undefined) {
             alert("No Name");
@@ -32,7 +32,7 @@ angular.module('myApp').controller('ItemsCtrl', ['$scope', '$http', '$rootScope'
                 email: $scope.email,
                 phone: $scope.phone,
                 bid: $scope.bid,
-                itemId: $scope.items.itemId
+                itemId: itemId
             };
         
             //$scope.bid = {name: "Corey Weber", email: "Test@Test.com", phone: "90299999999", bid: 1000000, itemId: 1};
