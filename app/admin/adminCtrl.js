@@ -15,7 +15,7 @@ angular.module('myApp').controller('AdminCtrl', ['$scope', '$http', function ($s
         console.log("picture: ", $scope.picture);
 
         $http({
-            url: "insertItem.php",
+            url: "api/item/insertItem.php",
             data: $scope.item,
             method: 'POST',
             headers: {'Content-Type': 'application/json; charset=UTF-8'}

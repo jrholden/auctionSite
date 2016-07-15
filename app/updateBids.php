@@ -4,6 +4,11 @@
  * User: Corey Weber
  * Date: 2016-07-06
  * Time: 6:20 PM
+ * 
+ * 
+ * todo MUST BE CHANGED TO WORK WITH BIDS
+ * 
+ * 
  */
 $dbhost = "107.180.26.160";
 $dbuser = "jrholden";
