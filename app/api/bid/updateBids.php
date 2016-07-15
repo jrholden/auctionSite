@@ -10,16 +10,7 @@
  * 
  * 
  */
-$dbhost = "107.180.26.160";
-$dbuser = "jrholden";
-$dbpass = "Google92@";
-$dataBase = "AUCTIONTABLES";
-// Create connection
-$conn = new mysqli($dbhost, $dbuser, $dbpass, $dataBase);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include '../database.php';
 
 $data = json_decode(file_get_contents("php://input"), true);
 echo $data;
