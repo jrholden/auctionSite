@@ -40,23 +40,23 @@ $conn = new mysqli($dbhost, $dbuser, $dbpass, $dataBase);
 if ($conn->connect_error) {
 	die("Connection failed: " . $conn->connect_error);
 }
-$data = json_decode(file_get_contents("php://input"), true);
+$body = json_decode(file_get_contents("php://input"), true);
 
 //$body = json_decode($REQUEST_[getBody()], true);
-echo($body);
+echo($body['name']);
 
-/*$sql = "INSERT INTO auction_bids ".
+$sql = "INSERT INTO auction_bids ".
 	"(bids_name)".
 	"VALUES".
 	"('$name')";
 
-mysqli_select_db($dataBase);
+//mysqli_select_db($dataBase);
 $retval = mysqli_query($conn, $sql);
 if(!$retval){
 	echo "Failed";
 }else{
 	echo "Success";
 }
-mysqli_close($conn);*/
+mysqli_close($conn);
 
 ?>

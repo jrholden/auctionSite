@@ -25,12 +25,36 @@ angular.module('myApp').controller('AdminCtrl', ['$scope', '$http', function ($s
             console.log(err);
         });
     };
+    $scope.deleteItem = function (itemNum) {
+        
+        console.log(itemNum);
+        $http({
+            url: "deleteItem.php",
+            data: itemNum,
+            method: 'POST',
+            headers: {'Content-Type': 'application/json; charset=UTF-8'}
+        }).success(function (data) {
+            console.log("OK", data);
+        }).error(function (err) {
+            console.log(err);
+        });
+    };
 
     $scope.fileChange = function(elm){
         console.log("hey", elm);
         $scope.picture = elm.files;
         $scope.$apply();
     }
+    $scope.getItems = function () {
 
+        console.log("Testing");
+
+        $http.get("getItems.php")
+            .then(function (response) {
+                $scope.items = response.data;
+                console.log($scope.items);
+            });
+    };
+    $scope.getItems();
 
 }]);
