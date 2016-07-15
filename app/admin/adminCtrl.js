@@ -29,7 +29,7 @@ angular.module('myApp').controller('AdminCtrl', ['$scope', '$http', function ($s
         
         console.log(itemNum);
         $http({
-            url: "deleteItem.php",
+            url: "api/item/deleteItem.php",
             data: itemNum,
             method: 'POST',
             headers: {'Content-Type': 'application/json; charset=UTF-8'}
@@ -49,7 +49,7 @@ angular.module('myApp').controller('AdminCtrl', ['$scope', '$http', function ($s
 
         console.log("Testing");
 
-        $http.get("getItems.php")
+        $http.get("api/item/getItems.php")
             .then(function (response) {
                 $scope.items = response.data;
                 console.log($scope.items);

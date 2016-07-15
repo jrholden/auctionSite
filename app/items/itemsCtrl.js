@@ -16,7 +16,7 @@ angular.module('myApp').controller('ItemsCtrl', ['$scope', '$http', '$rootScope'
 
         console.log("Testing");
 
-        $http.get("getItems.php")
+        $http.get("api/item/getItems.php")
             .then(function (response) {
                 $scope.items = response.data;
             });
@@ -38,7 +38,7 @@ angular.module('myApp').controller('ItemsCtrl', ['$scope', '$http', '$rootScope'
             //$scope.bid = {name: "Corey Weber", email: "Test@Test.com", phone: "90299999999", bid: 1000000, itemId: 1};
 
             $http({
-                url: "insertBid.php",
+                url: "api/bid/insertBid.php",
                 data: $scope.bid,
                 method: 'POST',
                 headers: {'Content-Type': 'application/json; charset=UTF-8'}
