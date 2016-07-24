@@ -16,7 +16,7 @@ angular.module('myApp').controller('ItemsCtrl', ['$scope', '$http', '$rootScope'
 
         console.log("Testing");
 
-        $http.get("getItems.php")
+        $http.get("api/item/getItems.php")
             .then(function (response) {
                 $rootScope.items = response.data;
             });
@@ -24,31 +24,36 @@ angular.module('myApp').controller('ItemsCtrl', ['$scope', '$http', '$rootScope'
     
 
 
-    $scope.makeBid = function () {
+    $scope.makeBid = function (itemId) {
 
-        if (/*$scope.name == undefined || $scope.name == ''*/false) {
+        if ($scope.name == undefined) {
             alert("No Name");
         } else {
-            //$scope.bid = {name: $scope.name, email: $scope.email, phone: $scope.phone, bid: $scope.bid, itemId: $scope.itemId};
-
-            $scope.bid = {name: "Corey Weber", email: "Test@Test.com", phone: "90299999999", bid: 1000000, itemId: 1};
+            $scope.bid = {
+                name: $scope.name,
+                email: $scope.email,
+                phone: $scope.phone,
+                bid: $scope.bid,
+                itemId: itemId
+            };
+        
+            //$scope.bid = {name: "Corey Weber", email: "Test@Test.com", phone: "90299999999", bid: 1000000, itemId: 1};
 
             $http({
-
-                url: "index.php",
+                url: "api/bid/insertBid.php",
                 data: $scope.bid,
                 method: 'POST',
-                headers : {'Content-Type':'application/json; charset=UTF-8'}
+                headers: {'Content-Type': 'application/json; charset=UTF-8'}
+            }).success(function (data) {
+                console.log("OK", data);
+            }).error(function (err) {
+                console.log(err);
+            });
+        };
+     
 
-            }).success(function(data){
 
-                console.log("OK", data)
-
-            }).error(function(err){"ERR", console.log(err)});
-
-        }
-
-    };
+        };
 
     //todo
     //getHighestBid
@@ -56,6 +61,6 @@ angular.module('myApp').controller('ItemsCtrl', ['$scope', '$http', '$rootScope'
 
     //initialize
     $scope.getItems();
-    $scope.makeBid();
+    
 
 }]);

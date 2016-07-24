@@ -1,15 +1,11 @@
 <?php
-
-$dbhost = "107.180.26.160";
-$dbuser = "jrholden";
-$dbpass = "Google92@";
-$dataBase = "AUCTIONTABLES";
-// Create connection
-$conn = new mysqli($dbhost, $dbuser, $dbpass, $dataBase);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+/**
+ * Created by PhpStorm.
+ * User: Corey Weber
+ * Date: 2016-07-06
+ * Time: 5:10 PM
+ */
+include '../database.php';
 
 $data = json_decode(file_get_contents("php://input"), true);
 
@@ -19,7 +15,7 @@ $image = $data['image'];
 $desc = $data['description'];
 
 
-$sql = "INSERT INTO auction_items WHERE item_id = '45' ".
+$sql = "INSERT INTO auction_items ".
     "(item_name, item_price, item_image, item_desc)".
     "VALUES".
     "('$name', '$price', '$image', '$desc')";
@@ -32,5 +28,3 @@ if(!$retval){
 }
 
 mysqli_close($conn);
-
-?>

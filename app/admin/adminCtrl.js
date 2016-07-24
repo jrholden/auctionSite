@@ -3,85 +3,74 @@
  */
 'use strict';
 
-angular.module('myApp').controller('AdminCtrl', ['$scope','$rootScope', '$http', function ($scope, $rootScope, $http) {
+angular.module('myApp').controller('AdminCtrl', ['$scope', '$http', function($scope, $http) {
 
     console.log("We Are Admin");
-    
-    
-    $scope.makeItem = function () {
+
+    document.getElementById('file').onchange = function() {
+        // Sets the scope variable for photo
+        var picture = document.querySelector('input[type=file]').files[0];
+
+        var reader = new FileReader();
+
+        reader.addEventListener("load", function() {
+            $scope.picture = reader.result;
+        }, false);
+
+        if (file) {
+            reader.readAsDataURL(picture);
+        }
+    };
+
+    $scope.makeItem = function() {
+
+        var imageBase64 = $scope.picture;
+        var blob = new Blob([imageBase64], { type: 'image/png' });
 
         //todo error handling check if variables are empty before creating  (alerts if empty)
-        $scope.item = {name: $scope.name, price: $scope.price, image: $scope.picture, description: $scope.description}
-        console.log("picture: ", $scope.picture);
+        $scope.item = { name: $scope.name, price: $scope.price, image: blob, description: $scope.description }
 
         $http({
-            url: "insertItem.php",
+            url: "api/item/insertItem.php",
             data: $scope.item,
             method: 'POST',
-            headers: {'Content-Type': 'application/json; charset=UTF-8'}
-        }).success(function (data) {
+            headers: { 'Content-Type': 'application/json; charset=UTF-8' }
+        }).success(function(data) {
             console.log("OK", data);
-        }).error(function (err) {
+        }).error(function(err) {
             console.log(err);
         });
     };
+    $scope.deleteItem = function(itemNum) {
 
-    $scope.updateItem = function () {
-
-        //todo error handling check if variables are empty before creating  (alerts if empty)
-        $scope.itemUpdate = {name: $scope.name, price: $scope.price, image: $scope.picture, description: $scope.description}
-        console.log("picture: ", $scope.picture);
-
+        console.log(itemNum);
         $http({
-            url: "updateItem.php",
-            data: $scope.itemUpdate,
+            url: "api/item/deleteItem.php",
+            data: itemNum,
             method: 'POST',
-            headers: {'Content-Type': 'application/json; charset=UTF-8'}
-        }).success(function (data) {
+            headers: { 'Content-Type': 'application/json; charset=UTF-8' }
+        }).success(function(data) {
             console.log("OK", data);
-        }).error(function (err) {
+        }).error(function(err) {
             console.log(err);
         });
     };
 
-    $scope.getItemId = function () {
-
-        console.log("Testing");
-
-        $http.get("getItemId.php")
-            .then(function (response) {
-                $scope.itemId = response.data;
-                console.log($scope.itemId);
-            });
-        
-    };
-    
-    $scope.deleteItem = function () {
-
-        //todo error handling check if variables are empty before creating  (alerts if empty)
-        $scope.getItemId();
-       
-
-        $http({
-            url: "deleteItem.php",
-            data: $scope.itemId,
-            method: 'POST',
-            headers: {'Content-Type': 'application/json; charset=UTF-8'}
-        }).success(function (data) {
-            console.log("OK", data);
-        }).error(function (err) {
-            console.log(err);
-        });
-    };
-
-    
-    
-
-    $scope.fileChange = function(elm){
+    $scope.fileChange = function(elm) {
         console.log("hey", elm);
         $scope.picture = elm.files;
         $scope.$apply();
     }
+    $scope.getItems = function() {
 
+        console.log("Testing");
+
+        $http.get("api/item/getItems.php")
+            .then(function(response) {
+                $scope.items = response.data;
+                console.log($scope.items);
+            });
+    };
+    $scope.getItems();
 
 }]);
