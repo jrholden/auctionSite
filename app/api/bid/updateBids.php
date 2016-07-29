@@ -13,14 +13,14 @@
 include '../database.php';
 
 $data = json_decode(file_get_contents("php://input"), true);
-echo $data;
+
 $itemId = $data['itemNum'];
 
 $name = $data['name'];
 $price = $data['price'];
 $image = $data['image'];
 $desc = $data['description'];
-
+echo $name;
 
 $sql = "UPDATE auction_items SET item_name = $name, item_price = $price, item_image = $image, item_desc = $desc WHERE item_id = $itemId";
 

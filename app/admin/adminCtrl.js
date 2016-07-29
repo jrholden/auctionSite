@@ -3,7 +3,7 @@
  */
 'use strict';
 
-angular.module('myApp').controller('AdminCtrl', ['$scope', '$http', function($scope, $http) {
+angular.module('myApp').controller('AdminCtrl', ['$scope', '$http','$sce', function($scope, $http, $sce) {
 
     console.log("We Are Admin");
 
@@ -24,11 +24,8 @@ angular.module('myApp').controller('AdminCtrl', ['$scope', '$http', function($sc
 
     $scope.makeItem = function() {
 
-        var imageBase64 = $scope.picture;
-        var blob = new Blob([imageBase64], { type: 'image/png' });
-
         //todo error handling check if variables are empty before creating  (alerts if empty)
-        $scope.item = { name: $scope.name, price: $scope.price, image: blob, description: $scope.description }
+        $scope.item = { name: $scope.name, price: $scope.price, image: $scope.picture, description: $scope.description }
 
         $http({
             url: "api/item/insertItem.php",
@@ -41,6 +38,31 @@ angular.module('myApp').controller('AdminCtrl', ['$scope', '$http', function($sc
             console.log(err);
         });
     };
+    
+    $scope.editItem = function(item){
+
+        console.log(item);
+        
+        $http({
+            url: "api/item/updateItem.php",
+            data: item,
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json; charset=UTF-8' }
+        }).success(function(data) {
+            console.log("OK", data);
+        }).error(function(err) {
+            console.log(err);
+        });
+        
+    };
+
+    $scope.setModal = function (item) {
+        $scope.modalItem = item;
+        console.log($scope.modalItem);
+    };
+
+
+
     $scope.deleteItem = function(itemNum) {
 
         console.log(itemNum);
@@ -60,7 +82,8 @@ angular.module('myApp').controller('AdminCtrl', ['$scope', '$http', function($sc
         console.log("hey", elm);
         $scope.picture = elm.files;
         $scope.$apply();
-    }
+    };
+    
     $scope.getItems = function() {
 
         console.log("Testing");

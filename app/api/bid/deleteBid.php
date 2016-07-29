@@ -8,10 +8,8 @@
 include '../database.php';
 
 $data = json_decode(file_get_contents("php://input"), true);
-echo $data;
-$itemId = $data['itemNum'];
 
-$sql = "delete from auction_bids where bid_id = $data";
+$sql = "delete from auction_bids where bids_id = $data";
 
 $retval = mysqli_query($conn, $sql);
 if(!$retval){
