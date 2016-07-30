@@ -59,6 +59,7 @@ angular.module('myApp').controller('AdminCtrl', ['$scope', '$http','$sce', funct
     $scope.setModal = function (item) {
         $scope.modalItem = item;
         console.log($scope.modalItem);
+       
     };
 
 
@@ -78,11 +79,78 @@ angular.module('myApp').controller('AdminCtrl', ['$scope', '$http','$sce', funct
         });
     };
 
+    $scope.deleteAllItems = function() {
+
+        
+        $http({
+            url: "api/item/deleteAllItems.php",
+            method: 'POST',
+        }).success(function(data) {
+            console.log("OK", data);
+        }).error(function(err) {
+            console.log(err);
+        });
+    };
+
     $scope.fileChange = function(elm) {
         console.log("hey", elm);
         $scope.picture = elm.files;
         $scope.$apply();
     };
+
+    $scope.setModal2 = function(bidId) {
+        
+        $http.get("api/bid/getHighestBid.php")
+            .then(function(response) {
+                $scope.bids = response.data;
+                
+
+                var $index = null;
+                var $count = 0;
+                var $found = false;
+                while ($count < $scope.bids.length && !$found){
+                    if (bidId == $scope.bids[$count].bids_id){
+                        $index = $count;
+                        $count = 0;
+                        $found = true;
+                    }else{
+                        $count++;
+                    }
+                }
+                    $scope.modalItem2 = $scope.bids[$index];
+                    console.log($scope.modalItem2);
+                if ($index == null){
+                    alert("No Bidders Interested");
+                }
+            });
+        
+        
+    };
+    
+    /*$scope.setModal2 = function(bidId){
+        
+        $scope.getBids();
+        
+        var $index = null;
+        var $found = false;
+        var $count = 0;
+        
+        
+        /!*while (!$found){
+            if (bidId == $scope.bids[$count].bids_id){
+                $index = $count;
+                $count = 0;
+                $found = true;
+            }else{
+                $count++;
+            }
+        }
+        $scope.modalItem2 = $scope.bids[$index];*!/
+
+
+
+    };*/
+    
     
     $scope.getItems = function() {
 
@@ -91,7 +159,7 @@ angular.module('myApp').controller('AdminCtrl', ['$scope', '$http','$sce', funct
         $http.get("api/item/getItems.php")
             .then(function(response) {
                 $scope.items = response.data;
-                console.log($scope.items);
+                /*console.log($scope.items);*/
             });
     };
     $scope.getItems();

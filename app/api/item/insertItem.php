@@ -7,12 +7,17 @@
  */
 include '../database.php';
 
+// This is the directory where images will be saved
+
+
 $data = json_decode(file_get_contents("php://input"), true);
 
 $name = $data['name'];
 $price = $data['price'];
 $image = $data['image'];
 $desc = $data['description'];
+
+
 
 
 $sql = "INSERT INTO auction_items ".

@@ -84,6 +84,7 @@
         <p> ... </p>
     </div>
     <!-- /.row -->
+    <button type="button" class="btn btn-warning btn-lg" ng-click="deleteAllItems()">DELETE ALL ITEMS</button>
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
@@ -93,7 +94,7 @@
                 <div class="panel-body">
                     <!-- Project One -->
                     <div class="container">
-                        <div ng-repeat="item in items" class="row text-center">
+                        <div class="row text-center">
                             <div id="myCarousel" class="carousel slide" data-ride="carousel">
                                 <!-- Indicators -->
                                 <ol class="carousel-indicators">
@@ -102,17 +103,19 @@
                                 </ol>
                                 <!-- Wrapper for slides -->
                                 <div class="carousel-inner" role="listbox">
-                                    <div class="item active">
-                                        <div class="col-md-3 col-sm-6 hero-feature">
+                                    <div class="item" ng-class="{active:!$first}">
+                                        <div class="col-md-3 col-sm-6 hero-feature" ng-repeat="item in items">
                                             <div class="thumbnail">
-                                                <img src="{{ blobToURL(item.item_image) }}" alt="">
+                                                <img src="{{ item.item_image }}" alt="">
                                                 <div class="caption">
                                                     <h3>{{ item.item_name }}</h3>
                                                     <p>{{ item.item_desc }}{{ item.item_id }}</p>
                                                     <p>
-                                                         <a class="btn btn-warning" ng-click="deleteItem(item.item_id)">Delete</a>
                                                         <button type="button" ng-click="setModal(item)" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
                                                             Edit Item
+                                                        </button>
+                                                        <button type="button" ng-click="setModal2(item.items_high_bid)" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal2">
+                                                            Current Bidder
                                                         </button>
                                                     </p>
                                                 </div>
@@ -136,8 +139,8 @@
     </div>
 </div>
 <!-- /.row -->
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal2">Open Modal</button>
+
+<!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal2">Open Modal</button>-->
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
@@ -172,6 +175,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-warning" ng-click="deleteItem(modalItem.item_id)">Delete</button>
                 <button type="button" class="btn btn-primary" ng-click="editItem(modalItem)">Save changes</button>
             </div>
         </div>
@@ -187,30 +191,26 @@
             <div class="modal-body">
                 <div class="row" style="padding-bottom: 10px;">
                     <div class="col-md-4">
-                        <label>First Name</label>
-                        <p>Gloria</p>
-                    </div>
-                    <div class="col-md-4">
-                        <label>Last Name</label>
-                        <p>Comeau</p>
+                        <label>Name</label>
+                        <p>{{ modalItem2.bids_name }}</p>
                     </div>
                 </div>
                 <div class="row" style="padding-bottom: 10px;">
                     <div class="col-md-6">
-                        <label>Home Address</label>
-                        <p>3 Picton Beete Cres, Stratford, PE</p>
+                        <label>Email</label>
+                        <p>{{ modalItem2.bids_email }}</p>
                     </div>
                 </div>
                 <div class="row" style="padding-bottom: 10px;">
                     <div class="col-md-6">
-                        <label>Email Address</label>
-                        <p>gloria@hotmail.com</p>
+                        <label>Telephone</label>
+                        <p>{{ modalItem2.bids_phone }}</p>
                     </div>
                 </div>
                 <div class="row" style="padding-bottom: 10px;">
                     <div class="col-md-6">
-                        <label>Winning Bid</label>
-                        <p>$50</p>
+                        <label>Current High Bid</label>
+                        <p>{{ modalItem2.bids_bid }}</p>
                     </div>
                 </div>
             </div>
