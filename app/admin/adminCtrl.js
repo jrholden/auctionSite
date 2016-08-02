@@ -137,59 +137,7 @@ angular.module('myApp').controller('AdminCtrl', ['$scope', '$http','$sce', funct
             //no bid error
             $scope.isBid = false;
         }
-
-        //send bid id get back the bid item
-        /*$http.get("api/bid/getHighestBid.php")
-            .then(function(response) {
-                $scope.bids = response.data;
-                
-
-                var $index = null;
-                var $count = 0;
-                var $found = false;
-                while ($count < $scope.bids.length && !$found){
-                    if (bidId == $scope.bids[$count].bids_id){
-                        $index = $count;
-                        $count = 0;
-                        $found = true;
-                    }else{
-                        $count++;
-                    }
-                }
-                    $scope.modalItem2 = $scope.bids[$index];
-                    console.log($scope.modalItem2);
-                if ($index == null){
-                    alert("No Bidders Interested");
-                }
-            });*/
-        
-        
     };
-    
-    /*$scope.setModal2 = function(bidId){
-        
-        $scope.getBids();
-        
-        var $index = null;
-        var $found = false;
-        var $count = 0;
-        
-        
-        /!*while (!$found){
-            if (bidId == $scope.bids[$count].bids_id){
-                $index = $count;
-                $count = 0;
-                $found = true;
-            }else{
-                $count++;
-            }
-        }
-        $scope.modalItem2 = $scope.bids[$index];*!/
-
-
-
-    };*/
-    
     
     $scope.getItems = function() {
 
