@@ -68,9 +68,14 @@
     <!-- /.row -->
     <!-- Projects Row -->
     <div class="row">
+        <div ng-show='bidMade' class="alert alert-success">
+            <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Success!</strong> Indicates a successful or positive action.
+        </div>
+        <!--<li >No items in this list yet!</li>-->
         <div ng-repeat="item in items" class="col-md-4 portfolio-item">
-            <a href="#">
-                <img class="img-responsive" src="{{ item.picture }}" alt="">
+            <a>
+                <img class="img-responsive" src="{{ item.item_image }}" alt="" height="125" width="100">
             </a>
             <h3>
                 <a>{{ item.item_name }}</a>
@@ -153,7 +158,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button ng-click="makeBid(modalItem.item_id)" type="button" class="btn btn-primary">Submit Bid</button>
+                    <button ng-click="makeBid(modalItem.item_id)" type="button" class="btn btn-primary" data-dismiss="modal">Submit Bid</button>
                 </div>
             </div>
         </div>

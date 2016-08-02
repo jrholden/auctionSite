@@ -1,9 +1,13 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: Jordan
+ * Date: 8/1/2016
+ * Time: 7:46 PM
+ */
 include '../database.php';
 
-$data = json_decode(file_get_contents("php://input"), true);
-
-$sql = "SELECT * FROM auction_bids WHERE bids_itemId = $data";
+$sql = "SELECT * FROM auction_login";
 $result = $conn->query($sql);
 
 $data = array();

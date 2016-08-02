@@ -8,16 +8,18 @@
 include '../database.php';
 
 $data = json_decode(file_get_contents("php://input"), true);
-echo $data;
-$itemId = $data['itemNum'];
+$itemId = $data['item_id'];
+$name = $data['item_name'];
+$price = $data['item_price'];
+$image = $data['item_image'];
+$desc = $data['item_desc'];
+$hBid = $data['items_high_bid'];
+echo $name;
 
-$name = $data['name'];
-$price = $data['price'];
-$image = $data['image'];
-$desc = $data['description'];
+$sql = "UPDATE auction_items SET item_name = '$name', item_price = '$price', item_image = '$image', item_desc = '$desc', items_high_bid = '$hBid'  WHERE item_id = $itemId";
 
 
-$sql = "UPDATE auction_items SET item_name = $name, item_price = $price, item_image = $image, item_desc = $desc WHERE item_id = $itemId";
+
 
 $retval = mysqli_query($conn, $sql);
 if(!$retval){
