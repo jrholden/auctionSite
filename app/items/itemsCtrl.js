@@ -38,15 +38,15 @@ angular.module('myApp').controller('ItemsCtrl', ['$scope', '$http', '$rootScope'
             }
         }
            // Error Checking ==> NEEDS WORK ==> Im thinking switch?
-            if ($scope.name == undefined) {
+            if ($scope.name == undefined || $scope.name == ' ') {
                 alert("Please enter your name");
-            } else if ($scope.email == undefined) {
+            } else if ($scope.email == undefined || $scope.email == ' ') {
                 alert("Please enter your email");
             }
-            else if ($scope.phone == undefined) {
+            else if ($scope.phone == undefined || $scope.phone == ' ') {
                 alert("Please Enter your phone");
             }
-            else if (/*$scope.bid == undefined ||*/ $scope.bid - $scope.items[$index].item_price <= 0) {
+            else if ($scope.bid == undefined || $scope.bid == ' ' || $scope.bid - $scope.items[$index].item_price <= 0) {
                 console.log($scope.items[$index].item_price);
                 console.log($scope.bid);
                 alert("Please Enter a bid that is Greater than the Previous");
@@ -71,6 +71,7 @@ angular.module('myApp').controller('ItemsCtrl', ['$scope', '$http', '$rootScope'
                     headers: {'Content-Type': 'application/json; charset=UTF-8'}
                 }).success(function (data) {
                     console.log("OK", data);
+                    $scope.bidMade = true;
                 }).error(function (err) {
                     console.log(err);
                 });

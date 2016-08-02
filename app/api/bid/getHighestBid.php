@@ -1,7 +1,9 @@
 <?php
 include '../database.php';
 
-$sql = "SELECT * FROM auction_bids";
+$data = json_decode(file_get_contents("php://input"), true);
+
+$sql = "SELECT * FROM auction_bids WHERE bids_id = $data";
 $result = $conn->query($sql);
 
 $data = array();

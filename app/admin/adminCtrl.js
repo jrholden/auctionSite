@@ -33,7 +33,11 @@ angular.module('myApp').controller('AdminCtrl', ['$scope', '$http','$sce', funct
             method: 'POST',
             headers: { 'Content-Type': 'application/json; charset=UTF-8' }
         }).success(function(data) {
-            console.log("OK", data);
+            console.log("OK", data[0]);
+            
+            $scope.items.push(data[0]);
+
+            $scope.itemCreate = true;
         }).error(function(err) {
             console.log(err);
         });
@@ -50,9 +54,11 @@ angular.module('myApp').controller('AdminCtrl', ['$scope', '$http','$sce', funct
             headers: { 'Content-Type': 'application/json; charset=UTF-8' }
         }).success(function(data) {
             console.log("OK", data);
+            $scope.itemEdit = true;
         }).error(function(err) {
             console.log(err);
         });
+        $scope.itemEdit = false;
         
     };
 
@@ -64,16 +70,18 @@ angular.module('myApp').controller('AdminCtrl', ['$scope', '$http','$sce', funct
 
 
 
-    $scope.deleteItem = function(itemNum) {
+    $scope.deleteItem = function(item) {
 
-        console.log(itemNum);
+        console.log(item);
         $http({
             url: "api/item/deleteItem.php",
-            data: itemNum,
+            data: item.item_id,
             method: 'POST',
             headers: { 'Content-Type': 'application/json; charset=UTF-8' }
         }).success(function(data) {
             console.log("OK", data);
+            
+            $scope.items.splice($scope.items.indexOf(item),1);
         }).error(function(err) {
             console.log(err);
         });
@@ -87,6 +95,7 @@ angular.module('myApp').controller('AdminCtrl', ['$scope', '$http','$sce', funct
             method: 'POST',
         }).success(function(data) {
             console.log("OK", data);
+            $scope.items.splice($scope.items);
         }).error(function(err) {
             console.log(err);
         });
@@ -99,8 +108,38 @@ angular.module('myApp').controller('AdminCtrl', ['$scope', '$http','$sce', funct
     };
 
     $scope.setModal2 = function(bidId) {
-        
-        $http.get("api/bid/getHighestBid.php")
+
+        console.log("bidId:", bidId);
+
+        if(bidId != '0' && bidId != 0 && bidId != null){
+
+            $http({
+                url: "api/bid/getHighestBid.php",
+                data: bidId,
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json; charset=UTF-8' }
+            }).success(function(data) {
+                $scope.isBid = true;
+                console.log("OK", data);
+
+                $scope.modalItem2 = data[0];
+
+                console.log($scope.modalItem2);
+                //open modal with data
+
+            }).error(function(err) {
+                console.log(err);
+
+                //error
+            });
+
+        }else{
+            //no bid error
+            $scope.isBid = false;
+        }
+
+        //send bid id get back the bid item
+        /*$http.get("api/bid/getHighestBid.php")
             .then(function(response) {
                 $scope.bids = response.data;
                 
@@ -122,7 +161,7 @@ angular.module('myApp').controller('AdminCtrl', ['$scope', '$http','$sce', funct
                 if ($index == null){
                     alert("No Bidders Interested");
                 }
-            });
+            });*/
         
         
     };
@@ -154,12 +193,17 @@ angular.module('myApp').controller('AdminCtrl', ['$scope', '$http','$sce', funct
     
     $scope.getItems = function() {
 
-        console.log("Testing");
-
         $http.get("api/item/getItems.php")
             .then(function(response) {
-                $scope.items = response.data;
-                /*console.log($scope.items);*/
+
+                if(response.data != '0 results'){
+                    $scope.items = response.data;
+                    console.log("Response", response.data);
+                }else{
+                    $scope.items = [];
+                    console.log("Length", $scope.items.length);
+                }
+
             });
     };
     $scope.getItems();

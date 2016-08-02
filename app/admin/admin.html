@@ -11,8 +11,8 @@
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
 <!-- Navigation -->
@@ -24,9 +24,11 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" style="text-align: center; margin-top: -4px; padding-left: 15px; display: inline-block;" href="index.html">
-            <center><img width="120px" src="images/logo.png" style="margin-top: -6px;" />
-                <p style="display: block; float: right; font-size: 60%; color: #EEEEEE; margin-top: 10px; padding-left: 9px;">| ADMINISTRATOR PANEL</p>
+        <a class="navbar-brand" style="text-align: center; margin-top: -4px; padding-left: 15px; display: inline-block;"
+           href="index.html">
+            <center><img width="120px" src="images/logo.png" style="margin-top: -6px;"/>
+                <p style="display: block; float: right; font-size: 60%; color: #EEEEEE; margin-top: 10px; padding-left: 9px;">
+                    | ADMINISTRATOR PANEL</p>
             </center>
         </a>
     </div>
@@ -72,6 +74,8 @@
                             <button type="reset" class="btn btn-warning">Clear</button>
                             <button type="submit" class="btn btn-success" ng-click="makeItem()">Create Item</button>
                         </div>
+
+
                     </form>
                 </div>
                 <!-- /.panel-body -->
@@ -84,6 +88,14 @@
         <p> ... </p>
     </div>
     <!-- /.row -->
+    <div ng-show='itemCreate' class="alert alert-success">
+        <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>Success!</strong> Indicates a successful or positive action.
+    </div>
+        <div ng-show='itemEdit' class="alert alert-success">
+        <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Success!</strong> Indicates a successful or positive action.
+    </div>
     <button type="button" class="btn btn-warning btn-lg" ng-click="deleteAllItems()">DELETE ALL ITEMS</button>
     <div class="row">
         <div class="col-lg-12">
@@ -94,7 +106,10 @@
                 <div class="panel-body">
                     <!-- Project One -->
                     <div class="container">
-                        <div class="row text-center">
+                        <div ng-show="items.length == 0">
+                            No Items
+                        </div>
+                        <div ng-show="items.length != 0" class="row text-center">
                             <div id="myCarousel" class="carousel slide" data-ride="carousel">
                                 <!-- Indicators -->
                                 <ol class="carousel-indicators">
@@ -111,21 +126,25 @@
                                                     <h3>{{ item.item_name }}</h3>
                                                     <p>{{ item.item_desc }}{{ item.item_id }}</p>
                                                     <p>
-                                                        <button type="button" ng-click="setModal(item)" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                                                        <button type="button" ng-click="setModal(item)"
+                                                                class="btn btn-primary btn-lg" data-toggle="modal"
+                                                                data-target="#myModal">
                                                             Edit Item
                                                         </button>
-                                                        <button type="button" ng-click="setModal2(item.items_high_bid)" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal2">
+                                                        <button type="button" ng-click="setModal2(item.items_high_bid)"
+                                                                class="btn btn-default btn-lg" data-toggle="modal"
+                                                                data-target="#myModal2">
                                                             Current Bidder
                                                         </button>
                                                     </p>
                                                 </div>
                                             </div>
                                         </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
 
                     <!-- /.row -->
@@ -146,7 +165,8 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel"><strong>Edit Item: {{ modalItem.item_name }} </strong></h4>
             </div>
             <div class="modal-body">
@@ -169,23 +189,27 @@
                     </div>
                     <div class="form-group">
                         <label>Image Upload</label>
-                        <input ng-model="modalItem.item_image" type="file" onchange="angular.element(this).scope().fileChange(this)">
+                        <input ng-model="modalItem.item_image" type="file"
+                               onchange="angular.element(this).scope().fileChange(this)">
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-warning" ng-click="deleteItem(modalItem.item_id)">Delete</button>
-                <button type="button" class="btn btn-primary" ng-click="editItem(modalItem)">Save changes</button>
+                <button type="button" class="btn btn-warning" ng-click="deleteItem(modalItem)">Delete</button>
+                <button type="button" class="btn btn-primary" ng-click="editItem(modalItem)"data-dismiss="modal">Save changes</button>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Highest Bid Modal -->
 <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
+        <div ng-show="isBid" class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel2"><strong>Bidder Details: </strong></h4>
             </div>
             <div class="modal-body">
@@ -218,6 +242,10 @@
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary">Save changes</button>
             </div>
+        </div>
+        <!-- No Highest bid-->
+        <div ng-hide="isBid" class="modal-content">
+            <p> No Highest Bid</p>
         </div>
     </div>
 </div>
