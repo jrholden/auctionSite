@@ -25,7 +25,7 @@ angular.module('myApp').controller('AdminCtrl', ['$scope', '$http','$sce', funct
     $scope.makeItem = function() {
 
         //todo error handling check if variables are empty before creating  (alerts if empty)
-        $scope.item = { name: $scope.name, price: $scope.price, image: $scope.picture, description: $scope.description }
+        $scope.item = { name: $scope.name, price: $scope.price, image: $scope.picture, description: $scope.description };
 
         $http({
             url: "api/item/insertItem.php",

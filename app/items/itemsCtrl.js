@@ -51,8 +51,8 @@ angular.module('myApp').controller('ItemsCtrl', ['$scope', '$http', '$rootScope'
                 console.log($scope.bid);
                 alert("Please Enter a bid that is Greater than the Previous");
             } else {
-                /*console.log(itemId);
-                 console.log($scope.items[$index].item_price);*/
+                console.log($scope.name);
+                 
                 $scope.bid = {
                     name: $scope.name,
                     email: $scope.email,
