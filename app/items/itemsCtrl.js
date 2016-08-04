@@ -11,6 +11,10 @@ angular.module('myApp').controller('ItemsCtrl', ['$scope', '$http', '$rootScope'
         $scope.modalItem = item;
         console.log($scope.modalItem);
     };
+    $scope.setModal2 = function (item) {
+        $scope.modalItem2 = item;
+        console.log($scope.modalItem);
+    };
 
 
     $scope.getItems = function () {
@@ -23,8 +27,6 @@ angular.module('myApp').controller('ItemsCtrl', ['$scope', '$http', '$rootScope'
     };
 
     $scope.submitForm = function () {
-
-        // check to make sure the form is completely valid
         if ($scope.userForm.$valid) {
             alert('our form is amazing');
         }
@@ -33,6 +35,7 @@ angular.module('myApp').controller('ItemsCtrl', ['$scope', '$http', '$rootScope'
 
     $scope.closeAlert = function () {
         $scope.showAlert = false;
+        $scope.bidMade = false;
     };
     
     $scope.getItemIndex = function (itemId) {
@@ -55,11 +58,11 @@ angular.module('myApp').controller('ItemsCtrl', ['$scope', '$http', '$rootScope'
     $scope.makeBid = function (itemId) {
         //Needed to find index of items array
         var $index = $scope.getItemIndex(itemId);
+        $scope.higherBid = false;
         // Error Checking ==> NEEDS WORK ==> Im thinking switch?
 
         if ($scope.bid - $scope.items[$index].item_price <= 0) {
-            console.log($scope.items[$index].item_price);
-            console.log($scope.bid);
+            $scope.higherBid = true;
             alert("Please Enter a bid that is greater than: " + $scope.items[$index].item_price);
 
         } else {
@@ -85,6 +88,7 @@ angular.module('myApp').controller('ItemsCtrl', ['$scope', '$http', '$rootScope'
                 console.log("OK", data);
                 $scope.items[$index].item_price = $scope.bid.bid+".00";
                 $scope.bidMade = true;
+                $scope.higherBid = true;
 
                 $scope.clearBid();
 

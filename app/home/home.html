@@ -56,7 +56,7 @@
                 <p><a class="btn btn-success btn-large">See All Items</a>
             </div>
             <div class="col-md-4">
-                <img class="img-circle" style="max-width: 100%; max-height: 100%;" src="http://placehold.it/500x500" />
+                <img class="img-circle" style="max-width: 100%; max-height: 100%;" src="../images/logo.png" />
             </div>
         </div>
         <hr>
@@ -81,48 +81,76 @@
                     <div class="item" ng-class="{active:!$index}" ng-repeat="item in items" ng-if="$index%4==0">
                         <div class="col-md-3 col-sm-6 hero-feature" ng-if="items.length >=1">
                             <div class="thumbnail">
-                                <img src="{{ items[getSecondIndex($index)].item_image }}" alt="" height="200" width="100">
+                                <img src="{{ items[getSecondIndex($index)].item_image }}" alt="" height="300" width="300">
                                 <div class="caption">
                                     <h3>{{ items[getSecondIndex($index)].item_name }}</h3>
-                                    <p>{{ items[getSecondIndex($index)].item_desc }}</p>
+                                    <center>
+                                    <p class="truncate">{{ items[getSecondIndex($index)].item_desc }}</p>
+                                    </center>
                                     <p>
-                                        <a class="btn btn-primary">Buy Now!</a> <a class="btn btn-default">More Info</a>
+                                        <button type="button" ng-click="setModal(items[$index])" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                                            Place Bid
+                                        </button>
+                                        <button type="button" ng-click="setModal2(items[$index])" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal2">
+                                            More Info
+                                        </button>
                                     </p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-6 hero-feature" ng-if="items.length >=2">
                             <div class="thumbnail">
-                                <img src="{{ items[getSecondIndex($index+1)].item_image }}" alt="" height="200" width="100">
+                                <img src="{{ items[getSecondIndex($index+1)].item_image }}" alt="" height="300" width="300">
                                 <div class="caption">
                                     <h3>{{ items[getSecondIndex($index+1)].item_name }}</h3>
-                                    <p>{{ items[getSecondIndex($index+1)].item_desc }}</p>
+                                    <center>
+                                    <p class="truncate">{{ items[getSecondIndex($index+1)].item_desc }}</p>
+                                    </center>
                                     <p>
-                                        <a class="btn btn-primary">Buy Now!</a> <a class="btn btn-default">More Info</a>
+                                        <button type="button" ng-click="setModal(items[$index+1])" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                                            Place Bid
+                                        </button>
+                                        <button type="button" ng-click="setModal2(items[$index+1])" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal2">
+                                            More Info
+                                        </button>
                                     </p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-6 hero-feature" ng-if="items.length >=3">
                             <div class="thumbnail">
-                                <img src="{{ items[getSecondIndex($index+2)].item_image }}" alt="" height="200" width="100">
+                                <img src="{{ items[getSecondIndex($index+2)].item_image }}" alt="" height="300" width="300">
                                 <div class="caption">
                                     <h3>{{ items[getSecondIndex($index+2)].item_name }}</h3>
-                                    <p>{{ items[getSecondIndex($index+2)].item_desc }}</p>
+                                    <center>
+                                    <p class="truncate">{{ items[getSecondIndex($index+2)].item_desc }}</p>
+                                    </center>
                                     <p>
-                                        <a class="btn btn-primary">Buy Now!</a> <a class="btn btn-default">More Info</a>
+                                        <button type="button" ng-click="setModal(items[$index+2])" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                                            Place Bid
+                                        </button>
+                                        <button type="button" ng-click="setModal2(items[$index+2])" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal2">
+                                            More Info
+                                        </button>
                                     </p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-6 hero-feature" ng-if="items.length >=4">
                             <div class="thumbnail">
-                                <img src="{{ items[getSecondIndex($index+3)].item_image }}" alt="" height="200" width="100">
+                                <img src="{{ items[getSecondIndex($index+3)].item_image }}" alt="" height="300" width="300">
                                 <div class="caption">
                                     <h3>{{ items[getSecondIndex($index+3)].item_name }}</h3>
-                                    <p>{{ items[getSecondIndex($index+3)].item_desc }}</p>
+                                    <center>
+                                    <p class="truncate2">{{ items[getSecondIndex($index+3)].item_desc }}</p>
+                                    </center>
                                     <p>
-                                        <a class="btn btn-primary">Buy Now!</a> <a class="btn btn-default">More Info</a>
+                                        <button type="button" ng-click="setModal(items[$index+3])" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                                            Place Bid
+                                        </button>
+                                        <button type="button" ng-click="setModal2(items[$index+3])" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal2">
+                                            More Info
+                                        </button>
                                     </p>
                                 </div>
                             </div>
@@ -147,6 +175,108 @@
     </div>    
     <br/>
     <!-- /.row -->
+
+    <!-- Place Bid Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <div class="col-lg-12">
+                        <img src="{{ modalItem.item_image }}" alt="" height="250" width="250">
+                        <h2 class="modal-title" id="myModalLabel">{{ modalItem.item_name }}</h2>
+                        <p></br>{{ modalItem.item_desc }}</p>
+                    </div>
+                    <div class="modal-body">
+
+                        <form name="userForm" ng-submit="submitForm()" novalidate>
+
+                            <div class="form-group" ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">
+                                <label>Name</label>
+                                <input ng-model="name" placeholder="Bidder Name" class="form-control" required name="name">
+                                <p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">Your name is required.</p>
+                            </div>
+                            <div class="form-group" ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }">
+                                <label>Email</label>
+                                <input type="email" ng-model="email" placeholder="Bidder Email" class="form-control" required name="email">
+                                <p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">Enter a valid email.</p>
+
+                            </div>
+                            <div class="form-group" ng-class="{ 'has-error' : userForm.phone.$invalid && !userForm.phone.$pristine }">
+                                <label>Phone</label>
+                                <input type="tel" pattern='[\(]\d{3}[\) ]\d{3}[\-]\d{4}' ng-model="phone" placeholder="(999)999-9999"  class="form-control" name="phone" required>
+                                <p ng-show="userForm.phone.$invalid && !userForm.phone.$pristine" class="help-block">Enter a valid phone number.</p>
+
+                            </div>
+                            <div>
+                                <div class="form-group" ng-class="{ 'has-error' : userForm.bid.$invalid && !userForm.bid.$pristine }">
+                                    <label>Minimum Price (${{ modalItem.item_price }})</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">$</span>
+                                        <input ng-model="bid" placeholder="Price" type="text" class="form-control" name="bid" required>
+                                        <span class="input-group-addon">.00</span>
+                                        <p ng-show="userForm.bid.$invalid && !userForm.bid.$pristine" class="help-block">Enter a valid phone number.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default"ng-click="clearBid()" data-dismiss="modal">Close</button>
+
+                        <button  data-dismiss="modal" type="submit" class="btn btn-primary" ng-click="makeBid(modalItem.item_id)" ng-disabled="userForm.$invalid">Submit</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- More Info Modal -->
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel2"><strong>Auction Item </strong></h4>
+                </div>
+
+                <div class="modal-body">
+                    <div class="col-md-6">
+                        <img src="{{ modalItem2.item_image }}" alt="" height="250" width="250">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row" style="padding-bottom: 10px;">
+                            <div class="col-md-4">
+                                <label><u>Name</u></label>
+                                <p>{{ modalItem2.item_name }}</p>
+                            </div>
+                        </div>
+                        <div class="row" style="padding-bottom: 10px;">
+                            <div class="col-md-6">
+                                <label><u>Telephone</u></label>
+                                <p>{{ modalItem2.item_desc }}</p>
+                            </div>
+                        </div>
+                        <div class="row" style="padding-bottom: 10px;">
+                            <div class="col-md-6">
+                                <label><u>Current High Bid</u></label>
+                                <p>{{ modalItem2.item_price}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
     
     <!-- Footer -->
     <div class="container">

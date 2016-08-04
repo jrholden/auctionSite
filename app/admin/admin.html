@@ -88,13 +88,11 @@
         <p> ... </p>
     </div>
     <!-- /.row -->
-    <div ng-show='itemCreate' class="alert alert-success">
-        <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <strong>Success!</strong> Indicates a successful or positive action.
+    <div id="createSuccess" class="alert alert-success">
+        <strong>Success!</strong> ITEM GOOD DAWG
     </div>
-    <div ng-show='itemEdit' class="alert alert-success">
-        <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <strong>Success!</strong> Indicates a successful or positive action.
+    <div id="editSuccess" class="alert alert-success">
+        <strong>Success!</strong> EDIT GOOD DAWG
     </div>
 
     <div class="row">
@@ -142,7 +140,7 @@
                                                 <img src="{{ item.item_image }}" alt="">
                                                 <div class="caption">
                                                     <h3>{{ item.item_name }}</h3>
-                                                    <p>{{ item.item_desc }}</p>
+                                                    <p class="truncate">{{ item.item_desc }}</p>
                                                     <p>
                                                         <button type="button" ng-click="setModal(item)"
                                                                 class="btn btn-primary btn-lg" data-toggle="modal"
