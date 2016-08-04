@@ -19,7 +19,7 @@
     echo $data;
 
     //the message
-    $msg = "Message from: ".$name."\n\n Email: ".$email."\n\n Message: ".$msg1."";
+    $msg = "Message from: ".$name."\n\n Email: ".$email."\n\n Message: ".$message."";
 
     //if lines are longer than 70 characters wrap
     $msg = wordwrap($msg,70);

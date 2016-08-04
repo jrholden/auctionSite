@@ -21,26 +21,47 @@ angular.module('myApp').controller('AdminCtrl', ['$scope', '$http','$sce', funct
             reader.readAsDataURL(picture);
         }
     };
+  
+
 
     $scope.makeItem = function() {
 
-        //todo error handling check if variables are empty before creating  (alerts if empty)
-        $scope.item = { name: $scope.name, price: $scope.price, image: $scope.picture, description: $scope.description };
-
-        $http({
-            url: "api/item/insertItem.php",
-            data: $scope.item,
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json; charset=UTF-8' }
-        }).success(function(data) {
-            console.log("OK", data[0]);
+        // Error Checking ==> NEEDS WORK ==> Im thinking switch?
+       console.log($scope.name);
+        if ($scope.name == undefined || $scope.name == " ") {
+            alert("Please enter your name");
+        } else if ($scope.price == undefined || $scope.price == " ") {
+            alert("Please enter your email");
+        }
+        else if ($scope.picture == undefined || $scope.picture == " ") {
+            alert("Please Enter your phone");
+        }
+        else if ($scope.description == undefined || $scope.description == " ") {
+            alert("Please Enter a bid that is Greater than the Previous");
+        } else {
             
-            $scope.items.push(data[0]);
+            $scope.item = {
+                name: $scope.name,
+                price: $scope.price,
+                image: $scope.picture,
+                description: $scope.description
+            };
 
-            $scope.itemCreate = true;
-        }).error(function(err) {
-            console.log(err);
-        });
+            $http({
+                url: "api/item/insertItem.php",
+                data: $scope.item,
+                method: 'POST',
+                headers: {'Content-Type': 'application/json; charset=UTF-8'}
+            }).success(function (data) {
+                console.log("OK", data[0]);
+
+                $scope.items.push(data[0]);
+
+                $scope.itemCreate = true;
+            }).error(function (err) {
+                console.log(err);
+            });
+        }
     };
     
     $scope.editItem = function(item){
