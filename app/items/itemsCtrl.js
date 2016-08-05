@@ -6,6 +6,7 @@
 angular.module('myApp').controller('ItemsCtrl', ['$scope', '$http', '$rootScope', function ($scope, $http, $rootScope) {
 
     console.log("We Are ITEMS");
+    $('#createSuccess').hide();
 
     $scope.setModal = function (item) {
         $scope.modalItem = item;
@@ -16,18 +17,42 @@ angular.module('myApp').controller('ItemsCtrl', ['$scope', '$http', '$rootScope'
         console.log($scope.modalItem);
     };
 
+    $scope.pagination = function(){
+        $scope.filteredItems = $scope.items;
+        $scope.currentPage = 1;
+        $scope.numPerPage = 10;
+        $scope.maxSize = 5;
 
+        $scope.$watch('currentPage + numPerPage', function() {
+            var begin = (($scope.currentPage - 1) * $scope.numPerPage)
+                , end = begin + $scope.numPerPage;
+
+            $scope.filteredItems = $scope.items.slice(begin, end);
+        });
+
+    };
+
+    
     $scope.getItems = function () {
 
         $http.get("api/item/getItems.php")
             .then(function (response) {
-                $scope.items = response.data;
-                console.log($scope.items);
+                if(response.data != '0 results'){
+                    $scope.items = response.data;
+                    console.log("Response", response.data);
+                }else{
+                    $scope.items = [];
+                    console.log("Length", $scope.items.length);
+                }
             });
     };
 
     $scope.submitForm = function () {
-        if ($scope.userForm.$valid) {
+        if ($scope.bid - $scope.items[$index].item_price <= 0) {
+            $scope.higherBid = true;
+            $scope.userForm.$vaild = false;
+
+        }else if ($scope.userForm.$valid) {
             alert('our form is amazing');
         }
 
@@ -35,7 +60,6 @@ angular.module('myApp').controller('ItemsCtrl', ['$scope', '$http', '$rootScope'
 
     $scope.closeAlert = function () {
         $scope.showAlert = false;
-        $scope.bidMade = false;
     };
     
     $scope.getItemIndex = function (itemId) {
@@ -85,11 +109,16 @@ angular.module('myApp').controller('ItemsCtrl', ['$scope', '$http', '$rootScope'
                 method: 'POST',
                 headers: {'Content-Type': 'application/json; charset=UTF-8'}
             }).success(function (data) {
-                console.log("OK", data);
-                $scope.items[$index].item_price = $scope.bid.bid+".00";
-                $scope.bidMade = true;
-                $scope.higherBid = true;
+                console.log("OK", data);  
+                //Show message
+                $('#createSuccess').fadeIn('slow');
+                setTimeout(function(){
+                    $('#createSuccess').fadeOut('slow');
+                }, 3000);
 
+                $scope.items[$index].item_price = $scope.bid.bid+".00";
+                $scope.higherBid = true;
+              
                 $scope.clearBid();
 
             }).error(function (err) {

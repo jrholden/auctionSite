@@ -6,6 +6,8 @@
 angular.module('myApp').controller('HomeCtrl', ['$scope', '$http','$sce', function($scope, $http, $sce) {
 
     console.log("We Are Home");
+    $('#createSuccess').hide();
+    
     $scope.getItems = function() {
 
         $http.get("api/item/getItems.php")
@@ -94,6 +96,13 @@ angular.module('myApp').controller('HomeCtrl', ['$scope', '$http','$sce', functi
                 headers: {'Content-Type': 'application/json; charset=UTF-8'}
             }).success(function (data) {
                 console.log("OK", data);
+                
+                //Show message
+                $('#createSuccess').fadeIn('slow');
+                setTimeout(function(){
+                    $('#createSuccess').fadeOut('slow');
+                }, 3000);
+                
                 $scope.items[$index].item_price = $scope.bid.bid+".00";
                 $scope.bidMade = true;
                 $scope.higherBid = true;
