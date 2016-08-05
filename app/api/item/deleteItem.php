@@ -25,4 +25,3 @@ if(!$retval){
 }
 
 mysqli_close($conn);
-
