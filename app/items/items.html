@@ -174,10 +174,11 @@
                         <div class="form-group" ng-class="{ 'has-error' : userForm.bid.$invalid && !userForm.bid.$pristine }">
                             <label>Minimum Price (${{ modalItem.item_price }})</label>
                             <div class="input-group">
-                                <span class="input-group-addon">$</span>
-                                <input ng-model="bid" placeholder="Price" type="text" class="form-control" name="bid" required>
-                                <span class="input-group-addon">.00</span>
-                                <p ng-show="userForm.bid.$invalid && !userForm.bid.$pristine" class="help-block">Enter a valid phone number.</p>
+                               <!-- <span class="input-group-addon">$</span>-->
+                                <input ng-model="bid" placeholder="Price" type="number" class="form-control" name="bid" required>
+                                <p ng-show="userForm.bid.$invalid && !userForm.bid.$pristine" class="help-block">Enter a valid number.</p>
+                                <!--<span class="input-group-addon">.00</span>-->
+
                             </div>
                 </div>
                 </div>
@@ -206,29 +207,23 @@
                 </div>
 
                 <div class="modal-body">
-                    <div class="col-md-6">
-                    <img src="{{ modalItem2.item_image }}" alt="" height="250" width="250">
+                    <div class="col-md-8">
+                        <img src="{{ modalItem2.item_image }}" alt="" height="250" width="250">
                     </div>
-                    <div class="col-md-6">
-                    <div class="row" style="padding-bottom: 10px;">
-                        <div class="col-md-4">
-                            <label><u>Item Name: </u></label>
+                    <div class="col-md-4">
+                        <div class="row" style="padding-bottom: 10px;">
+                            <label><u>Name</u></label>
                             <p>{{ modalItem2.item_name }}</p>
                         </div>
-                    </div>
-                    <div class="row" style="padding-bottom: 10px;">
-                        <div class="col-md-6">
-                            <label><u>Item Description: </u></label>
+                        <div class="row" style="padding-bottom: 10px;">
+                            <label><u>Telephone</u></label>
                             <p>{{ modalItem2.item_desc }}</p>
                         </div>
-                    </div>
-                    <div class="row" style="padding-bottom: 10px;">
-                        <div class="col-md-6">
-                            <label><u>Current High Bid: </u></label>
+                        <div class="row" style="padding-bottom: 10px;">
+                            <label><u>Current High Bid</u></label>
                             <p>{{ modalItem2.item_price}}</p>
                         </div>
                     </div>
-                </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

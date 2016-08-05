@@ -35,11 +35,13 @@ angular.module('myApp').controller('HomeCtrl', ['$scope', '$http','$sce', functi
 
     $scope.setModal2 = function (item) {
         $scope.modalItem2 = item;
+        $scope.inUse = false;
         console.log($scope.modalItem2);
 
     };
     $scope.setModal = function (item) {
         $scope.modalItem = item;
+        $scope.inUse=false;
         console.log($scope.modalItem);
 
     };

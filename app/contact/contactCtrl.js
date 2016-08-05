@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myApp').controller('ContactCtrl', ['$scope', '$http','$sce', function($scope, $http, $sce) {
-
+   
    console.log("We Are Contact");
    
    $scope.sendMail = function() {

@@ -71,7 +71,7 @@
     </div>
     <div class="container">
         <div class="row text-center">
-            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <div id="myCarousel" class="carousel slide" pause="hover" data-ride="carousel">
                 <!-- Indicators -->
                <!--<ol class="carousel-indicators" ng-repeat="items in items" ng-if="$index%4==0">
                     <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -156,15 +156,16 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                    <!-- Controls -->
-                    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                        <span class="icon-prev"></span>
-                    </a>
-                    <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                        <span class="icon-next"></span>
-                    </a>
+                </div><!-- Controls -->
+                <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                    <span class="icon-prev"></span>
+                </a>
+                <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                    <span class="icon-next"></span>
+                </a>
+
             </div>
+
         </div>
     </div>
     <br/>
@@ -214,9 +215,9 @@
                                     <label>Minimum Price (${{ modalItem.item_price }})</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">$</span>
-                                        <input ng-model="bid" placeholder="Price" type="text" class="form-control" name="bid" required>
+                                        <input ng-model="bid" placeholder="Price" type="number" class="form-control" name="bid" required>
                                         <span class="input-group-addon">.00</span>
-                                        <p ng-show="userForm.bid.$invalid && !userForm.bid.$pristine" class="help-block">Enter a valid phone number.</p>
+                                        <p ng-show="userForm.bid.$invalid && !userForm.bid.$pristine" class="help-block">Enter a valid number.</p>
                                     </div>
                                 </div>
                             </div>
@@ -246,29 +247,23 @@
                 </div>
 
                 <div class="modal-body">
-                    <div class="col-md-6">
+                    <div class="col-md-8">
                         <img src="{{ modalItem2.item_image }}" alt="" height="250" width="250">
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="row" style="padding-bottom: 10px;">
-                            <div class="col-md-4">
                                 <label><u>Name</u></label>
                                 <p>{{ modalItem2.item_name }}</p>
-                            </div>
                         </div>
                         <div class="row" style="padding-bottom: 10px;">
-                            <div class="col-md-6">
                                 <label><u>Telephone</u></label>
                                 <p>{{ modalItem2.item_desc }}</p>
-                            </div>
                         </div>
                         <div class="row" style="padding-bottom: 10px;">
-                            <div class="col-md-6">
                                 <label><u>Current High Bid</u></label>
                                 <p>{{ modalItem2.item_price}}</p>
-                            </div>
                         </div>
-                    </div>
+                </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -293,7 +288,8 @@
     <script type="text/javascript">
     $(document).ready(function() {
         $('.carousel').carousel({
-            interval: 4200
+                interval: 4200
+
         })
     });
     </script>
