@@ -23,6 +23,7 @@ angular.module('myApp').controller('AdminCtrl', ['$scope', '$http','$sce', funct
             reader.readAsDataURL(picture);
         }
     };
+  
 
     $scope.imageToData = function(img, width, height) {
 
