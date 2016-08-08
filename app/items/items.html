@@ -71,7 +71,7 @@
         </div>
         <div class="col-md-6">
             <div class="input-group" width="200px">
-                <input type="text" class="form-control" ng-model="searchTerm" placeholder="Search"
+                <input type="text" class="form-control" ng-model="searchTerm" ng-change="filter()" placeholder="Search"
                        name="srch-term" id="srch-term">
                 <div class="input-group-btn">
                     <button class="btn btn-default" type="submit"><i
@@ -89,7 +89,7 @@
 
         <!--<li >No items in this list yet!</li>-->
 
-        <div  class="col-md-3 col-sm-6 hero-feature" ng-repeat="item in items | filter: searchTerm">
+        <div  class="col-md-3 col-sm-6 hero-feature" ng-repeat="item in filteredItems = (items | filter: searchTerm) | startFrom: (currentPage-1)*numPerPage | limitTo: numPerPage">
             <div class="thumbnail">
                 <img src="{{ item.item_image }}" alt="" height="300" width="300">
                 <div class="caption">
@@ -115,6 +115,17 @@
     </div>
     <!-- /.row -->
     <hr>
+
+    <!--<pagination
+            ng-model="currentPage"
+            total-items="items.length"
+            max-size="maxSize"
+            boundary-links="true">
+    </pagination>-->
+    <center>
+    <ul uib-pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-lg" boundary-links="true" items-per-page="numPerPage" ></ul>
+    </center>
+
     <!-- Pagination -->
     <!--<div class="row text-center">
         <div class="col-lg-12">

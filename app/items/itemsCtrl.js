@@ -3,46 +3,35 @@
  */
 'use strict';
 
-angular.module('myApp').controller('ItemsCtrl', ['$scope', '$http', '$rootScope', function ($scope, $http, $rootScope) {
+angular.module('myApp').controller('ItemsCtrl', ['$scope', '$http', '$timeout', function ($scope, $http, $timeout) {
 
     console.log("We Are ITEMS");
     $('#createSuccess').hide();
 
     $scope.setModal = function (item) {
+        console.log("Modalll");
         $scope.modalItem = item;
         console.log($scope.modalItem);
     };
     $scope.setModal2 = function (item) {
         $scope.modalItem2 = item;
-        console.log($scope.modalItem);
+        //console.log($scope.modalItem);
     };
-
-    $scope.pagination = function(){
-        $scope.filteredItems = $scope.items;
-        $scope.currentPage = 1;
-        $scope.numPerPage = 10;
-        $scope.maxSize = 5;
-
-        $scope.$watch('currentPage + numPerPage', function() {
-            var begin = (($scope.currentPage - 1) * $scope.numPerPage)
-                , end = begin + $scope.numPerPage;
-
-            $scope.filteredItems = $scope.items.slice(begin, end);
-        });
-
-    };
-
     
+   
     $scope.getItems = function () {
 
         $http.get("api/item/getItems.php")
             .then(function (response) {
                 if(response.data != '0 results'){
                     $scope.items = response.data;
-                    console.log("Response", response.data);
+
+                    $scope.totalItems = $scope.items.length;
+                    $scope.filteredItems= [];
+                    
                 }else{
-                    $scope.items = [];
-                    console.log("Length", $scope.items.length);
+                   $scope.items = [];
+                    //console.log("Length", $scope.items.length);
                 }
             });
     };
@@ -90,7 +79,7 @@ angular.module('myApp').controller('ItemsCtrl', ['$scope', '$http', '$rootScope'
             alert("Please Enter a bid that is greater than: " + $scope.items[$index].item_price);
 
         } else {
-            console.log($scope.name);
+            //console.log($scope.name);
 
             $scope.bid = {
                 name: $scope.name,
@@ -101,7 +90,8 @@ angular.module('myApp').controller('ItemsCtrl', ['$scope', '$http', '$rootScope'
 
             };
 
-            //$scope.bid = {name: "Corey Weber", email: "Test@Test.com", phone: "90299999999", bid: 1000000, itemId: 1};
+           
+
 
             $http({
                 url: "api/bid/insertBid.php",
@@ -109,7 +99,7 @@ angular.module('myApp').controller('ItemsCtrl', ['$scope', '$http', '$rootScope'
                 method: 'POST',
                 headers: {'Content-Type': 'application/json; charset=UTF-8'}
             }).success(function (data) {
-                console.log("OK", data);  
+                //console.log("OK", data);  
                 //Show message
                 $('#createSuccess').fadeIn('slow');
                 setTimeout(function(){
@@ -122,7 +112,7 @@ angular.module('myApp').controller('ItemsCtrl', ['$scope', '$http', '$rootScope'
                 $scope.clearBid();
 
             }).error(function (err) {
-                console.log(err);
+                //console.log(err);
             });
         }
     };
@@ -135,10 +125,26 @@ angular.module('myApp').controller('ItemsCtrl', ['$scope', '$http', '$rootScope'
         $scope.bid = '';
     };
 
-    //getAllBids
 
-    //initialize
     $scope.getItems();
 
+    $scope.currentPage = 1;
+    $scope.numPerPage = 4;
+    $scope.maxSize = 4;
+   
+    
+
+    $scope.filter = function() {
+        $timeout(function() {
+            //wait for 'filtered' to be changed
+            /* change pagination with $scope.filtered */
+            $scope.totalItems = $scope.filteredItems.length;
+        }, 10);
+    };
+    
+    
+   
 
 }]);
+
+
