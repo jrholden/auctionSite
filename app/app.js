@@ -4,7 +4,8 @@
 angular.module('myApp', [
     'ui.router',
     'ui.bootstrap',
-    'searchFilter'
+    'searchFilter',
+    'ui.mask'
 ])
     .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
 

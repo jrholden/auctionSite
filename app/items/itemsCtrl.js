@@ -129,8 +129,8 @@ angular.module('myApp').controller('ItemsCtrl', ['$scope', '$http', '$timeout', 
     $scope.getItems();
 
     $scope.currentPage = 1;
-    $scope.numPerPage = 4;
-    $scope.maxSize = 4;
+    $scope.numPerPage = 8;
+    $scope.maxSize = 5;
    
     
 

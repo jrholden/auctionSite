@@ -122,9 +122,11 @@
             max-size="maxSize"
             boundary-links="true">
     </pagination>-->
+    <div class="col-sm-12">
     <center>
     <ul uib-pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-lg" boundary-links="true" items-per-page="numPerPage" ></ul>
     </center>
+    </div>
 
     <!-- Pagination -->
     <!--<div class="row text-center">
@@ -186,7 +188,7 @@
                             </div>
                             <div class="form-group" ng-class="{ 'has-error' : userForm.phone.$invalid && !userForm.phone.$pristine }">
                                 <label>Phone</label>
-                                <input type="tel" pattern='[\(]\d{3}[\) ]\d{3}[\-]\d{4}' ng-model="phone" placeholder="(999)999-9999"  class="form-control" name="phone" required>
+                                <input type="text"   id="phone" ui-mask="(999) 999-9999" ng-model="phone"  class="form-control" name="phone" required>
                                 <p ng-show="userForm.phone.$invalid && !userForm.phone.$pristine" class="help-block">Enter a valid phone number.</p>
 
                             </div>
@@ -237,7 +239,7 @@
                             <p>{{ modalItem2.item_name }}</p>
                         </div>
                         <div class="row" style="padding-bottom: 10px;">
-                            <label><u>Telephone</u></label>
+                            <label><u>Item Description</u></label>
                             <p>{{ modalItem2.item_desc }}</p>
                         </div>
                         <div class="row" style="padding-bottom: 10px;">
