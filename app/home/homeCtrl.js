@@ -3,7 +3,7 @@
  */
 'use strict';
 
-angular.module('myApp').controller('HomeCtrl', ['$scope', '$http','$sce', function($scope, $http, $sce) {
+angular.module('myApp').controller('HomeCtrl', ['$scope', '$http', function($scope, $http) {
 
     console.log("We Are Home");
     
@@ -72,14 +72,6 @@ angular.module('myApp').controller('HomeCtrl', ['$scope', '$http','$sce', functi
         //Needed to find index of items array
         var $index = $scope.getItemIndex(itemId);
         $scope.higherBid = false;
-        // Error Checking ==> NEEDS WORK ==> Im thinking switch?
-
-        if ($scope.bid - $scope.items[$index].item_price <= 0) {
-            $scope.higherBid = true;
-            alert("Please Enter a bid that is greater than: " + $scope.items[$index].item_price);
-
-        } else {
-            console.log($scope.name);
 
             $scope.bid = {
                 name: $scope.name,
@@ -89,8 +81,6 @@ angular.module('myApp').controller('HomeCtrl', ['$scope', '$http','$sce', functi
                 itemId: itemId
 
             };
-
-            //$scope.bid = {name: "Corey Weber", email: "Test@Test.com", phone: "90299999999", bid: 1000000, itemId: 1};
 
             $http({
                 url: "api/bid/insertBid.php",
@@ -114,7 +104,7 @@ angular.module('myApp').controller('HomeCtrl', ['$scope', '$http','$sce', functi
             }).error(function (err) {
                 $scope.loading = false;
             });
-        }
+        
     };
 
     $scope.clearBid = function () {

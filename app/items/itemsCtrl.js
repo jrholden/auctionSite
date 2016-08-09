@@ -73,14 +73,6 @@ angular.module('myApp').controller('ItemsCtrl', ['$scope', '$http', '$timeout', 
         $scope.loading = true;
         var $index = $scope.getItemIndex(itemId);
         $scope.higherBid = false;
-        // Error Checking ==> NEEDS WORK ==> Im thinking switch?
-
-        if ($scope.bid - $scope.items[$index].item_price <= 0) {
-            $scope.higherBid = true;
-            alert("Please Enter a bid that is greater than: " + $scope.items[$index].item_price);
-
-        } else {
-            //console.log($scope.name);
 
             $scope.bid = {
                 name: $scope.name,
@@ -99,7 +91,7 @@ angular.module('myApp').controller('ItemsCtrl', ['$scope', '$http', '$timeout', 
                 data: $scope.bid,
                 method: 'POST',
                 headers: {'Content-Type': 'application/json; charset=UTF-8'}
-            }).success(function (data) {
+            }).success(function () {
                 //console.log("OK", data);
                 $scope.loading = false;
                 //Show message
@@ -113,11 +105,10 @@ angular.module('myApp').controller('ItemsCtrl', ['$scope', '$http', '$timeout', 
               
                 $scope.clearBid();
 
-            }).error(function (err) {
+            }).error(function () {
                 //console.log(err);
                 $scope.loading = false;
             });
-        }
     };
 
     $scope.clearBid = function () {
