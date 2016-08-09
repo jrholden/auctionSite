@@ -5,6 +5,7 @@ angular.module('myApp').controller('LoginCtrl', ['$scope', '$http', '$window', f
    console.log("We Are LOGIN");
 
    $scope.checkLogin = function() {
+       $scope.loading = true;
 
       $http.get("api/login/login.php")
           .then(function(response) {
@@ -15,13 +16,16 @@ angular.module('myApp').controller('LoginCtrl', ['$scope', '$http', '$window', f
                 console.log($scope.username);
                 if ($scope.username === $scope.creds[0].login && $scope.pass === $scope.creds[0].password) {
                     console.log("Login Success");
+                    $scope.loading = true;
                     $window.location.href = '#/admin';
                 }
                  else{
                     console.log("Failed");
+                    $scope.loading = false;
                 }
              }else{
-               console.log("Failed")
+                    console.log("Failed");
+                     $scope.loading = false;
              }
 
           });

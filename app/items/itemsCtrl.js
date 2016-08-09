@@ -70,6 +70,7 @@ angular.module('myApp').controller('ItemsCtrl', ['$scope', '$http', '$timeout', 
 
     $scope.makeBid = function (itemId) {
         //Needed to find index of items array
+        $scope.loading = true;
         var $index = $scope.getItemIndex(itemId);
         $scope.higherBid = false;
         // Error Checking ==> NEEDS WORK ==> Im thinking switch?
@@ -99,7 +100,8 @@ angular.module('myApp').controller('ItemsCtrl', ['$scope', '$http', '$timeout', 
                 method: 'POST',
                 headers: {'Content-Type': 'application/json; charset=UTF-8'}
             }).success(function (data) {
-                //console.log("OK", data);  
+                //console.log("OK", data);
+                $scope.loading = false;
                 //Show message
                 $('#createSuccess').fadeIn('slow');
                 setTimeout(function(){
@@ -113,6 +115,7 @@ angular.module('myApp').controller('ItemsCtrl', ['$scope', '$http', '$timeout', 
 
             }).error(function (err) {
                 //console.log(err);
+                $scope.loading = false;
             });
         }
     };

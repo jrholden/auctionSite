@@ -6,6 +6,7 @@
 angular.module('myApp').controller('HomeCtrl', ['$scope', '$http','$sce', function($scope, $http, $sce) {
 
     console.log("We Are Home");
+    
     $('#createSuccess').hide();
     
     $scope.getItems = function() {
@@ -66,6 +67,8 @@ angular.module('myApp').controller('HomeCtrl', ['$scope', '$http','$sce', functi
     };
 
     $scope.makeBid = function (itemId) {
+
+        $scope.loading = true;
         //Needed to find index of items array
         var $index = $scope.getItemIndex(itemId);
         $scope.higherBid = false;
@@ -95,8 +98,7 @@ angular.module('myApp').controller('HomeCtrl', ['$scope', '$http','$sce', functi
                 method: 'POST',
                 headers: {'Content-Type': 'application/json; charset=UTF-8'}
             }).success(function (data) {
-                console.log("OK", data);
-                
+                $scope.loading = false;
                 //Show message
                 $('#createSuccess').fadeIn('slow');
                 setTimeout(function(){
@@ -110,7 +112,7 @@ angular.module('myApp').controller('HomeCtrl', ['$scope', '$http','$sce', functi
                 $scope.clearBid();
 
             }).error(function (err) {
-                console.log(err);
+                $scope.loading = false;
             });
         }
     };
