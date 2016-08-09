@@ -83,7 +83,19 @@
     <!-- /.row -->
     <!-- Projects Row -->
     <div ng-show="items.length == 0">
-        No Items
+        <center>
+            <div class="container">
+        <div class="hero-unit">
+            <h1>There are Currently <strong>No Items</strong></h1>
+            <p>If you have an item that you would like to add, please visit the <strong>Contact Page</strong></p>
+            <p>
+                <a class="btn btn-primary btn-large" href="#/contact">
+                    Contact Page
+                </a>
+            </p>
+        </div>
+            </div>
+        </center>
     </div>
     <div ng-show="items.length != 0" class="row">
 
@@ -197,7 +209,7 @@
                             <label>Minimum Price (${{ modalItem.item_price }})</label>
                             <div class="input-group">
                                <!-- <span class="input-group-addon">$</span>-->
-                                <input ng-model="bid" placeholder="Price" type="number" class="form-control" name="bid" min="{{ modalItem.item_price }}" required>
+                                <input ng-model="bid" placeholder="Price" type="number" class="form-control" name="bid" min="{{ modalItem.item_price+1 }}" required>
                                 <p ng-show="userForm.bid.$invalid && !userForm.bid.$pristine" class="help-block">Enter a valid number that is greater than: ${{ modalItem.item_price }}</p>
 
                                 <!--<span class="input-group-addon">.00</span>-->

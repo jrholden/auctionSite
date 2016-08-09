@@ -8,6 +8,7 @@ angular.module('myApp').controller('AdminCtrl', ['$scope', '$http','$sce', funct
     console.log("We Are Admin");
 
     $('#createSuccess').hide();
+    $('#editSuccess').hide();
 
     document.getElementById('file').onchange = function() {
         // Sets the scope variable for photo
@@ -91,6 +92,11 @@ angular.module('myApp').controller('AdminCtrl', ['$scope', '$http','$sce', funct
             headers: { 'Content-Type': 'application/json; charset=UTF-8' }
         }).success(function(data) {
             console.log("OK", data);
+            //Show message
+            $('#editSuccess').fadeIn('slow');
+            setTimeout(function(){
+                $('#editSuccess').fadeOut('slow');
+            }, 3000);
             $scope.itemEdit = true;
         }).error(function(err) {
             console.log(err);

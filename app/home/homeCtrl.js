@@ -1,6 +1,9 @@
 /**
  * Created by Corey Weber on 2016-07-03.
  */
+var console = {};
+console.log = function(){};
+
 'use strict';
 
 angular.module('myApp').controller('HomeCtrl', ['$scope', '$http', function($scope, $http) {

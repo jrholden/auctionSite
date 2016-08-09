@@ -23,6 +23,7 @@
 
     //if lines are longer than 70 characters wrap
     $msg = wordwrap($msg,70);
+    echo $message;
 
     // send emails
     mail("jordan_holden@live.ca","Contact Request",$msg, "From: ". $email ."" . "\r\n");
