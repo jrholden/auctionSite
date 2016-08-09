@@ -82,11 +82,12 @@
     </div>
     <!-- /.row -->
     <!-- Projects Row -->
-    <div ng-show="items.length == 0">
+    <div ng-show="totalItems == 0">
         <center>
             <div class="container">
         <div class="hero-unit">
             <h1>There are Currently <strong>No Items</strong></h1>
+            <h4 ng-if="searchTerm !== undefined || searchTerm !== ' '">That Match: {{ searchTerm }}</h4>
             <p>If you have an item that you would like to add, please visit the <strong>Contact Page</strong></p>
             <p>
                 <a class="btn btn-primary btn-large" href="#/contact">
@@ -110,7 +111,8 @@
                     <div>
                     <p class="truncate">{{ item.item_desc }}</p>
                     </div>
-                    <p>Current High Bid: {{ item.item_price }}</p>
+                        <p>Current High Bidder: {{ item.item_high_bidder }}</p>
+                        <p>Current High Bid: {{ item.item_price }}</p>
 
                         <button type="button" ng-click="setModal(item)" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
                             Place Bid
@@ -253,6 +255,10 @@
                         <div class="row" style="padding-bottom: 10px;">
                             <label><u>Item Description</u></label>
                             <p>{{ modalItem2.item_desc }}</p>
+                        </div>
+                        <div class="row" style="padding-bottom: 10px;">
+                            <label><u>Current High Bidder</u></label>
+                            <p>{{ modalItem2.item_high_bidder}}</p>
                         </div>
                         <div class="row" style="padding-bottom: 10px;">
                             <label><u>Current High Bid</u></label>

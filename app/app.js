@@ -5,7 +5,8 @@ angular.module('myApp', [
     'ui.router',
     'ui.bootstrap',
     'searchFilter',
-    'ui.mask'
+    'ui.mask',
+    'itemService'
 ])
     .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
 

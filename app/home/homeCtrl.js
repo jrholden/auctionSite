@@ -1,31 +1,23 @@
 /**
  * Created by Corey Weber on 2016-07-03.
  */
-var console = {};
-console.log = function(){};
+/*var console = {};
+console.log = function(){};*/
 
 'use strict';
 
-angular.module('myApp').controller('HomeCtrl', ['$scope', '$http', function($scope, $http) {
+angular.module('myApp').controller('HomeCtrl', ['GetItems', 'PlaceBid', '$scope', '$http', function(GetItems, PlaceBid, $scope, $http) {
 
     console.log("We Are Home");
     
     $('#createSuccess').hide();
-    
-    $scope.getItems = function() {
 
-        $http.get("api/item/getItems.php")
-            .then(function(response) {
+    $scope.getItems = function () {
 
-                if(response.data != '0 results'){
-                    $scope.items = response.data;
-                    console.log("Response", response.data);
-                }else{
-                    $scope.items = [];
-                    console.log("Length", $scope.items.length);
-                }
-
-            });
+        GetItems.async().then(function(data){
+            $scope.items = data[0];
+            $scope.totalItems = data[1];
+        });
     };
     
     $scope.getSecondIndex = function(index) {
@@ -70,44 +62,26 @@ angular.module('myApp').controller('HomeCtrl', ['$scope', '$http', function($sco
     };
 
     $scope.makeBid = function (itemId) {
-
         $scope.loading = true;
-        //Needed to find index of items array
         var $index = $scope.getItemIndex(itemId);
-        $scope.higherBid = false;
 
-            $scope.bid = {
-                name: $scope.name,
-                email: $scope.email,
-                phone: $scope.phone,
-                bid: $scope.bid,
-                itemId: itemId
+        $scope.bid = {
+            name: $scope.name,
+            email: $scope.email,
+            phone: $scope.phone,
+            bid: $scope.bid,
+            itemId: itemId
+        };
 
-            };
+        PlaceBid.async($scope.bid).success(function() {
 
-            $http({
-                url: "api/bid/insertBid.php",
-                data: $scope.bid,
-                method: 'POST',
-                headers: {'Content-Type': 'application/json; charset=UTF-8'}
-            }).success(function (data) {
-                $scope.loading = false;
-                //Show message
-                $('#createSuccess').fadeIn('slow');
-                setTimeout(function(){
-                    $('#createSuccess').fadeOut('slow');
-                }, 3000);
-                
-                $scope.items[$index].item_price = $scope.bid.bid+".00";
-                $scope.bidMade = true;
-                $scope.higherBid = true;
+            $scope.loading = false;
+            $scope.items[$index].item_price = $scope.bid.bid+".00";
+            $scope.items[$index].item_high_bidder = $scope.bid.name;
+            $scope.higherBid = true;
 
-                $scope.clearBid();
-
-            }).error(function (err) {
-                $scope.loading = false;
-            });
-        
+            $scope.clearBid();
+        });
     };
 
     $scope.clearBid = function () {
@@ -117,47 +91,7 @@ angular.module('myApp').controller('HomeCtrl', ['$scope', '$http', function($sco
         $scope.email = '';
         $scope.bid = '';
     };
-
-    /*
-    $scope.fileChange = function(elm) {
-        console.log("hey", elm);
-        $scope.picture = elm.files;
-        $scope.$apply();
-    };
-
-    $scope.setModal2 = function(bidId) {
-
-        console.log("bidId:", bidId);
-
-        if(bidId != '0' && bidId != 0 && bidId != null){
-
-            $http({
-                url: "api/bid/getHighestBid.php",
-                data: bidId,
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json; charset=UTF-8' }
-            }).success(function(data) {
-                $scope.isBid = true;
-                console.log("OK", data);
-
-                $scope.modalItem2 = data[0];
-
-                console.log($scope.modalItem2);
-                //open modal with data
-
-            }).error(function(err) {
-                console.log(err);
-
-                //error
-            });
-
-        }else{
-            //no bid error
-            $scope.isBid = false;
-        }
-    };*/
-
-  
+    
     $scope.getItems();
 
 }]);

@@ -3,7 +3,7 @@
  */
 'use strict';
 
-angular.module('myApp').controller('AdminCtrl', ['$scope', '$http','$sce', function($scope, $http, $sce) {
+angular.module('myApp').controller('AdminCtrl', ['GetItems', '$scope', '$http', function(GetItems, $scope, $http) {
 
     console.log("We Are Admin");
 
@@ -56,7 +56,8 @@ angular.module('myApp').controller('AdminCtrl', ['$scope', '$http','$sce', funct
                 name: $scope.name,
                 price: $scope.price,
                 image: $scope.imageToData(img,500,500),
-                description: $scope.description
+                description: $scope.description,
+                currentBidder: "No Current Bidder"
             };
 
             $http({
@@ -181,21 +182,13 @@ angular.module('myApp').controller('AdminCtrl', ['$scope', '$http','$sce', funct
             $scope.isBid = false;
         }
     };
-    
-    $scope.getItems = function() {
 
-        $http.get("api/item/getItems.php")
-            .then(function(response) {
+    $scope.getItems = function () {
 
-                if(response.data != '0 results'){
-                    $scope.items = response.data;
-                    console.log("Response", response.data);
-                }else{
-                    $scope.items = [];
-                    console.log("Length", $scope.items.length);
-                }
-
-            });
+        GetItems.async().then(function(data){
+            $scope.items = data[0];
+            $scope.totalItems = data[1];
+        });
     };
     $scope.getItems();
 

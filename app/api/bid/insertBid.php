@@ -28,7 +28,7 @@ if(!$retval){
     echo "Failed";
 }else{
 
-    $sql = "UPDATE auction_items SET items_high_bid = '$last_id', item_price = '$bid' WHERE item_id = $itemNum";
+    $sql = "UPDATE auction_items SET items_high_bid = '$last_id', item_price = '$bid', item_high_bidder = '$name' WHERE item_id = $itemNum";
 
     $retval = mysqli_query($conn, $sql);
     if($retval){

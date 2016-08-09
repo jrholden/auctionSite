@@ -16,14 +16,15 @@ $name = $data['name'];
 $price = $data['price'];
 $image = $data['image'];
 $desc = $data['description'];
+$bidder = $data['currentBidder'];
 
 
 
 
 $sql = "INSERT INTO auction_items ".
-    "(item_name, item_price, item_image, item_desc)".
+    "(item_name, item_price, item_image, item_desc, item_high_bidder)".
     "VALUES".
-    "('$name', '$price', '$image', '$desc')";
+    "('$name', '$price', '$image', '$desc', '$bidder')";
 
 $retval = mysqli_query($conn, $sql);
 $last_id = $conn->insert_id;

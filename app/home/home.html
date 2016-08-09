@@ -106,6 +106,7 @@
                                     <h3>{{ items[getSecondIndex($index)].item_name }}</h3>
                                     <center>
                                     <p class="truncate">{{ items[getSecondIndex($index)].item_desc }}</p>
+                                        <p>High Bidder: {{ items[getSecondIndex($index)].item_high_bidder }}</p>
                                     </center>
                                     <p>
                                         <button type="button" ng-click="setModal(items[$index])" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
@@ -125,6 +126,7 @@
                                     <h3>{{ items[getSecondIndex($index+1)].item_name }}</h3>
                                     <center>
                                     <p class="truncate">{{ items[getSecondIndex($index+1)].item_desc }}</p>
+                                        <p>High Bidder: {{ items[getSecondIndex($index+1)].item_high_bidder }}</p>
                                     </center>
                                     <p>
                                         <button type="button" ng-click="setModal(items[$index+1])" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
@@ -144,6 +146,7 @@
                                     <h3>{{ items[getSecondIndex($index+2)].item_name }}</h3>
                                     <center>
                                     <p class="truncate">{{ items[getSecondIndex($index+2)].item_desc }}</p>
+                                        <p>High Bidder: {{ items[getSecondIndex($index+2)].item_high_bidder }}</p>
                                     </center>
                                     <p>
                                         <button type="button" ng-click="setModal(items[$index+2])" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
@@ -163,6 +166,7 @@
                                     <h3>{{ items[getSecondIndex($index+3)].item_name }}</h3>
                                     <center>
                                     <p class="truncate2">{{ items[getSecondIndex($index+3)].item_desc }}</p>
+                                        <p>High Bidder: {{ items[getSecondIndex($index+3)].item_high_bidder }}</p>
                                     </center>
                                     <p>
                                         <button type="button" ng-click="setModal(items[$index+3])" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">

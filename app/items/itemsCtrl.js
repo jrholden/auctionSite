@@ -3,7 +3,7 @@
  */
 'use strict';
 
-angular.module('myApp').controller('ItemsCtrl', ['$scope', '$http', '$timeout', function ($scope, $http, $timeout) {
+angular.module('myApp').controller('ItemsCtrl', [ 'GetItems', 'PlaceBid', '$scope', '$http', '$timeout', function ( GetItems, PlaceBid, $scope, $http, $timeout) {
 
     console.log("We Are ITEMS");
     $('#createSuccess').hide();
@@ -20,36 +20,18 @@ angular.module('myApp').controller('ItemsCtrl', ['$scope', '$http', '$timeout', 
     
    
     $scope.getItems = function () {
-
-        $http.get("api/item/getItems.php")
-            .then(function (response) {
-                if(response.data != '0 results'){
-                    $scope.items = response.data;
-
-                    $scope.totalItems = $scope.items.length;
-                    $scope.filteredItems= [];
-                    
-                }else{
-                   $scope.items = [];
-                    //console.log("Length", $scope.items.length);
-                }
-            });
+        
+        GetItems.async().then(function(data){
+            $scope.items = data[0];
+            $scope.totalItems = data[1];
+        });
     };
 
-    $scope.submitForm = function () {
-        if ($scope.bid - $scope.items[$index].item_price <= 0) {
-            $scope.higherBid = true;
-            $scope.userForm.$vaild = false;
-
-        }else if ($scope.userForm.$valid) {
-            alert('our form is amazing');
-        }
-
-    };
-
+    
     $scope.closeAlert = function () {
         $scope.showAlert = false;
     };
+    
     
     $scope.getItemIndex = function (itemId) {
         var $index = null;
@@ -67,48 +49,29 @@ angular.module('myApp').controller('ItemsCtrl', ['$scope', '$http', '$timeout', 
         }
         
     };
-
+    
+    
     $scope.makeBid = function (itemId) {
-        //Needed to find index of items array
         $scope.loading = true;
         var $index = $scope.getItemIndex(itemId);
-        $scope.higherBid = false;
 
-            $scope.bid = {
+        $scope.bid = {
                 name: $scope.name,
                 email: $scope.email,
                 phone: $scope.phone,
                 bid: $scope.bid,
                 itemId: itemId
+        };
 
-            };
+        PlaceBid.async($scope.bid).success(function() {
 
-           
+            $scope.loading = false;
+            $scope.items[$index].item_price = $scope.bid.bid+".00";
+            $scope.items[$index].item_high_bidder = $scope.bid.name;
+            $scope.higherBid = true;
 
-
-            $http({
-                url: "api/bid/insertBid.php",
-                data: $scope.bid,
-                method: 'POST',
-                headers: {'Content-Type': 'application/json; charset=UTF-8'}
-            }).success(function () {
-                //console.log("OK", data);
-                $scope.loading = false;
-                //Show message
-                $('#createSuccess').fadeIn('slow');
-                setTimeout(function(){
-                    $('#createSuccess').fadeOut('slow');
-                }, 3000);
-
-                $scope.items[$index].item_price = $scope.bid.bid+".00";
-                $scope.higherBid = true;
-              
-                $scope.clearBid();
-
-            }).error(function () {
-                //console.log(err);
-                $scope.loading = false;
-            });
+            $scope.clearBid();
+        });
     };
 
     $scope.clearBid = function () {
@@ -125,13 +88,10 @@ angular.module('myApp').controller('ItemsCtrl', ['$scope', '$http', '$timeout', 
     $scope.currentPage = 1;
     $scope.numPerPage = 8;
     $scope.maxSize = 5;
-   
     
-
+    
     $scope.filter = function() {
         $timeout(function() {
-            //wait for 'filtered' to be changed
-            /* change pagination with $scope.filtered */
             $scope.totalItems = $scope.filteredItems.length;
         }, 10);
     };
