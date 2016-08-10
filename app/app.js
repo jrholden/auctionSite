@@ -9,7 +9,8 @@ angular.module('myApp', [
     'ui.bootstrap',
     'searchFilter',
     'ui.mask',
-    'itemService'
+    'itemService',
+    'loginService'
 ])
     .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
 
@@ -29,11 +30,18 @@ angular.module('myApp', [
                 controller: 'ItemsCtrl'
             })
             
+            
             .state('admin', {
-                url: '/admin',
-                templateUrl: 'admin/admin.html?v=' + window.app_version,
-                controller: 'AdminCtrl'
-            })
+                    url: '/admin',
+                    templateUrl: 'admin/admin.html?v=' + window.app_version,
+                    controller: 'AdminCtrl',
+                    resolve: {
+                        auth: function(JWT){
+                            return JWT.async();
+                        }
+                    }
+                })
+            
 
             .state('contact', {
                 url: '/contact',

@@ -1,34 +1,39 @@
 'use strict';
 
-angular.module('myApp').controller('LoginCtrl', ['$scope', '$http', '$window', function ($scope, $http, $window) {
+angular.module('myApp').controller('LoginCtrl', ['JWT', '$scope', '$http', '$window', function (JWT, $scope, $http, $window) {
 
    console.log("We Are LOGIN");
+    if(JWT.test()){
+        $window.location.href = '#/admin';
+    }
 
    $scope.checkLogin = function() {
        $scope.loading = true;
-
-      $http.get("api/login/login.php")
-          .then(function(response) {
-
-             if(response.data != '0 results'){
-                $scope.creds = response.data;
-                //console.log("Response", response.data);
-                console.log($scope.username);
-                if ($scope.username === $scope.creds[0].login && $scope.pass === $scope.creds[0].password) {
-                    console.log("Login Success");
-                    $scope.loading = true;
-                    $window.location.href = '#/admin';
-                }
-                 else{
-                    console.log("Failed");
-                    $scope.loading = false;
-                }
-             }else{
-                    console.log("Failed");
-                     $scope.loading = false;
-             }
-
-          });
+       console.log("WERE HERER");
+       $scope.creds = {
+           user: $scope.username,
+           passW: $scope.pass,
+           from: "login"
+       };
+       $http({
+           url: "api/login/login.php",
+           data: $scope.creds,
+           method: 'POST',
+           headers: {'Content-Type': 'application/json; charset=UTF-8'}
+       }).success(function (response) {
+           
+           if(response === "Failed") {
+               console.log("Done Fucked Up");
+               $scope.incorrect = true;
+               $scope.loading = false;
+           }else{
+               
+               $window.localStorage.token = response.jwt;
+               $scope.loading = false;
+               $window.location.href = '#/admin';
+           }
+       });
+   
    };
    
    

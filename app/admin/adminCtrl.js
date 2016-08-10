@@ -3,10 +3,12 @@
  */
 'use strict';
 
-angular.module('myApp').controller('AdminCtrl', ['GetItems', '$scope', '$http', function(GetItems, $scope, $http) {
+angular.module('myApp').controller('AdminCtrl', ['JWT', 'GetItems', '$scope', '$http', '$window', function(JWT, GetItems, $scope, $http, $window) {
 
     console.log("We Are Admin");
-
+    console.log("TEST: "+ JWT.test());
+    
+    
     $('#createSuccess').hide();
     $('#editSuccess').hide();
 
@@ -182,6 +184,12 @@ angular.module('myApp').controller('AdminCtrl', ['GetItems', '$scope', '$http', 
             $scope.isBid = false;
         }
     };
+    
+    /*$scope.userAllowed = function () {
+        
+        JWT.async();
+        
+    };*/
 
     $scope.getItems = function () {
 
@@ -190,6 +198,7 @@ angular.module('myApp').controller('AdminCtrl', ['GetItems', '$scope', '$http', 
             $scope.totalItems = data[1];
         });
     };
+    //$scope.userAllowed();
     $scope.getItems();
 
 }]);
