@@ -82,6 +82,10 @@
     </div>
     <!-- /.row -->
     <!-- Projects Row -->
+    <center>
+        <img height="100px" src="images/default.gif" ng-show="loadingItems"/>
+    </center>
+
     <div ng-show="totalItems == 0">
         <center>
             <div class="container">
@@ -111,7 +115,8 @@
                     <div>
                     <p class="truncate">{{ item.item_desc }}</p>
                     </div>
-                        <p>Current High Bidder: {{ item.item_high_bidder }}</p>
+                        <p>High Bidder: {{ item.item_high_bidder }}</p>
+
                         <p>Current High Bid: {{ item.item_price }}</p>
 
                         <button type="button" ng-click="setModal(item)" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
@@ -184,6 +189,8 @@
                     <img src="{{ modalItem.item_image }}" alt="" height="250" width="250">
                   <h2 class="modal-title" id="myModalLabel">Item Name: {{ modalItem.item_name }}</h2>
                     <p></br>Item Description: {{ modalItem.item_desc }}</p>
+                        <p>Current High Bidder: {{ modalItem.item_high_bidder }}</p>
+                        <p>Current High Bid: {{ modalItem.item_price }}</p>
                 </div>
                 <div class="modal-body">
 
@@ -225,7 +232,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default"ng-click="clearBid()" data-dismiss="modal">Close</button>
 
-                    <button  data-dismiss="modal" type="submit" class="btn btn-primary" ng-click="makeBid(modalItem.item_id)" ng-disabled="userForm.$invalid">Submit<img height="30px" src="images/default.gif" ng-show="loading"/></button>
+                    <button type="submit" class="btn btn-primary" ng-click="makeBid(modalItem.item_id)" ng-disabled="userForm.$invalid">Submit<img height="30px" src="images/default.gif" ng-show="loading"/></button>
 
                 </div>
             </div>

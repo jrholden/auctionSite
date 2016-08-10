@@ -13,10 +13,12 @@ angular.module('myApp').controller('HomeCtrl', ['GetItems', 'PlaceBid', '$scope'
     $('#createSuccess').hide();
 
     $scope.getItems = function () {
+        $scope.loadingItems = true;
 
         GetItems.async().then(function(data){
             $scope.items = data[0];
             $scope.totalItems = data[1];
+            $scope.loadingItems = false;
         });
     };
     
@@ -28,20 +30,15 @@ angular.module('myApp').controller('HomeCtrl', ['GetItems', 'PlaceBid', '$scope'
             return index;
     };
 
-
-
-
+    
     $scope.setModal2 = function (item) {
         $scope.modalItem2 = item;
-        $scope.inUse = false;
-        console.log($scope.modalItem2);
-
+        $("#myCarousel").carousel('pause');
     };
+    
     $scope.setModal = function (item) {
         $scope.modalItem = item;
-        $scope.inUse=false;
-        console.log($scope.modalItem);
-
+        $("#myCarousel").carousel('pause');
     };
 
     $scope.getItemIndex = function (itemId) {
@@ -76,15 +73,18 @@ angular.module('myApp').controller('HomeCtrl', ['GetItems', 'PlaceBid', '$scope'
         PlaceBid.async($scope.bid).success(function() {
 
             $scope.loading = false;
+            
+            
+            
             $scope.items[$index].item_price = $scope.bid.bid+".00";
             $scope.items[$index].item_high_bidder = $scope.bid.name;
-            $scope.higherBid = true;
 
             $scope.clearBid();
         });
     };
 
     $scope.clearBid = function () {
+        $("#myCarousel").carousel('cycle');
         $scope.userForm.$setPristine();
         $scope.name = '';
         $scope.phone = '';

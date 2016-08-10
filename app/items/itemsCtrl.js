@@ -20,10 +20,13 @@ angular.module('myApp').controller('ItemsCtrl', [ 'GetItems', 'PlaceBid', '$scop
     
    
     $scope.getItems = function () {
+        $scope.loadingItems = true;
         
         GetItems.async().then(function(data){
             $scope.items = data[0];
             $scope.totalItems = data[1];
+
+            $scope.loadingItems = false;
         });
     };
 
@@ -68,7 +71,6 @@ angular.module('myApp').controller('ItemsCtrl', [ 'GetItems', 'PlaceBid', '$scop
             $scope.loading = false;
             $scope.items[$index].item_price = $scope.bid.bid+".00";
             $scope.items[$index].item_high_bidder = $scope.bid.name;
-            $scope.higherBid = true;
 
             $scope.clearBid();
         });

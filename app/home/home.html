@@ -74,6 +74,9 @@
         <!-- /.row -->
         <!-- Page Features -->
     </div>
+    <center>
+    <img height="100px" src="images/default.gif" ng-show="loadingItems"/>
+    </center>
     <div ng-show="items.length == 0">
         <center>
             <div class="container">
@@ -107,6 +110,7 @@
                                     <center>
                                     <p class="truncate">{{ items[getSecondIndex($index)].item_desc }}</p>
                                         <p>High Bidder: {{ items[getSecondIndex($index)].item_high_bidder }}</p>
+                                        <p>Current High Bid: {{ items[getSecondIndex($index)].item_price }}</p>
                                     </center>
                                     <p>
                                         <button type="button" ng-click="setModal(items[$index])" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
@@ -127,6 +131,8 @@
                                     <center>
                                     <p class="truncate">{{ items[getSecondIndex($index+1)].item_desc }}</p>
                                         <p>High Bidder: {{ items[getSecondIndex($index+1)].item_high_bidder }}</p>
+                                        <p>Current High Bid: {{ items[getSecondIndex($index+1)].item_price }}</p>
+
                                     </center>
                                     <p>
                                         <button type="button" ng-click="setModal(items[$index+1])" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
@@ -147,6 +153,8 @@
                                     <center>
                                     <p class="truncate">{{ items[getSecondIndex($index+2)].item_desc }}</p>
                                         <p>High Bidder: {{ items[getSecondIndex($index+2)].item_high_bidder }}</p>
+                                        <p>Current High Bid: {{ items[getSecondIndex($index+2)].item_price }}</p>
+
                                     </center>
                                     <p>
                                         <button type="button" ng-click="setModal(items[$index+2])" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
@@ -167,6 +175,8 @@
                                     <center>
                                     <p class="truncate2">{{ items[getSecondIndex($index+3)].item_desc }}</p>
                                         <p>High Bidder: {{ items[getSecondIndex($index+3)].item_high_bidder }}</p>
+                                        <p>Current High Bid: {{ items[getSecondIndex($index+3)].item_price }}</p>
+
                                     </center>
                                     <p>
                                         <button type="button" ng-click="setModal(items[$index+3])" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
@@ -180,14 +190,7 @@
                             </div>
                         </div>
                     </div>
-                </div><!-- Controls -->
-                <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                    <span class="icon-prev"></span>
-                </a>
-                <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                    <span class="icon-next"></span>
-                </a>
-
+                </div>
             </div>
 
         </div>
@@ -212,6 +215,10 @@
                         <img src="{{ modalItem.item_image }}" alt="" height="250" width="250">
                         <h2 class="modal-title" id="myModalLabel">{{ modalItem.item_name }}</h2>
                         <p></br>{{ modalItem.item_desc }}</p>
+                        <p>High Bidder: {{ modalItem.item_high_bidder }}</p>
+                        <p>Current Highest Bid: {{ modalItem.item_price }}</p>
+
+
                     </div>
                     <div class="modal-body">
 
@@ -255,7 +262,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default"ng-click="clearBid()" data-dismiss="modal">Close</button>
 
-                        <button  data-dismiss="modal" type="submit" class="btn btn-primary" ng-click="makeBid(modalItem.item_id)" ng-disabled="userForm.$invalid">Submit<img height="30px" src="images/default.gif" ng-show="loading"/></button>
+                        <button type="submit" class="btn btn-primary" ng-click="makeBid(modalItem.item_id)" ng-disabled="userForm.$invalid">Submit<img height="30px" src="images/default.gif" ng-show="loading"/></button>
 
                     </div>
                 </div>
@@ -284,8 +291,12 @@
                                 <p>{{ modalItem2.item_name }}</p>
                         </div>
                         <div class="row" style="padding-bottom: 10px;">
-                                <label><u>Telephone</u></label>
+                                <label><u>Description</u></label>
                                 <p>{{ modalItem2.item_desc }}</p>
+                        </div>
+                        <div class="row" style="padding-bottom: 10px;">
+                            <label><u>Current High Bidder</u></label>
+                            <p>{{ modalItem2.item_high_bidder}}</p>
                         </div>
                         <div class="row" style="padding-bottom: 10px;">
                                 <label><u>Current High Bid</u></label>
@@ -294,7 +305,7 @@
                 </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button ng-click="clearBid()" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
 
             </div>

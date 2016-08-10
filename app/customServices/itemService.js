@@ -47,6 +47,8 @@ angular.module('itemService', [])
                     setTimeout(function(){
                         $('#createSuccess').fadeOut('slow');
                     }, 3000);
+                    //close modal
+                    $('#myModal').modal('hide');
 
                 });
                 // Return the promise to the controller
