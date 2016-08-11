@@ -1,7 +1,7 @@
 /*
-var console = {};
+ var console = {};
  console.log = function(){};
-*/
+ */
 
 'use strict';
 

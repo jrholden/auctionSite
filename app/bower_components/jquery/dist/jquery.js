@@ -1,16 +1,4 @@
-/*!
- * jQuery JavaScript Library v2.1.4
- * http://jquery.com/
- *
- * Includes Sizzle.js
- * http://sizzlejs.com/
- *
- * Copyright 2005, 2014 jQuery Foundation, Inc. and other contributors
- * Released under the MIT license
- * http://jquery.org/license
- *
- * Date: 2015-04-28T16:01Z
- */
+
 
 (function( global, factory ) {
 
@@ -551,16 +539,7 @@ function isArraylike( obj ) {
 		typeof length === "number" && length > 0 && ( length - 1 ) in obj;
 }
 var Sizzle =
-/*!
- * Sizzle CSS Selector Engine v2.2.0-pre
- * http://sizzlejs.com/
- *
- * Copyright 2008, 2014 jQuery Foundation, Inc. and other contributors
- * Released under the MIT license
- * http://jquery.org/license
- *
- * Date: 2014-12-16
- */
+
 (function( window ) {
 
 var i,
@@ -855,12 +834,7 @@ function Sizzle( selector, context, results, seed ) {
 	return select( selector.replace( rtrim, "$1" ), context, results, seed );
 }
 
-/**
- * Create key-value caches of limited size
- * @returns {Function(string, Object)} Returns the Object data after storing it on itself with
- *	property name the (space-suffixed) string and (if the cache is larger than Expr.cacheLength)
- *	deleting the oldest entry
- */
+
 function createCache() {
 	var keys = [];
 
@@ -875,19 +849,13 @@ function createCache() {
 	return cache;
 }
 
-/**
- * Mark a function for special use by Sizzle
- * @param {Function} fn The function to mark
- */
+
 function markFunction( fn ) {
 	fn[ expando ] = true;
 	return fn;
 }
 
-/**
- * Support testing using an element
- * @param {Function} fn Passed the created div and expects a boolean result
- */
+
 function assert( fn ) {
 	var div = document.createElement("div");
 
@@ -905,11 +873,7 @@ function assert( fn ) {
 	}
 }
 
-/**
- * Adds the same handler for all of the specified attrs
- * @param {String} attrs Pipe-separated list of attributes
- * @param {Function} handler The method that will be applied
- */
+
 function addHandle( attrs, handler ) {
 	var arr = attrs.split("|"),
 		i = attrs.length;
@@ -919,12 +883,7 @@ function addHandle( attrs, handler ) {
 	}
 }
 
-/**
- * Checks document order of two siblings
- * @param {Element} a
- * @param {Element} b
- * @returns {Number} Returns less than 0 if a precedes b, greater than 0 if a follows b
- */
+
 function siblingCheck( a, b ) {
 	var cur = b && a,
 		diff = cur && a.nodeType === 1 && b.nodeType === 1 &&
@@ -948,10 +907,7 @@ function siblingCheck( a, b ) {
 	return a ? 1 : -1;
 }
 
-/**
- * Returns a function to use in pseudos for input types
- * @param {String} type
- */
+
 function createInputPseudo( type ) {
 	return function( elem ) {
 		var name = elem.nodeName.toLowerCase();
@@ -959,10 +915,7 @@ function createInputPseudo( type ) {
 	};
 }
 
-/**
- * Returns a function to use in pseudos for buttons
- * @param {String} type
- */
+
 function createButtonPseudo( type ) {
 	return function( elem ) {
 		var name = elem.nodeName.toLowerCase();
@@ -970,10 +923,7 @@ function createButtonPseudo( type ) {
 	};
 }
 
-/**
- * Returns a function to use in pseudos for positionals
- * @param {Function} fn
- */
+
 function createPositionalPseudo( fn ) {
 	return markFunction(function( argument ) {
 		argument = +argument;
@@ -992,11 +942,7 @@ function createPositionalPseudo( fn ) {
 	});
 }
 
-/**
- * Checks a node for validity as a Sizzle context
- * @param {Element|Object=} context
- * @returns {Element|Object|Boolean} The input node if acceptable, otherwise a falsy value
- */
+
 function testContext( context ) {
 	return context && typeof context.getElementsByTagName !== "undefined" && context;
 }
@@ -1004,11 +950,7 @@ function testContext( context ) {
 // Expose support vars for convenience
 support = Sizzle.support = {};
 
-/**
- * Detects XML nodes
- * @param {Element|Object} elem An element or a document
- * @returns {Boolean} True iff elem is a non-HTML XML node
- */
+
 isXML = Sizzle.isXML = function( elem ) {
 	// documentElement is verified for cases where it doesn't yet exist
 	// (such as loading iframes in IE - #4833)
@@ -1016,11 +958,7 @@ isXML = Sizzle.isXML = function( elem ) {
 	return documentElement ? documentElement.nodeName !== "HTML" : false;
 };
 
-/**
- * Sets document-related variables once based on the current document
- * @param {Element|Object} [doc] An element or document object to use to set the document
- * @returns {Object} Returns the current document
- */
+
 setDocument = Sizzle.setDocument = function( node ) {
 	var hasCompare, parent,
 		doc = node ? node.ownerDocument || node : preferredDoc;

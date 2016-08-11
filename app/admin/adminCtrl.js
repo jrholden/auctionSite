@@ -3,16 +3,18 @@
  */
 'use strict';
 
-angular.module('myApp').controller('AdminCtrl', ['JWT', 'GetItems', '$scope', '$http', '$window', function(JWT, GetItems, $scope, $http, $window) {
+angular.module('myApp').controller('AdminCtrl', ['JWT', 'GetItems', '$scope', '$http', '$timeout', function(JWT, GetItems, $scope, $http, $timeout) {
 
     console.log("We Are Admin");
-    console.log("TEST: "+ JWT.test());
+   var image;
     
     
     $('#createSuccess').hide();
     $('#editSuccess').hide();
+   
 
-    document.getElementById('file').onchange = function() {
+    document.getElementById('file').onchange = function() { 
+        
         // Sets the scope variable for photo
         var picture = document.querySelector('input[type=file]').files[0];
 
@@ -22,9 +24,14 @@ angular.module('myApp').controller('AdminCtrl', ['JWT', 'GetItems', '$scope', '$
             $scope.picture = reader.result;
         }, false);
 
-        if (file) {
+        if (picture) {
+            
             reader.readAsDataURL(picture);
+            var img = new Image;
+            img.src = $scope.picture;
+            $scope.picture = $scope.imageToData(img, 500, 500);
         }
+        
     };
 
     $scope.imageToData = function(img, width, height) {
@@ -41,60 +48,63 @@ angular.module('myApp').controller('AdminCtrl', ['JWT', 'GetItems', '$scope', '$
         ctx.drawImage(img, 0, 0, width, height);
 
         // encode image to data-uri with base64 version of compressed image
-        return canvas.toDataURL('image/jpeg', 0.5);  // quality = [0.0, 1.0]
+         return canvas.toDataURL('image/jpeg', 0.1);  // quality = [0.0, 1.0]
+        
     };
 
 
-    $scope.makeItem = function() {
-
-        // Error Checking ==> NEEDS WORK ==> Im thinking switch?
-            var img = new Image;
-            //img.onload = resizeImage;
-            img.src = $scope.picture;
-
-
-
-            $scope.item = {
-                name: $scope.name,
-                price: $scope.price,
-                image: $scope.imageToData(img,500,500),
-                description: $scope.description,
-                currentBidder: "No Current Bidder"
-            };
-
-            $http({
-                url: "api/item/insertItem.php",
-                data: $scope.item,
-                method: 'POST',
-                headers: {'Content-Type': 'application/json; charset=UTF-8'}
-            }).success(function (data) {
-                console.log("OK", data[0]);
-                
-                //Show message
-                $('#createSuccess').fadeIn('slow');
-                setTimeout(function(){
-                    $('#createSuccess').fadeOut('slow');
-                }, 3000);
-                
-                $scope.items.push(data[0]);
-
-                $scope.itemCreate = true;
-            }).error(function (err) {
-                console.log(err);
-            });
-    };
+    
+        
+        $scope.makeItem = function() {
+            
+            // Error Checking ==> NEEDS WORK ==> Im thinking switch?
+                var img = new Image;
+                img.src = $scope.picture;
+            
+    
+    
+                $scope.item = {
+                    name: $scope.name,
+                    price: $scope.price,
+                    image: $scope.picture,
+                    description: $scope.description,
+                    currentBidder: "No Current Bidder"
+                };
+    
+                $http({
+                    url: "api/item/insertItem.php",
+                    data: $scope.item,
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json; charset=UTF-8'}
+                }).success(function (data) {
+    
+    
+                    //Show message
+                    $('#createSuccess').fadeIn('slow');
+                    setTimeout(function () {
+                        $('#createSuccess').fadeOut('slow');
+                    }, 3000);
+    
+                    $scope.items.push(data[0]);
+    
+                    $scope.itemCreate = true;
+                }).error(function (err) {
+    
+                });
+            
+        };
+            
+    
     
     $scope.editItem = function(item){
 
-        console.log(item);
-        
         $http({
             url: "api/item/updateItem.php",
             data: item,
             method: 'POST',
             headers: { 'Content-Type': 'application/json; charset=UTF-8' }
         }).success(function(data) {
-            console.log("OK", data);
+            
             //Show message
             $('#editSuccess').fadeIn('slow');
             setTimeout(function(){
@@ -102,7 +112,7 @@ angular.module('myApp').controller('AdminCtrl', ['JWT', 'GetItems', '$scope', '$
             }, 3000);
             $scope.itemEdit = true;
         }).error(function(err) {
-            console.log(err);
+            
         });
         $scope.itemEdit = false;
         
@@ -110,7 +120,7 @@ angular.module('myApp').controller('AdminCtrl', ['JWT', 'GetItems', '$scope', '$
 
     $scope.setModal = function (item) {
         $scope.modalItem = item;
-        console.log($scope.modalItem);
+       
        
     };
 
@@ -118,18 +128,18 @@ angular.module('myApp').controller('AdminCtrl', ['JWT', 'GetItems', '$scope', '$
 
     $scope.deleteItem = function(item) {
 
-        console.log(item);
+       
         $http({
             url: "api/item/deleteItem.php",
             data: item.item_id,
             method: 'POST',
             headers: { 'Content-Type': 'application/json; charset=UTF-8' }
         }).success(function(data) {
-            console.log("OK", data);
+            
             
             $scope.items.splice($scope.items.indexOf(item),1);
         }).error(function(err) {
-            console.log(err);
+            
         });
     };
 
@@ -140,22 +150,22 @@ angular.module('myApp').controller('AdminCtrl', ['JWT', 'GetItems', '$scope', '$
             url: "api/item/deleteAllItems.php",
             method: 'POST',
         }).success(function(data) {
-            console.log("OK", data);
+            
             $scope.items.splice($scope.items);
         }).error(function(err) {
-            console.log(err);
+            
         });
     };
 
-    $scope.fileChange = function(elm) {
-        console.log("hey", elm);
+   /* $scope.fileChange = function(elm) {
+        
         $scope.picture = elm.files;
         $scope.$apply();
-    };
+    };*/
 
     $scope.setModal2 = function(bidId) {
 
-        console.log("bidId:", bidId);
+       
 
         if(bidId != '0' && bidId != 0 && bidId != null){
 
@@ -166,15 +176,15 @@ angular.module('myApp').controller('AdminCtrl', ['JWT', 'GetItems', '$scope', '$
                 headers: { 'Content-Type': 'application/json; charset=UTF-8' }
             }).success(function(data) {
                 $scope.isBid = true;
-                console.log("OK", data);
+                
 
                 $scope.modalItem2 = data[0];
 
-                console.log($scope.modalItem2);
+                
                 //open modal with data
 
             }).error(function(err) {
-                console.log(err);
+               
 
                 //error
             });

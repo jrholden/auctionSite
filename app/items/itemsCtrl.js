@@ -9,13 +9,13 @@ angular.module('myApp').controller('ItemsCtrl', [ 'GetItems', 'PlaceBid', '$scop
     $('#createSuccess').hide();
 
     $scope.setModal = function (item) {
-        console.log("Modalll");
+        
         $scope.modalItem = item;
-        console.log($scope.modalItem);
+        
     };
     $scope.setModal2 = function (item) {
         $scope.modalItem2 = item;
-        //console.log($scope.modalItem);
+       
     };
     
    

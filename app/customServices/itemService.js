@@ -20,7 +20,7 @@ angular.module('itemService', [])
                          data = [items, totalItems];
                     }
                     // The then function here is an opportunity to modify the response
-                    console.log(data);
+                  
                     // The return value gets picked up by the then in the controller.
                     return data;
                 });

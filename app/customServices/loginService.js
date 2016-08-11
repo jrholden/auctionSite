@@ -23,7 +23,7 @@ angular.module('loginService', [])
                 }).success(function () {
                     
                 }).error(function(){
-                    console.log("Big Turd");
+                   
                     $window.location.href = '#/login';
                 });
                 // Return the promise to the controller
