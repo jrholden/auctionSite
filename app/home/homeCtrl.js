@@ -9,7 +9,7 @@ console.log = function(){};*/
 angular.module('myApp').controller('HomeCtrl', ['GetItems', 'PlaceBid', '$scope', '$http', function(GetItems, PlaceBid, $scope, $http) {
 
     console.log("We Are Home");
-    
+    $("#myCarousel").carousel('cycle');
     $('#createSuccess').hide();
 
     $scope.getItems = function () {

@@ -4,7 +4,7 @@
 'use strict';
 
 angular.module('itemService', [])
-    .factory('GetItems', function($http) {
+    .factory('GetItems', function($http, $window) {
         var getItems = {
             async: function() {
                 // $http returns a promise, which has a then function, which also returns a promise
@@ -14,6 +14,7 @@ angular.module('itemService', [])
                         var items = response.data;
                         var totalItems = items.length;
                         var data = [items, totalItems];
+                        //$window.sessionStorage.itemData = data;
                     }else{
                          items = [];
                          totalItems = 0;

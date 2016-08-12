@@ -13,30 +13,48 @@ angular.module('myApp').controller('AdminCtrl', ['JWT', 'GetItems', '$scope', '$
     $('#editSuccess').hide();
    
 
-    document.getElementById('file').onchange = function() { 
+
+   // $scope.imageToData = function() {
+
+        var fileInput = document.getElementById('file');
+        //var fileDisplayArea = document.getElementById('fileDisplayArea');
+
+        fileInput.addEventListener('change', function (e) {
+
+            var file = fileInput.files[0];
+            var imageType = /image.*/;
+
+            if (file.type.match(imageType)) {
+
+                var reader = new FileReader();
+
+                reader.onload = function () {
+                    var canvas = document.createElement('canvas'),
+                        ctx = canvas.getContext('2d');
+                    
+
+                    // create a new image from user selected file
+                    var img = new Image();
+                    img.onload = function() {
+                        // set canvas size to image size
+                        canvas.width = 350;
+                        canvas.height = 350;
+
+                        // scale and draw image with offset
+                        ctx.drawImage(img, 0, 0,350,350);
+                        $scope.picture = canvas.toDataURL('image/jpeg', 0.3);
+                    };
+                    img.src = reader.result;
+                    
+                };
+                reader.readAsDataURL(file);
+            } else {
+                alert("File not supported!");
+            }
+        });
         
-        // Sets the scope variable for photo
-        var picture = document.querySelector('input[type=file]').files[0];
 
-        var reader = new FileReader();
-
-        reader.addEventListener("load", function() {
-            $scope.picture = reader.result;
-        }, false);
-
-        if (picture) {
-            
-            reader.readAsDataURL(picture);
-            var img = new Image;
-            img.src = $scope.picture;
-            $scope.picture = $scope.imageToData(img, 500, 500);
-        }
-        
-    };
-
-    $scope.imageToData = function(img, width, height) {
-
-        // create an off-screen canvas
+        /*// create an off-screen canvas
         var canvas = document.createElement('canvas'),
             ctx = canvas.getContext('2d');
 
@@ -48,20 +66,19 @@ angular.module('myApp').controller('AdminCtrl', ['JWT', 'GetItems', '$scope', '$
         ctx.drawImage(img, 0, 0, width, height);
 
         // encode image to data-uri with base64 version of compressed image
-         return canvas.toDataURL('image/jpeg', 0.1);  // quality = [0.0, 1.0]
+         return canvas.toDataURL('image/jpeg', 0.5);  // quality = [0.0, 1.0]*/
         
-    };
+    //};
 
 
     
         
         $scope.makeItem = function() {
+            /*var img = new Image;
+            img.src = $scope.picture;*/
+           // $scope.imageToData();
             
             // Error Checking ==> NEEDS WORK ==> Im thinking switch?
-                var img = new Image;
-                img.src = $scope.picture;
-            
-    
     
                 $scope.item = {
                     name: $scope.name,

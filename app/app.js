@@ -16,6 +16,7 @@ angular.module('myApp', [
 ])
     .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
 
+        
         $urlRouterProvider.when('', '/');
         $urlRouterProvider.otherwise('/404-page');
 
