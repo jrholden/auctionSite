@@ -89,16 +89,17 @@
     <div ng-show="totalItems == 0">
         <center>
             <div class="container">
-        <div class="hero-unit">
-            <h1>There are Currently <strong>No Items</strong></h1>
-            <h4 ng-if="searchTerm !== undefined || searchTerm !== ' '">That Match: {{ searchTerm }}</h4>
-            <p>If you have an item that you would like to add, please visit the <strong>Contact Page</strong></p>
-            <p>
-                <a class="btn btn-primary btn-large" href="#/contact">
-                    Contact Page
-                </a>
-            </p>
-        </div>
+                <div class="hero-unit">
+                    <h1>There are Currently <strong>No Items</strong></h1>
+                    <h4 ng-if="searchTerm !== undefined || searchTerm !== ' '">That Match: {{ searchTerm }}</h4>
+                    <p>If you have an item that you would like to add, please visit the <strong>Contact Page</strong>
+                    </p>
+                    <p>
+                        <a class="btn btn-primary btn-large" href="#/contact">
+                            Contact Page
+                        </a>
+                    </p>
+                </div>
             </div>
         </center>
     </div>
@@ -106,26 +107,29 @@
 
         <!--<li >No items in this list yet!</li>-->
 
-        <div  class="col-md-3 col-sm-6 hero-feature" ng-repeat="item in filteredItems = (items | filter: searchTerm) | startFrom: (currentPage-1)*numPerPage | limitTo: numPerPage">
+        <div class="col-md-3 col-sm-6 hero-feature"
+             ng-repeat="item in filteredItems = (items | filter: searchTerm) | startFrom: (currentPage-1)*numPerPage | limitTo: numPerPage">
             <div class="thumbnail">
                 <img src="{{ item.item_image }}" alt="" height="300" width="300">
                 <div class="caption">
                     <center>
-                    <h3>{{ item.item_name }}</h3>
-                    <div>
-                    <p class="truncate">{{ item.item_desc }}</p>
-                    </div>
+                        <h3>{{ item.item_name }}</h3>
+                        <div>
+                            <p class="truncate">{{ item.item_desc }}</p>
+                        </div>
                         <p>High Bidder: {{ item.item_high_bidder }}</p>
 
                         <p>Current High Bid: {{ item.item_price }}</p>
 
-                        <button type="button" ng-click="setModal(item)" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                        <button type="button" ng-click="setModal(item)" class="btn btn-primary btn-lg"
+                                data-toggle="modal" data-target="#myModal">
                             Place Bid
                         </button>
-                        <button type="button" ng-click="setModal2(item)" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal2">
-                           More Info
+                        <button type="button" ng-click="setModal2(item)" class="btn btn-default btn-lg"
+                                data-toggle="modal" data-target="#myModal2">
+                            More Info
                         </button>
-                        </center>
+                    </center>
 
                 </div>
             </div>
@@ -142,9 +146,10 @@
             boundary-links="true">
     </pagination>-->
     <div class="col-sm-12">
-    <center>
-    <ul uib-pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-lg" boundary-links="true" items-per-page="numPerPage" ></ul>
-    </center>
+        <center>
+            <ul uib-pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-lg"
+                boundary-links="true" items-per-page="numPerPage"></ul>
+        </center>
     </div>
 
     <!-- Pagination -->
@@ -186,58 +191,74 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
                     <div class="col-lg-12">
-                    <img src="{{ modalItem.item_image }}" alt="" height="350" width="350">
-                  <h2 class="modal-title" id="myModalLabel">Item Name: {{ modalItem.item_name }}</h2>
-                    <p></br>Item Description: {{ modalItem.item_desc }}</p>
+                        <img src="{{ modalItem.item_image }}" alt="" height="350" width="350">
+                        <h2 class="modal-title" id="myModalLabel">Item Name: {{ modalItem.item_name }}</h2>
+                        <p></br>Item Description: {{ modalItem.item_desc }}</p>
                         <p>Current High Bidder: {{ modalItem.item_high_bidder }}</p>
                         <p>Current High Bid: {{ modalItem.item_price }}</p>
-                </div>
-                <div class="modal-body">
+                    </div>
+                    <div class="modal-body">
 
-                    <form name="userForm" ng-submit="submitForm()" novalidate>
+                        <form name="userForm" ng-submit="submitForm()" novalidate>
 
-                        <div class="form-group" ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">
-                            <label>Name</label>
-                            <input ng-model="name" placeholder="Bidder Name" class="form-control" required name="name">
-                            <p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">Your name is required.</p>
-                        </div>
-                            <div class="form-group" ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }">
+                            <div class="form-group"
+                                 ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">
+                                <label>Name</label>
+                                <input ng-model="name" placeholder="Bidder Name" class="form-control" required
+                                       name="name">
+                                <p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">Your
+                                    name is required.</p>
+                            </div>
+                            <div class="form-group"
+                                 ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }">
                                 <label>Email</label>
-                                <input type="email" ng-model="email" placeholder="Bidder Email" class="form-control" required name="email">
-                                <p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">Enter a valid email.</p>
+                                <input type="email" ng-model="email" placeholder="Bidder Email" class="form-control"
+                                       required name="email">
+                                <p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">
+                                    Enter a valid email.</p>
 
                             </div>
-                            <div class="form-group" ng-class="{ 'has-error' : userForm.phone.$invalid && !userForm.phone.$pristine }">
+                            <div class="form-group"
+                                 ng-class="{ 'has-error' : userForm.phone.$invalid && !userForm.phone.$pristine }">
                                 <label>Phone</label>
-                                <input type="text"   id="phone" ui-mask="(999) 999-9999" ng-model="phone"  class="form-control" name="phone" required>
-                                <p ng-show="userForm.phone.$invalid && !userForm.phone.$pristine" class="help-block">Enter a valid phone number.</p>
+                                <input type="text" id="phone" ui-mask="(999) 999-9999" ng-model="phone"
+                                       class="form-control" name="phone" required>
+                                <p ng-show="userForm.phone.$invalid && !userForm.phone.$pristine" class="help-block">
+                                    Enter a valid phone number.</p>
 
                             </div>
-                        <div>
-                        <div class="form-group" ng-class="{ 'has-error' : userForm.bid.$invalid && !userForm.bid.$pristine}">
-                            <label>Minimum Price (${{ modalItem.item_price }})</label>
-                            <div class="input-group">
-                               <!-- <span class="input-group-addon">$</span>-->
-                                <input ng-model="bid" placeholder="Price" type="number" class="form-control" name="bid" min="{{ modalItem.item_price+1 }}" required>
-                                <p ng-show="userForm.bid.$invalid && !userForm.bid.$pristine" class="help-block">Enter a valid number that is greater than: ${{ modalItem.item_price }}</p>
+                            <div>
+                                <div class="form-group"
+                                     ng-class="{ 'has-error' : userForm.bid.$invalid && !userForm.bid.$pristine}">
+                                    <label>Minimum Price (${{ modalItem.item_price }})</label>
+                                    <div class="input-group">
+                                        <!-- <span class="input-group-addon">$</span>-->
+                                        <input ng-model="bid" placeholder="Price" type="number" class="form-control"
+                                               name="bid" min="{{ modalItem.item_price+1 }}" required>
+                                        <p ng-show="userForm.bid.$invalid && !userForm.bid.$pristine"
+                                           class="help-block">Enter a valid number that is greater than: ${{
+                                            modalItem.item_price }}</p>
 
-                                <!--<span class="input-group-addon">.00</span>-->
+                                        <!--<span class="input-group-addon">.00</span>-->
 
+                                    </div>
+                                </div>
                             </div>
-                </div>
-                </div>
-                    </form>
-                </div>
+                        </form>
+                    </div>
 
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default"ng-click="clearBid()" data-dismiss="modal">Close</button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" ng-click="clearBid()" data-dismiss="modal">Close
+                        </button>
 
-                    <button type="submit" class="btn btn-primary" ng-click="makeBid(modalItem.item_id)" ng-disabled="userForm.$invalid">Submit<img height="30px" src="images/default.gif" ng-show="loading"/></button>
+                        <button type="submit" class="btn btn-primary" ng-click="makeBid(modalItem.item_id)"
+                                ng-disabled="userForm.$invalid">Submit<img height="30px" src="images/default.gif"
+                                                                           ng-show="loading"/></button>
 
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 
     <!-- More Info Modal -->

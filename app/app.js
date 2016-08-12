@@ -32,19 +32,19 @@ angular.module('myApp', [
                 templateUrl: 'items/items.html?v=' + window.app_version,
                 controller: 'ItemsCtrl'
             })
-            
-            
+
+
             .state('admin', {
-                    url: '/admin',
-                    templateUrl: 'admin/admin.html?v=' + window.app_version,
-                    controller: 'AdminCtrl',
-                    resolve: {
-                        auth: function(JWT){
-                            return JWT.async();
-                        }
+                url: '/admin',
+                templateUrl: 'admin/admin.html?v=' + window.app_version,
+                controller: 'AdminCtrl',
+                resolve: {
+                    auth: function (JWT) {
+                        return JWT.async();
                     }
-                })
-            
+                }
+            })
+
 
             .state('contact', {
                 url: '/contact',
@@ -57,7 +57,6 @@ angular.module('myApp', [
                 templateUrl: 'login/login.html?v=' + window.app_version,
                 controller: 'LoginCtrl'
             })
-
 
 
     });

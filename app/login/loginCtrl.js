@@ -27,7 +27,7 @@ angular.module('myApp').controller('LoginCtrl', ['JWT', '$scope', '$http', '$win
                $scope.incorrect = true;
                $scope.loading = false;
            }else{
-               
+
                $window.localStorage.token = response.jwt;
                $scope.loading = false;
                $window.location.href = '#/admin';

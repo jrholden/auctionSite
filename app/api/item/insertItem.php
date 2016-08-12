@@ -19,18 +19,16 @@ $desc = $data['description'];
 $bidder = $data['currentBidder'];
 
 
-
-
-$sql = "INSERT INTO auction_items ".
-    "(item_name, item_price, item_image, item_desc, item_high_bidder)".
-    "VALUES".
+$sql = "INSERT INTO auction_items " .
+    "(item_name, item_price, item_image, item_desc, item_high_bidder)" .
+    "VALUES" .
     "('$name', '$price', '$image', '$desc', '$bidder')";
 
 $retval = mysqli_query($conn, $sql);
 $last_id = $conn->insert_id;
-if(!$retval){
+if (!$retval) {
     echo "Failed";
-}else{
+} else {
 
     $sql = "SELECT * FROM auction_items WHERE item_id = $last_id LIMIT 1";
     $result = $conn->query($sql);
@@ -42,7 +40,7 @@ if(!$retval){
         while ($row = $result->fetch_assoc()) {
             $data[] = $row;
         }
-        
+
         echo json_encode($data);
     } else {
         echo "0 results";
