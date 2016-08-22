@@ -1,0 +1,13 @@
+[11-Aug-2016 17:54:19 UTC] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 26798140 bytes) in /home/jh9222/public_html/app/api/item/getItems.php on line 24
+[11-Aug-2016 17:54:24 UTC] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 26798140 bytes) in /home/jh9222/public_html/app/api/item/getItems.php on line 24
+[11-Aug-2016 17:54:30 UTC] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 26798140 bytes) in /home/jh9222/public_html/app/api/item/getItems.php on line 24
+[11-Aug-2016 17:54:47 UTC] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 26798140 bytes) in /home/jh9222/public_html/app/api/item/getItems.php on line 24
+[11-Aug-2016 17:56:26 UTC] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 26798140 bytes) in /home/jh9222/public_html/app/api/item/getItems.php on line 24
+[11-Aug-2016 17:56:47 UTC] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 26798140 bytes) in /home/jh9222/public_html/app/api/item/getItems.php on line 24
+[11-Aug-2016 17:59:08 UTC] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 26798140 bytes) in /home/jh9222/public_html/app/api/item/getItems.php on line 24
+[11-Aug-2016 17:59:24 UTC] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 26798140 bytes) in /home/jh9222/public_html/app/api/item/getItems.php on line 24
+[11-Aug-2016 17:59:57 UTC] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 26798140 bytes) in /home/jh9222/public_html/app/api/item/getItems.php on line 24
+[11-Aug-2016 18:01:37 UTC] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 26228659 bytes) in /home/jh9222/public_html/app/api/item/getItems.php on line 24
+[11-Aug-2016 18:17:37 UTC] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 21743289 bytes) in /home/jh9222/public_html/app/api/item/getItems.php on line 24
+[11-Aug-2016 18:17:46 UTC] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 21743289 bytes) in /home/jh9222/public_html/app/api/item/getItems.php on line 24
+[11-Aug-2016 18:18:05 UTC] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 21743289 bytes) in /home/jh9222/public_html/app/api/item/getItems.php on line 24
