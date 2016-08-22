@@ -33,15 +33,15 @@ if($creds['from'] === "login") {
 
     }
 
-
+    
     $passWord = $creds['passW'];
     $userName = $creds['user'];
-    
+   
 
     if ($userName === $realUser && $passWord === $realPass) {
 
-        $tokenId = base64_encode(mcrypt_create_iv(32));
-
+        $tokenId = base64_encode(mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
+        
         $token = [
             'jti' => $tokenId
         ];

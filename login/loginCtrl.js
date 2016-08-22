@@ -21,7 +21,7 @@ angular.module('myApp').controller('LoginCtrl', ['JWT', '$scope', '$http', '$win
            method: 'POST',
            headers: {'Content-Type': 'application/json; charset=UTF-8'}
        }).success(function (response) {
-           
+           console.log(response);
            if(response === "Failed") {
                console.log("Done Fucked Up");
                $scope.incorrect = true;

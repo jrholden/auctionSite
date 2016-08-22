@@ -6,7 +6,7 @@
 angular.module('myApp').controller('AdminCtrl', ['JWT', 'GetItems', '$scope', '$http', '$timeout', function (JWT, GetItems, $scope, $http, $timeout) {
 
     console.log("We Are Admin");
-    var image;
+    
 
 
     $('#createSuccess').hide();
@@ -16,6 +16,7 @@ angular.module('myApp').controller('AdminCtrl', ['JWT', 'GetItems', '$scope', '$
     // $scope.imageToData = function() {
 
     var fileInput = document.getElementById('file');
+    var fileInput2 = document.getElementById('file2');
     //var fileDisplayArea = document.getElementById('fileDisplayArea');
 
     fileInput.addEventListener('change', function (e) {
@@ -24,7 +25,7 @@ angular.module('myApp').controller('AdminCtrl', ['JWT', 'GetItems', '$scope', '$
         var imageType = /image.*/;
 
         if (file.type.match(imageType)) {
-
+          
             var reader = new FileReader();
 
             reader.onload = function () {
@@ -49,8 +50,10 @@ angular.module('myApp').controller('AdminCtrl', ['JWT', 'GetItems', '$scope', '$
             reader.readAsDataURL(file);
         } else {
             alert("File not supported!");
+            
         }
     });
+    
 
 
     /*// create an off-screen canvas
@@ -74,6 +77,7 @@ angular.module('myApp').controller('AdminCtrl', ['JWT', 'GetItems', '$scope', '$
         /*var img = new Image;
          img.src = $scope.picture;*/
         console.log("Hello");
+        $scope.loading = true;
         // $scope.imageToData();
 
         // Error Checking ==> NEEDS WORK ==> Im thinking switch?
@@ -100,6 +104,7 @@ angular.module('myApp').controller('AdminCtrl', ['JWT', 'GetItems', '$scope', '$
             setTimeout(function () {
                 $('#createSuccess').fadeOut('slow');
             }, 3000);
+            $scope.loading = false;
 
             $scope.items.push(data[0]);
 
