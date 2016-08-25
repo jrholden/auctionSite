@@ -8,6 +8,14 @@
 	display: none !important;
 }
 
+.full {
+	background: url('../images/backgroud.jpg') no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	background-size: cover;
+	-o-background-size: cover;
+}
+
 body {
     padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
     background-color: #F5F5F5;

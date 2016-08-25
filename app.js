@@ -1,7 +1,9 @@
 /*
+
  var console = {};
  console.log = function(){};
- */
+*/
+ 
 
 'use strict';
 
@@ -12,7 +14,8 @@ angular.module('myApp', [
     'searchFilter',
     'ui.mask',
     'itemService',
-    'loginService'
+    'loginService',
+    'ngMessages'
 ])
     .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
 

@@ -11,12 +11,10 @@ $data = json_decode(file_get_contents("php://input"), true);
 $itemId = $data['item_id'];
 $name = $conn->real_escape_string($data['item_name']);
 $price = $data['item_price'];
-$image = $data['item_image'];
 $desc = $conn->real_escape_string($data['item_desc']);
-$hBid = $data['items_high_bid'];
-echo $name;
+echo $name.$price.$desc;
 
-$sql = "UPDATE auction_items SET item_name = '$name', item_price = '$price', item_image = '$image', item_desc = '$desc', items_high_bid = '$hBid'  WHERE item_id = $itemId";
+$sql = "UPDATE auction_items SET item_name = '$name', item_price = '$price', item_desc = '$desc'  WHERE item_id = $itemId";
 
 
 

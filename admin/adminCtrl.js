@@ -6,113 +6,94 @@
 angular.module('myApp').controller('AdminCtrl', ['JWT', 'GetItems', '$scope', '$http', '$timeout', function (JWT, GetItems, $scope, $http, $timeout) {
 
     console.log("We Are Admin");
-    
 
 
     $('#createSuccess').hide();
     $('#editSuccess').hide();
 
 
-    // $scope.imageToData = function() {
 
     var fileInput = document.getElementById('file');
-    var fileInput2 = document.getElementById('file2');
-    //var fileDisplayArea = document.getElementById('fileDisplayArea');
+
 
     fileInput.addEventListener('change', function (e) {
 
         var file = fileInput.files[0];
         var imageType = /image.*/;
+        
+            if (file.type.match(imageType)) {
 
-        if (file.type.match(imageType)) {
-          
-            var reader = new FileReader();
+                var reader = new FileReader();
 
-            reader.onload = function () {
-                var canvas = document.createElement('canvas'),
-                    ctx = canvas.getContext('2d');
+                reader.onload = function () {
+                    var canvas = document.createElement('canvas'),
+                        ctx = canvas.getContext('2d');
 
 
-                // create a new image from user selected file
-                var img = new Image();
-                img.onload = function () {
-                    // set canvas size to image size
-                    canvas.width = 350;
-                    canvas.height = 350;
+                    // create a new image from user selected file
+                    var img = new Image();
+                    img.onload = function () {
+                        // set canvas size to image size
+                        canvas.width = 350;
+                        canvas.height = 350;
 
-                    // scale and draw image with offset
-                    ctx.drawImage(img, 0, 0, 350, 350);
-                    $scope.picture = canvas.toDataURL('image/jpeg', 0.3);
+                        // scale and draw image with offset
+                        ctx.drawImage(img, 0, 0, 350, 350);
+                        $scope.picture = canvas.toDataURL('image/jpeg', 0.4);
+                    };
+                    img.src = reader.result;
+
                 };
-                img.src = reader.result;
+                reader.readAsDataURL(file);
+            } else {
+                alert("Please submit an image!");
+                
+            }
 
-            };
-            reader.readAsDataURL(file);
-        } else {
-            alert("File not supported!");
-            
-        }
     });
     
 
 
-    /*// create an off-screen canvas
-     var canvas = document.createElement('canvas'),
-     ctx = canvas.getContext('2d');
-
-     // set its dimension to target size
-     canvas.width = width;
-     canvas.height = height;
-
-     // draw source image into the off-screen canvas:
-     ctx.drawImage(img, 0, 0, width, height);
-
-     // encode image to data-uri with base64 version of compressed image
-     return canvas.toDataURL('image/jpeg', 0.5);  // quality = [0.0, 1.0]*/
-
-    //};
-
 
     $scope.makeItem = function () {
-        /*var img = new Image;
-         img.src = $scope.picture;*/
-        console.log("Hello");
-        $scope.loading = true;
-        // $scope.imageToData();
+        
+        if($scope.picture === '' || $scope.picture === undefined || $scope.picture === null){
+            alert("Please enter a valid picture!");
+        }else {
+            $scope.loading = true;
 
-        // Error Checking ==> NEEDS WORK ==> Im thinking switch?
+            $scope.item = {
+                name: $scope.name,
+                price: $scope.price,
+                image: $scope.picture,
+                description: $scope.description,
+                currentBidder: "No High Bidder"
+            };
+            console.log($scope.item);
 
-        $scope.item = {
-            name: $scope.name,
-            price: $scope.price,
-            image: $scope.picture,
-            description: $scope.description,
-            currentBidder: "No Current Bidder"
-        };
-        console.log($scope.item);
+            $http({
+                url: "api/item/insertItem.php",
+                data: $scope.item,
+                method: 'POST',
+                headers: {'Content-Type': 'application/json; charset=UTF-8'}
+            }).success(function (data) {
 
-        $http({
-            url: "api/item/insertItem.php",
-            data: $scope.item,
-            method: 'POST',
-            headers: {'Content-Type': 'application/json; charset=UTF-8'}
-        }).success(function (data) {
-            
-            console.log(data);
-            //Show message
-            $('#createSuccess').fadeIn('slow');
-            setTimeout(function () {
-                $('#createSuccess').fadeOut('slow');
-            }, 3000);
-            $scope.loading = false;
+                console.log(data);
+                //Show message
+                $('#createSuccess').fadeIn('slow');
+                setTimeout(function () {
+                    $('#createSuccess').fadeOut('slow');
+                }, 3000);
+                $scope.loading = false;
+                $scope.clearBid();
 
-            $scope.items.push(data[0]);
+                $scope.items.push(data[0]);
 
-            $scope.itemCreate = true;
-        }).error(function (err) {
-            console.log("err");
-        });
-
+                $scope.itemCreate = true;
+            }).error(function (err) {
+                console.log("err");
+            });
+        }
     };
 
 
@@ -124,7 +105,7 @@ angular.module('myApp').controller('AdminCtrl', ['JWT', 'GetItems', '$scope', '$
             method: 'POST',
             headers: {'Content-Type': 'application/json; charset=UTF-8'}
         }).success(function (data) {
-
+            console.log(data);
             //Show message
             $('#editSuccess').fadeIn('slow');
             setTimeout(function () {
@@ -176,11 +157,6 @@ angular.module('myApp').controller('AdminCtrl', ['JWT', 'GetItems', '$scope', '$
         });
     };
 
-    /* $scope.fileChange = function(elm) {
-
-     $scope.picture = elm.files;
-     $scope.$apply();
-     };*/
 
     $scope.setModal2 = function (bidId) {
 
@@ -213,11 +189,15 @@ angular.module('myApp').controller('AdminCtrl', ['JWT', 'GetItems', '$scope', '$
         }
     };
 
-    /*$scope.userAllowed = function () {
+    $scope.clearBid = function () {
 
-     JWT.async();
-
-     };*/
+        $scope.userForm.$setPristine();
+        $scope.name = '';
+        $scope.price = '';
+        $scope.picture = '';
+        $scope.description = '';
+        $scope.file='';
+    };
 
     $scope.getItems = function () {
 
@@ -226,7 +206,7 @@ angular.module('myApp').controller('AdminCtrl', ['JWT', 'GetItems', '$scope', '$
             $scope.totalItems = data[1];
         });
     };
-    //$scope.userAllowed();
+  
     $scope.getItems();
 
 }]);
