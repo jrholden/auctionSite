@@ -67,8 +67,8 @@
         <hr>
         <!-- Title -->
         <div class="row">
-            <div class="col-lg-12">
-                <h3>Latest Items for Auction</h3>
+            <div class="col-sm-10">
+                <h3 class="title">Latest Items for Auction</h3>
             </div>
         </div>
         <!-- /.row -->
@@ -94,7 +94,7 @@
     </div>
     <div ng-if="items.length != 0" class="container" ng-cloak>
         <div class="row text-center">
-            <div id="myCarousel" data-ride="carousel">
+            <div id="myCarousel">
                 <!-- Indicators -->
                <!--<ol class="carousel-indicators" ng-repeat="items in items" ng-if="$index%4==0">
                     <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -104,7 +104,7 @@
                     <div class="item" ng-class="{active:!$index}" ng-repeat="item in items" ng-if="$index%4==0">
                         <div class="col-md-3 col-sm-6 hero-feature" ng-if="items.length >=1">
                             <div class="thumbnail">
-                                <img ng-src="{{ items[getSecondIndex($index)].item_image }}" alt="" height="300" width="300">
+                                <img class="itemImage" ng-src="{{ items[getSecondIndex($index)].item_image }}" alt="" height="300" width="300">
                                 <div class="caption">
                                     <h3>{{ items[getSecondIndex($index)].item_name }}</h3>
                                     <center>
@@ -125,7 +125,7 @@
                         </div>
                         <div class="col-md-3 col-sm-6 hero-feature" ng-if="items.length >=2" ng-cloak>
                             <div class="thumbnail">
-                                <img ng-src="{{ items[getSecondIndex($index+1)].item_image }}" alt="" height="300" width="300">
+                                <img class="itemImage" ng-src="{{ items[getSecondIndex($index+1)].item_image }}" alt="" height="300" width="300">
                                 <div class="caption">
                                     <h3>{{ items[getSecondIndex($index+1)].item_name }}</h3>
                                     <center>
@@ -147,7 +147,7 @@
                         </div>
                         <div class="col-md-3 col-sm-6 hero-feature" ng-if="items.length >=3" ng-cloak>
                             <div class="thumbnail">
-                                <img ng-src="{{ items[getSecondIndex($index+2)].item_image }}" alt="" height="300" width="300">
+                                <img class="itemImage" ng-src="{{ items[getSecondIndex($index+2)].item_image }}" alt="" height="300" width="300">
                                 <div class="caption">
                                     <h3>{{ items[getSecondIndex($index+2)].item_name }}</h3>
                                     <center>
@@ -169,11 +169,11 @@
                         </div>
                         <div class="col-md-3 col-sm-6 hero-feature" ng-if="items.length >=4" ng-cloak>
                             <div class="thumbnail">
-                                <img ng-src="{{ items[getSecondIndex($index+3)].item_image }}" alt="" height="300" width="300">
+                                <img class="itemImage" ng-src="{{ items[getSecondIndex($index+3)].item_image }}" alt="" height="300" width="300">
                                 <div class="caption">
                                     <h3>{{ items[getSecondIndex($index+3)].item_name }}</h3>
                                     <center>
-                                    <p class="truncate2">{{ items[getSecondIndex($index+3)].item_desc }}</p>
+                                    <p class="truncate">{{ items[getSecondIndex($index+3)].item_desc }}</p>
                                         <p>High Bidder: {{ items[getSecondIndex($index+3)].item_high_bidder }}</p>
                                         <p>Current High Bid: {{ items[getSecondIndex($index+3)].item_price }}</p>
 
@@ -212,7 +212,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
                     <div class="col-lg-12">
-                        <img src="{{ modalItem.item_image }}" alt="" height="350" width="350">
+                        <img class="itemImage" src="{{ modalItem.item_image }}" alt="" height="350" width="350">
                         <h2 class="modal-title" id="myModalLabel">{{ modalItem.item_name }}</h2>
                         <p></br>{{ modalItem.item_desc }}</p>
                         <p>High Bidder: {{ modalItem.item_high_bidder }}</p>
@@ -292,7 +292,7 @@
 
                 <div class="modal-body">
                     <div class="col-md-8">
-                        <img src="{{ modalItem2.item_image }}" alt="" height="250" width="250">
+                        <img class="itemImage" src="{{ modalItem2.item_image }}" alt="" height="250" width="250">
                     </div>
                     <div class="col-md-4">
                         <div class="row" style="padding-bottom: 10px;">

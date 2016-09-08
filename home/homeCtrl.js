@@ -9,7 +9,7 @@
 angular.module('myApp').controller('HomeCtrl', ['GetItems', 'PlaceBid', '$scope', '$http', function (GetItems, PlaceBid, $scope, $http) {
 
     console.log("We Are Home");
-    $("#myCarousel").carousel('cycle');
+    
     $('#createSuccess').hide();
 
     $scope.getItems = function () {
@@ -33,12 +33,12 @@ angular.module('myApp').controller('HomeCtrl', ['GetItems', 'PlaceBid', '$scope'
 
     $scope.setModal2 = function (item) {
         $scope.modalItem2 = item;
-        $("#myCarousel").carousel('pause');
+        
     };
 
     $scope.setModal = function (item) {
         $scope.modalItem = item;
-        $("#myCarousel").carousel('pause');
+        
     };
 
     $scope.getItemIndex = function (itemId) {
@@ -83,7 +83,6 @@ angular.module('myApp').controller('HomeCtrl', ['GetItems', 'PlaceBid', '$scope'
     };
 
     $scope.clearBid = function () {
-        $("#myCarousel").carousel('cycle');
         $scope.userForm.$setPristine();
         $scope.name = '';
         $scope.phone = '';
