@@ -15,7 +15,7 @@
 body {
     padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
     /*background-color: #F5F5F5;*/
-	background: url('../images/background.jpg') no-repeat center center fixed;
+	background: url('../images/backgroundOp.jpg') no-repeat center center fixed;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -42,7 +42,7 @@ body {
 
 .thumbnail {
 	margin-top: 15px;
-	box-shadow: 0 0 11px black;
+	box-shadow: 0 0 8px gray;
 	padding:0 15px 0 15px;
 }
 

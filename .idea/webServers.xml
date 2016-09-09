@@ -2,8 +2,8 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="d8b2ae8e-ccf3-4226-9662-4aa9ff485fdf" name="auctionSite" url="http://45.79.155.147">
-        <fileTransfer host="45.79.155.147" port="22" rootFolder="/var/www/html/hospicepeiauction.ca/public_html" accessType="SFTP" password="dfeddfc5dfc5dfcddfc6dfcfdf93df98dfea" username="root">
+      <webServer id="d8b2ae8e-ccf3-4226-9662-4aa9ff485fdf" name="auctionSite" url="http://hospicepeiauction.ca">
+        <fileTransfer host="hospicepeiauction.ca" port="22" rootFolder="/var/www/html/hospicepeiauction.ca/public_html" accessType="SFTP" password="dfeddfc5dfc5dfcddfc6dfcfdf93df98dfea" username="root">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" />
           </advancedOptions>
