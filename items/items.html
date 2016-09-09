@@ -116,14 +116,16 @@
                     <div class="row">
                         <div style="text-align: center" class="col-lg-12 col-md-12 col-sm-12">
                             <span style="margin-bottom: 3px;width: 100%;font-size:12px;">HIGHEST BID</span>
-                            <h3 style="margin-top: 3px;"><label style="font-weight: 400">${{ item.item_price}}</label></h3>
+                            <h3 style="margin-top: 3px;"><label style="font-weight: 400">${{ item.item_price}}</label>
+                            </h3>
                         </div>
                     </div>
                     <p class="truncate">{{ item.item_desc }}</p>
                     <div class="row">
                         <div style="padding-left:0px; padding-right: 2px;" class="col-md-6 col-sm-6 col-xs-6">
                             <a style="width: 100%" class="btn btn-primary btn-product" ng-click="setModal2(item)"
-                               data-toggle="modal" data-target="#myModal2"><span class="glyphicon glyphicon-info-sign"></span> More Info</a>
+                               data-toggle="modal" data-target="#myModal2"><span
+                                    class="glyphicon glyphicon-info-sign"></span> More Info</a>
                         </div>
                         <div style="padding-left:2px; padding-right: 0px;" class="col-md-6 col-sm-6 col-xs-6">
                             <a style="width: 100%" class="btn btn-success btn-product" ng-click="setModal(item)"
@@ -217,136 +219,137 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                    <div class="col-lg-12">
-                        <img class="itemImage" src="{{ modalItem.item_image }}" alt="" height="350" width="350">
-                        <h2 class="modal-title" id="myModalLabel">Item Name: {{ modalItem.item_name }}</h2>
-                        <p></br>Item Description: {{ modalItem.item_desc }}</p>
-                        <p>Current High Bidder: {{ modalItem.item_high_bidder }}</p>
-                        <p>Current High Bid: {{ modalItem.item_price }}</p>
-                    </div>
-                    <div class="modal-body">
-
-                        <form name="userForm" ng-submit="submitForm()" novalidate>
-
-                            <div class="form-group"
-                                 ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">
-                                <label>Name</label>
-                                <input type="text" ng-model="name" placeholder="Bidder Name" class="form-control"
-                                       required
-                                       name="name" ng-minlength="5" ng-maxlength="30">
-                                <div class="help-block" ng-messages="userForm.name.$error"
-                                     ng-show="userForm.name.$invalid && !userForm.name.$pristine">
-                                    <div ng-messages-include="../messages.html"></div>
-                                </div>
-                                <!--<p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">Your
-                                    name is required.</p>-->
-                            </div>
-                            <div class="form-group"
-                                 ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }">
-                                <label>Email</label>
-                                <input type="email" ng-model="email" placeholder="Bidder Email" class="form-control"
-                                       required name="email" ng-minlength="5" ng-maxlength="40">
-                                <div class="help-block" ng-messages="userForm.email.$error"
-                                     ng-show="userForm.email.$invalid && !userForm.email.$pristine">
-                                    <div ng-messages-include="../messages.html"></div>
-                                </div>
-
-                            </div>
-                            <div class="form-group"
-                                 ng-class="{ 'has-error' : userForm.phone.$invalid && !userForm.phone.$pristine }">
-                                <label>Phone</label>
-                                <input type="text" id="phone" ui-mask="(999) 999-9999" ng-model="phone"
-                                       class="form-control" name="phone" required>
-                                <p ng-show="userForm.phone.$invalid && !userForm.phone.$pristine" class="help-block">
-                                    Enter a valid phone number.</p>
-
-                            </div>
-                            <div>
-                                <div class="form-group"
-                                     ng-class="{ 'has-error' : userForm.bid.$invalid && !userForm.bid.$pristine}">
-                                    <label>Minimum Price (${{ modalItem.item_price }})</label>
-                                    <input ng-model="bid" placeholder="Price" type="number" class="form-control"
-                                           name="bid" ng-min="{{ modalItem.item_price+1 }}" ng-max="9999999" required>
-                                    <!--<p ng-show="userForm.bid.$invalid && !userForm.bid.$pristine"
-                                       class="help-block">Enter a valid number that is greater than: ${{
-                                        modalItem.item_price }}</p>-->
-                                    <div class="help-block" ng-messages="userForm.bid.$error"
-                                         ng-show="userForm.bid.$invalid && !userForm.bid.$pristine">
-                                        <div ng-messages-include="../messages.html"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" ng-click="clearBid()" data-dismiss="modal">Close
-                        </button>
-
-                        <button type="submit" data-dismiss="modal" class="btn btn-primary"
-                                ng-click="makeBid(modalItem.item_id)"
-                                ng-disabled="userForm.$invalid">Submit<img height="30px" src="images/default.gif"
-                                                                           ng-show="loading"/></button>
-
+                    <div class="row">
+                        <div class="col-md-10">
+                            <h4>{{ modalItem.item_name}}</h4>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- More Info Modal -->
-    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel2"><strong>Auction Item </strong></h4>
-                </div>
-
                 <div class="modal-body">
-                    <div class="col-md-8">
-                        <img class="itemImage" src="{{ modalItem2.item_image }}" alt="" height="250" width="250">
-                    </div>
-                    <div class="col-md-4">
-                        <div class="row" style="padding-bottom: 10px;">
-                            <label><u>Name</u></label>
-                            <p>{{ modalItem2.item_name }}</p>
+
+                    <form name="userForm" ng-submit="submitForm()" novalidate>
+
+                        <div class="form-group"
+                             ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">
+                            <label>Name</label>
+                            <input type="text" ng-model="name" placeholder="Bidder Name" class="form-control"
+                                   required
+                                   name="name" ng-minlength="5" ng-maxlength="30">
+                            <div class="help-block" ng-messages="userForm.name.$error"
+                                 ng-show="userForm.name.$invalid && !userForm.name.$pristine">
+                                <div ng-messages-include="../messages.html"></div>
+                            </div>
+                            <!--<p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">Your
+                                name is required.</p>-->
                         </div>
-                        <div class="row" style="padding-bottom: 10px;">
-                            <label><u>Item Description</u></label>
-                            <p>{{ modalItem2.item_desc }}</p>
+                        <div class="form-group"
+                             ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }">
+                            <label>Email</label>
+                            <input type="email" ng-model="email" placeholder="Bidder Email" class="form-control"
+                                   required name="email" ng-minlength="5" ng-maxlength="40">
+                            <div class="help-block" ng-messages="userForm.email.$error"
+                                 ng-show="userForm.email.$invalid && !userForm.email.$pristine">
+                                <div ng-messages-include="../messages.html"></div>
+                            </div>
+
                         </div>
-                        <div class="row" style="padding-bottom: 10px;">
-                            <label><u>Current High Bidder</u></label>
-                            <p>{{ modalItem2.item_high_bidder}}</p>
+                        <div class="form-group"
+                             ng-class="{ 'has-error' : userForm.phone.$invalid && !userForm.phone.$pristine }">
+                            <label>Phone</label>
+                            <input type="text" id="phone" ui-mask="(999) 999-9999" ng-model="phone"
+                                   class="form-control" name="phone" required>
+                            <p ng-show="userForm.phone.$invalid && !userForm.phone.$pristine" class="help-block">
+                                Enter a valid phone number.</p>
+
                         </div>
-                        <div class="row" style="padding-bottom: 10px;">
-                            <label><u>Current High Bid</u></label>
-                            <p>{{ modalItem2.item_price}}</p>
+                        <div>
+                            <div class="form-group"
+                                 ng-class="{ 'has-error' : userForm.bid.$invalid && !userForm.bid.$pristine}">
+                                <label>Minimum Price (${{ modalItem.item_price }})</label>
+                                <input ng-model="bid" placeholder="Price" type="number" class="form-control"
+                                       name="bid" ng-min="{{ modalItem.item_price+1 }}" ng-max="9999999" required>
+                                <!--<p ng-show="userForm.bid.$invalid && !userForm.bid.$pristine"
+                                   class="help-block">Enter a valid number that is greater than: ${{
+                                    modalItem.item_price }}</p>-->
+                                <div class="help-block" ng-messages="userForm.bid.$error"
+                                     ng-show="userForm.bid.$invalid && !userForm.bid.$pristine">
+                                    <div ng-messages-include="../messages.html"></div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </form>
                 </div>
 
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" ng-click="clearBid()" data-dismiss="modal">Close
+                    </button>
+
+                    <button type="submit" data-dismiss="modal" class="btn btn-primary"
+                            ng-click="makeBid(modalItem.item_id)"
+                            ng-disabled="userForm.$invalid">Submit<img height="30px" src="images/default.gif"
+                                                                       ng-show="loading"/></button>
+
+                </div>
             </div>
         </div>
     </div>
+</div>
 
-    <hr>
-    <!-- Footer -->
-    <footer>
-        <div class="row">
-            <div class="col-lg-12">
-                <p>Copyright &copy; 2016 Jordan Holden</p>
+<!-- More Info Modal -->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel2"><strong>Auction Item </strong></h4>
             </div>
+
+            <div class="modal-body">
+                <div class="col-md-8">
+                    <img class="itemImage" src="{{ modalItem2.item_image }}" alt="" height="250" width="250">
+                </div>
+                <div class="col-md-4">
+                    <div class="row" style="padding-bottom: 10px;">
+                        <label><u>Name</u></label>
+                        <p>{{ modalItem2.item_name }}</p>
+                    </div>
+                    <div class="row" style="padding-bottom: 10px;">
+                        <label><u>Item Description</u></label>
+                        <p>{{ modalItem2.item_desc }}</p>
+                    </div>
+                    <div class="row" style="padding-bottom: 10px;">
+                        <label><u>Current High Bidder</u></label>
+                        <p>{{ modalItem2.item_high_bidder}}</p>
+                    </div>
+                    <div class="row" style="padding-bottom: 10px;">
+                        <label><u>Current High Bid</u></label>
+                        <p>{{ modalItem2.item_price}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+
         </div>
-        <!-- /.row -->
-    </footer>
+    </div>
+</div>
+
+<hr>
+<!-- Footer -->
+<footer>
+    <div class="row">
+        <div class="col-lg-12">
+            <p>Copyright &copy; 2016 Jordan Holden</p>
+        </div>
+    </div>
+    <!-- /.row -->
+</footer>
 </div>
 <!-- /.container -->
 
