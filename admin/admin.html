@@ -367,7 +367,14 @@
         </div>
         <!-- No Highest bid-->
         <div ng-hide="isBid" class="modal-content">
-            <p> No Highest Bid</p>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel2"><strong>No Bidder </strong></h4>
+            </div>
+            <div class="modal-body">
+                <p style="padding-left: 20px;"> There has not been a bidder on this item yet.</p>
+            </div>
         </div>
     </div>
 </div>
