@@ -11,328 +11,392 @@
 </head>
 
 <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" style="margin-top: -8px;"><img width="130px" src="images/logo.png" /></a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li style="margin-top: 6px; padding-bottom: 4px;">
-                        <a href="#/items">Auction</a>
-                    </li>
-                    <li style="margin-top: 6px;">
-                        <a href="#/contact">Contact</a>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                	<li>
-                    	<a class="login-button" href="#/login"> <button type="button" class="btn btn-success navbar-btn">Login</button></a>
-                    </li>
-                </ul>
-                
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
-    <div class="col-md-12" ng-cloak>
-        <div style="position: fixed; z-index: 5" id="createSuccess" class="alert alert-success">
-            <strong>Success!</strong> Your bid was successfully placed!
-        </div>
-    </div>
-    <!-- Page Content -->
+<!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
-        <!-- Jumbotron Header -->
-        <div class="jumbotron hero-spacer col-md-12">
-            <div class="col-md-8">
-                <h1>A Warm Welcome!</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, ipsam, eligendi, in quo sunt possimus non incidunt odit vero aliquid similique quaerat nam nobis illo aspernatur vitae fugiat numquam repellat.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, ipsam, eligendi, in quo sunt possimus non incidunt odit vero aliquid similique quaerat nam nobis illo aspernatur vitae fugiat numquam repellat.</p>
-                <p><a class="btn btn-primary btn-large" href="#/items">See All Items</a>
-            </div>
-            <div class="col-md-4">
-                <img class="img-circle" style="max-width: 100%; max-height: 100%;" src="images/home_image.jpg" />
-            </div>
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" style="margin-top: -8px;"><img width="130px" src="images/logo.png"/></a>
         </div>
-        <hr>
-        <!-- Title -->
-        <div class="row">
-            <div class="col-sm-10">
-                <h3 class="title">Latest Items for Auction</h3>
-            </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li style="margin-top: 6px; padding-bottom: 4px;">
+                    <a href="#/items">Auction</a>
+                </li>
+                <li style="margin-top: 6px;">
+                    <a href="#/contact">Contact</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="login-button" href="#/login">
+                        <button type="button" class="btn btn-success navbar-btn">Login</button>
+                    </a>
+                </li>
+            </ul>
+
         </div>
-        <!-- /.row -->
-        <!-- Page Features -->
+        <!-- /.navbar-collapse -->
     </div>
-    <center>
-    <img height="100px" src="images/default.gif" ng-show="loadingItems"/>
-    </center>
-    <div ng-if="items.length == 0" ng-cloak>
-        <center>
-            <div class="container">
-                <div class="hero-unit">
-                    <h1>There are Currently <strong>No Items</strong></h1>
-                    <p>If you have an item that you would like to add, please visit the <strong>Contact Page</strong></p>
-                    <p>
-                        <a class="btn btn-primary btn-large" href="#/contact">
-                            Contact Page
-                        </a>
-                    </p>
-                </div>
-            </div>
-        </center>
+    <!-- /.container -->
+</nav>
+<div class="col-md-12" ng-cloak>
+    <div style="position: fixed; z-index: 5" id="createSuccess" class="alert alert-success">
+        <strong>Success!</strong> Your bid was successfully placed!
     </div>
-    <div ng-if="items.length != 0" class="container" ng-cloak>
-        <div class="row text-center">
-            <div id="myCarousel">
-                <!-- Indicators -->
-               <!--<ol class="carousel-indicators" ng-repeat="items in items" ng-if="$index%4==0">
-                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                </ol>-->
-                <!-- Wrapper for slides -->
-                <div class="carousel-inner" role="listbox">
-                    <div class="item" ng-class="{active:!$index}" ng-repeat="item in items" ng-if="$index%4==0">
-                        <div class="col-md-3 col-sm-6 hero-feature" ng-if="items.length >=1">
-                            <div class="thumbnail">
-                                <img class="itemImage" ng-src="{{ items[getSecondIndex($index)].item_image }}" alt="" height="300" width="300">
-                                <div class="caption">
-                                    <h3>{{ items[getSecondIndex($index)].item_name }}</h3>
-                                    <center>
-                                    <p class="truncate">{{ items[getSecondIndex($index)].item_desc }}</p>
-                                        <p>High Bidder: {{ items[getSecondIndex($index)].item_high_bidder }}</p>
-                                        <p>Current High Bid: {{ items[getSecondIndex($index)].item_price }}</p>
-                                    </center>
-                                    <p>
-                                        <button type="button" ng-click="setModal(items[$index])" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-                                            Place Bid
-                                        </button>
-                                        <button type="button" ng-click="setModal2(items[$index])" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal2">
-                                            More Info
-                                        </button>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6 hero-feature" ng-if="items.length >=2" ng-cloak>
-                            <div class="thumbnail">
-                                <img class="itemImage" ng-src="{{ items[getSecondIndex($index+1)].item_image }}" alt="" height="300" width="300">
-                                <div class="caption">
-                                    <h3>{{ items[getSecondIndex($index+1)].item_name }}</h3>
-                                    <center>
-                                    <p class="truncate">{{ items[getSecondIndex($index+1)].item_desc }}</p>
-                                        <p>High Bidder: {{ items[getSecondIndex($index+1)].item_high_bidder }}</p>
-                                        <p>Current High Bid: {{ items[getSecondIndex($index+1)].item_price }}</p>
-
-                                    </center>
-                                    <p>
-                                        <button type="button" ng-click="setModal(items[$index+1])" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-                                            Place Bid
-                                        </button>
-                                        <button type="button" ng-click="setModal2(items[$index+1])" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal2">
-                                            More Info
-                                        </button>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6 hero-feature" ng-if="items.length >=3" ng-cloak>
-                            <div class="thumbnail">
-                                <img class="itemImage" ng-src="{{ items[getSecondIndex($index+2)].item_image }}" alt="" height="300" width="300">
-                                <div class="caption">
-                                    <h3>{{ items[getSecondIndex($index+2)].item_name }}</h3>
-                                    <center>
-                                    <p class="truncate">{{ items[getSecondIndex($index+2)].item_desc }}</p>
-                                        <p>High Bidder: {{ items[getSecondIndex($index+2)].item_high_bidder }}</p>
-                                        <p>Current High Bid: {{ items[getSecondIndex($index+2)].item_price }}</p>
-
-                                    </center>
-                                    <p>
-                                        <button type="button" ng-click="setModal(items[$index+2])" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-                                            Place Bid
-                                        </button>
-                                        <button type="button" ng-click="setModal2(items[$index+2])" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal2">
-                                            More Info
-                                        </button>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6 hero-feature" ng-if="items.length >=4" ng-cloak>
-                            <div class="thumbnail">
-                                <img class="itemImage" ng-src="{{ items[getSecondIndex($index+3)].item_image }}" alt="" height="300" width="300">
-                                <div class="caption">
-                                    <h3>{{ items[getSecondIndex($index+3)].item_name }}</h3>
-                                    <center>
-                                    <p class="truncate">{{ items[getSecondIndex($index+3)].item_desc }}</p>
-                                        <p>High Bidder: {{ items[getSecondIndex($index+3)].item_high_bidder }}</p>
-                                        <p>Current High Bid: {{ items[getSecondIndex($index+3)].item_price }}</p>
-
-                                    </center>
-                                    <p>
-                                        <button type="button" ng-click="setModal(items[$index+3])" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-                                            Place Bid
-                                        </button>
-                                        <button type="button" ng-click="setModal2(items[$index+3])" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal2">
-                                            More Info
-                                        </button>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+</div>
+<!-- Page Content -->
+<div class="container">
+    <!-- Jumbotron Header -->
+    <div class="jumbotron hero-spacer col-md-12">
+        <div class="col-md-8">
+            <h1>A Warm Welcome!</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, ipsam, eligendi, in quo sunt possimus non
+                incidunt odit vero aliquid similique quaerat nam nobis illo aspernatur vitae fugiat numquam
+                repellat.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, ipsam, eligendi, in quo sunt possimus non
+                incidunt odit vero aliquid similique quaerat nam nobis illo aspernatur vitae fugiat numquam
+                repellat.</p>
+            <p><a class="btn btn-primary btn-large" href="#/items">See All Items</a>
+        </div>
+        <div class="col-md-4">
+            <img class="img-circle" style="max-width: 100%; max-height: 100%;" src="images/home_image.jpg"/>
         </div>
     </div>
-    <br/>
-    <div class="container">
-        <div ng-if="items.length != 0" class="row text-center">
-            <a class="btn btn-primary btn-large" href="#/items">See All {{ items.length }} Items</a>
+    <hr>
+    <!-- Title -->
+    <div class="row">
+        <div class="col-sm-10">
+            <h1 class="page-header">Latest Items for Auction</h1>
         </div>
-    </div>    
-    <br/>
+    </div>
     <!-- /.row -->
-
-    <!-- Place Bid Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                    <div class="col-lg-12">
-                        <img class="itemImage" src="{{ modalItem.item_image }}" alt="" height="350" width="350">
-                        <h2 class="modal-title" id="myModalLabel">{{ modalItem.item_name }}</h2>
-                        <p></br>{{ modalItem.item_desc }}</p>
-                        <p>High Bidder: {{ modalItem.item_high_bidder }}</p>
-                        <p>Current Highest Bid: {{ modalItem.item_price }}</p>
-
-
+    <!-- Page Features -->
+</div>
+<center>
+    <img height="100px" src="images/default.gif" ng-show="loadingItems"/>
+</center>
+<div ng-if="items.length == 0" ng-cloak>
+    <center>
+        <div class="container">
+            <div class="hero-unit">
+                <h1>There are Currently <strong>No Items</strong></h1>
+                <p>If you have an item that you would like to add, please visit the <strong>Contact Page</strong></p>
+                <p>
+                    <a class="btn btn-primary btn-large" href="#/contact">
+                        Contact Page
+                    </a>
+                </p>
+            </div>
+        </div>
+    </center>
+</div>
+<div ng-if="items.length != 0" class="container" ng-cloak>
+    <div class="row text-center">
+        <div id="myCarousel">
+            <!-- Indicators -->
+            <!--<ol class="carousel-indicators" ng-repeat="items in items" ng-if="$index%4==0">
+                 <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+             </ol>-->
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+                <div class="item" ng-class="{active:!$index}" ng-repeat="item in items" ng-if="$index%4==0">
+                    <div class="col-md-3 col-sm-6 hero-feature" ng-if="items.length >=1" ng-cloak>
+                        <div class="thumbnail">
+                            <h4 class="text-center">{{ items[getSecondIndex($index)].item_name }}</h4>
+                            <img class="img-responsive" ng-src="{{ items[getSecondIndex($index)].item_image }}" alt=""
+                                 height="300" width="300">
+                            <div class="caption">
+                                <div class="row">
+                                    <div style="text-align: center" class="col-lg-12 col-md-12 col-sm-12">
+                                        <span style="margin-bottom: 3px;width: 100%;font-size:12px;">HIGHEST BID</span>
+                                        <h3 style="margin-top: 3px;"><label style="font-weight: 400">${{
+                                            items[getSecondIndex($index)].item_price }}</label>
+                                        </h3>
+                                    </div>
+                                </div>
+                                <p class="truncate">{{ items[getSecondIndex($index)].item_desc }}</p>
+                                <div class="row">
+                                    <div style="padding-left:0px; padding-right: 2px;"
+                                         class="col-md-6 col-sm-6 col-xs-6">
+                                        <a style="width: 100%" class="btn btn-primary btn-product"
+                                           ng-click="setModal2(items[$index])"
+                                           data-toggle="modal" data-target="#myModal2"><span
+                                                class="glyphicon glyphicon-info-sign"></span> More Info</a>
+                                    </div>
+                                    <div style="padding-left:2px; padding-right: 0px;"
+                                         class="col-md-6 col-sm-6 col-xs-6">
+                                        <a style="width: 100%" class="btn btn-success btn-product"
+                                           ng-click="setModal(items[$index])"
+                                           data-toggle="modal" data-target="#myModal"><span
+                                                class="glyphicon glyphicon-shopping-cart"></span> Place Bid</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="modal-body">
-
-                        <form name="userForm" ng-submit="submitForm()" novalidate>
-
-                            <div class="form-group" ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">
-                                <label>Name</label>
-                                <input type="text" ng-model="name" placeholder="Bidder Name" class="form-control" required
-                                       name="name" ng-minlength="5" ng-maxlength="30">
-                                <div class="help-block" ng-messages="userForm.name.$error" ng-show="userForm.name.$invalid && !userForm.name.$pristine">
-                                    <div ng-messages-include="../messages.html"></div>
+                    <div class="col-md-3 col-sm-6 hero-feature" ng-if="items.length >=2" ng-cloak>
+                        <div class="thumbnail">
+                            <h4 class="text-center">{{ items[getSecondIndex($index+1)].item_name }}</h4>
+                            <img class="img-responsive" ng-src="{{ items[getSecondIndex($index+1)].item_image }}" alt=""
+                                 height="300" width="300">
+                            <div class="caption">
+                                <div class="row">
+                                    <div style="text-align: center" class="col-lg-12 col-md-12 col-sm-12">
+                                        <span style="margin-bottom: 3px;width: 100%;font-size:12px;">HIGHEST BID</span>
+                                        <h3 style="margin-top: 3px;"><label style="font-weight: 400">${{
+                                            items[getSecondIndex($index+1)].item_price }}</label>
+                                        </h3>
+                                    </div>
                                 </div>
-                                <!--<p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">Your
-                                    name is required.</p>-->
-                            </div>
-                            <div class="form-group"
-                                 ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }">
-                                <label>Email</label>
-                                <input type="email" ng-model="email" placeholder="Bidder Email" class="form-control"
-                                       required name="email" ng-minlength="5" ng-maxlength="40">
-                                <div class="help-block" ng-messages="userForm.email.$error" ng-show="userForm.email.$invalid && !userForm.email.$pristine">
-                                    <div ng-messages-include="../messages.html"></div>
-                                </div>
-
-                            </div>
-                            <div class="form-group"
-                                 ng-class="{ 'has-error' : userForm.phone.$invalid && !userForm.phone.$pristine }">
-                                <label>Phone</label>
-                                <input type="text" id="phone" ui-mask="(999) 999-9999" ng-model="phone"
-                                       class="form-control" name="phone" required>
-                                <p ng-show="userForm.phone.$invalid && !userForm.phone.$pristine" class="help-block">
-                                    Enter a valid phone number.</p>
-
-                            </div>
-                            <div>
-                                <div class="form-group"
-                                     ng-class="{ 'has-error' : userForm.bid.$invalid && !userForm.bid.$pristine}">
-                                    <label>Minimum Price (${{ modalItem.item_price }})</label>
-                                    <input ng-model="bid" placeholder="Price" type="number" class="form-control"
-                                           name="bid" min="{{ modalItem.item_price+1 }}" required>
-                                    <p ng-show="userForm.bid.$invalid && !userForm.bid.$pristine"
-                                       class="help-block">Enter a valid number that is greater than: ${{
-                                        modalItem.item_price }}</p>
+                                <p class="truncate">{{ items[getSecondIndex($index+1)].item_desc }}</p>
+                                <div class="row">
+                                    <div style="padding-left:0px; padding-right: 2px;"
+                                         class="col-md-6 col-sm-6 col-xs-6">
+                                        <a style="width: 100%" class="btn btn-primary btn-product"
+                                           ng-click="setModal2(items[$index+1])"
+                                           data-toggle="modal" data-target="#myModal2"><span
+                                                class="glyphicon glyphicon-info-sign"></span> More Info</a>
+                                    </div>
+                                    <div style="padding-left:2px; padding-right: 0px;"
+                                         class="col-md-6 col-sm-6 col-xs-6">
+                                        <a style="width: 100%" class="btn btn-success btn-product"
+                                           ng-click="setModal(items[$index+1])"
+                                           data-toggle="modal" data-target="#myModal"><span
+                                                class="glyphicon glyphicon-shopping-cart"></span> Place Bid</a>
+                                    </div>
                                 </div>
                             </div>
-                        </form>
-
+                        </div>
                     </div>
 
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default"ng-click="clearBid()" data-dismiss="modal">Close</button>
+                    <div class="col-md-3 col-sm-6 hero-feature" ng-if="items.length >=3" ng-cloak>
+                        <div class="thumbnail">
+                            <h4 class="text-center">{{ items[getSecondIndex($index+2)].item_name }}</h4>
+                            <img class="img-responsive" ng-src="{{ items[getSecondIndex($index+2)].item_image }}" alt=""
+                                 height="300" width="300">
+                            <div class="caption">
+                                <div class="row">
+                                    <div style="text-align: center" class="col-lg-12 col-md-12 col-sm-12">
+                                        <span style="margin-bottom: 3px;width: 100%;font-size:12px;">HIGHEST BID</span>
+                                        <h3 style="margin-top: 3px;"><label style="font-weight: 400">${{
+                                            items[getSecondIndex($index+2)].item_price }}</label>
+                                        </h3>
+                                    </div>
+                                </div>
+                                <p class="truncate">{{ items[getSecondIndex($index+2)].item_desc }}</p>
+                                <div class="row">
+                                    <div style="padding-left:0px; padding-right: 2px;"
+                                         class="col-md-6 col-sm-6 col-xs-6">
+                                        <a style="width: 100%" class="btn btn-primary btn-product"
+                                           ng-click="setModal2(items[$index+2])"
+                                           data-toggle="modal" data-target="#myModal2"><span
+                                                class="glyphicon glyphicon-info-sign"></span> More Info</a>
+                                    </div>
+                                    <div style="padding-left:2px; padding-right: 0px;"
+                                         class="col-md-6 col-sm-6 col-xs-6">
+                                        <a style="width: 100%" class="btn btn-success btn-product"
+                                           ng-click="setModal(items[$index+2])"
+                                           data-toggle="modal" data-target="#myModal"><span
+                                                class="glyphicon glyphicon-shopping-cart"></span> Place Bid</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                        <button type="submit" class="btn btn-primary" ng-click="makeBid(modalItem.item_id)" data-dismiss="modal" ng-disabled="userForm.$invalid">Submit<img height="30px" src="images/default.gif" ng-show="loading"/></button>
-
+                    <div class="col-md-3 col-sm-6 hero-feature" ng-if="items.length >=4" ng-cloak>
+                        <div class="thumbnail">
+                            <h4 class="text-center">{{ items[getSecondIndex($index+3)].item_name }}</h4>
+                            <img class="img-responsive" ng-src="{{ items[getSecondIndex($index+3)].item_image }}" alt=""
+                                 height="300" width="300">
+                            <div class="caption">
+                                <div class="row">
+                                    <div style="text-align: center" class="col-lg-12 col-md-12 col-sm-12">
+                                        <span style="margin-bottom: 3px;width: 100%;font-size:12px;">HIGHEST BID</span>
+                                        <h3 style="margin-top: 3px;"><label style="font-weight: 400">${{
+                                            items[getSecondIndex($index+3)].item_price }}</label>
+                                        </h3>
+                                    </div>
+                                </div>
+                                <p class="truncate">{{ items[getSecondIndex($index+3)].item_desc }}</p>
+                                <div class="row">
+                                    <div style="padding-left:0px; padding-right: 2px;"
+                                         class="col-md-6 col-sm-6 col-xs-6">
+                                        <a style="width: 100%" class="btn btn-primary btn-product"
+                                           ng-click="setModal2(items[$index+3])"
+                                           data-toggle="modal" data-target="#myModal2"><span
+                                                class="glyphicon glyphicon-info-sign"></span> More Info</a>
+                                    </div>
+                                    <div style="padding-left:2px; padding-right: 0px;"
+                                         class="col-md-6 col-sm-6 col-xs-6">
+                                        <a style="width: 100%" class="btn btn-success btn-product"
+                                           ng-click="setModal(items[$index+3])"
+                                           data-toggle="modal" data-target="#myModal"><span
+                                                class="glyphicon glyphicon-shopping-cart"></span> Place Bid</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
+</div>
+<br/>
+<div class="container">
+    <div ng-if="items.length != 0" class="row text-center">
+        <a class="btn btn-primary btn-large" href="#/items">See All {{ items.length }} Items</a>
+    </div>
+</div>
+<br/>
+<!-- /.row -->
 
+<!-- Place Bid Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel"><strong>{{ modalItem.item_name }}</strong></h4>
+            </div>
+            <div class="modal-body">
 
-    <!-- More Info Modal -->
-    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel2"><strong>Auction Item </strong></h4>
-                </div>
+                <form name="userForm" ng-submit="submitForm()" novalidate>
 
-                <div class="modal-body">
-                    <div class="col-md-8">
+                    <div class="form-group"
+                         ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">
+                        <label>Name</label>
+                        <input type="text" ng-model="name" placeholder="Bidder Name" class="form-control"
+                               required
+                               name="name" ng-minlength="5" ng-maxlength="30">
+                        <div class="help-block" ng-messages="userForm.name.$error"
+                             ng-show="userForm.name.$invalid && !userForm.name.$pristine">
+                            <div ng-messages-include="../messages.html"></div>
+                        </div>
+                        <!--<p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">Your
+                            name is required.</p>-->
+                    </div>
+                    <div class="form-group"
+                         ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }">
+                        <label>Email</label>
+                        <input type="email" ng-model="email" placeholder="Bidder Email" class="form-control"
+                               required name="email" ng-minlength="5" ng-maxlength="40">
+                        <div class="help-block" ng-messages="userForm.email.$error"
+                             ng-show="userForm.email.$invalid && !userForm.email.$pristine">
+                            <div ng-messages-include="../messages.html"></div>
+                        </div>
+
+                    </div>
+                    <div class="form-group"
+                         ng-class="{ 'has-error' : userForm.phone.$invalid && !userForm.phone.$pristine }">
+                        <label>Phone</label>
+                        <input type="text" id="phone" ui-mask="(999) 999-9999" ng-model="phone"
+                               class="form-control" name="phone" required>
+                        <p ng-show="userForm.phone.$invalid && !userForm.phone.$pristine" class="help-block">
+                            Enter a valid phone number.</p>
+
+                    </div>
+                    <div>
+                        <div class="form-group"
+                             ng-class="{ 'has-error' : userForm.bid.$invalid && !userForm.bid.$pristine}">
+                            <label>Minimum Price (${{ modalItem.item_price }})</label>
+                            <input ng-model="bid" placeholder="Price" type="number" class="form-control"
+                                   name="bid" ng-min="{{ modalItem.item_price+1 }}" ng-max="9999999" required>
+                            <!--<p ng-show="userForm.bid.$invalid && !userForm.bid.$pristine"
+                               class="help-block">Enter a valid number that is greater than: ${{
+                                modalItem.item_price }}</p>-->
+                            <div class="help-block" ng-messages="userForm.bid.$error"
+                                 ng-show="userForm.bid.$invalid && !userForm.bid.$pristine">
+                                <div ng-messages-include="../messages.html"></div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" ng-click="clearBid()" data-dismiss="modal">Close
+                </button>
+
+                <button type="submit" data-dismiss="modal" class="btn btn-primary"
+                        ng-click="makeBid(modalItem.item_id)"
+                        ng-disabled="userForm.$invalid">Submit<img height="30px" src="images/default.gif"
+                                                                   ng-show="loading"/></button>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- More Info Modal -->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel2"><strong>Auction Item </strong></h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6" style="text-align: center">
+                        <h4 style="width: 100%">{{ modalItem2.item_name }}</h4>
                         <img class="itemImage" src="{{ modalItem2.item_image }}" alt="" height="250" width="250">
                     </div>
-                    <div class="col-md-4">
-                        <div class="row" style="padding-bottom: 10px;">
-                                <label><u>Name</u></label>
-                                <p>{{ modalItem2.item_name }}</p>
-                        </div>
-                        <div class="row" style="padding-bottom: 10px;">
-                                <label><u>Description</u></label>
-                                <p>{{ modalItem2.item_desc }}</p>
-                        </div>
-                        <div class="row" style="padding-bottom: 10px;">
-                            <label><u>Current High Bidder</u></label>
-                            <p>{{ modalItem2.item_high_bidder}}</p>
-                        </div>
-                        <div class="row" style="padding-bottom: 10px;">
-                                <label><u>Current High Bid</u></label>
-                                <p>{{ modalItem2.item_price}}</p>
-                        </div>
+                    <div style="margin-top: 40px;" class="col-md-6">
+                        <table class="table table-user-information">
+                            <tbody>
+                            <tr>
+                                <td>Description</td>
+                                <td>{{ modalItem2.item_desc }}</td>
+                            </tr>
+                            <tr>
+                                <td>Highest Bidder</td>
+                                <td>{{ modalItem2.item_high_bidder}}</td>
+                            </tr>
+                            <tr>
+                                <td>Highest Bid</td>
+                                <td>${{ modalItem2.item_price}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                </div>
-                <div class="modal-footer">
-                    <button ng-click="clearBid()" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-
             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+
         </div>
     </div>
-    
-    <!-- Footer -->
-    <div class="container">
-	    <footer>
-	        <div class="row" style="padding-top:10px;">
-	            <div class="col-lg-12">
-	            	<hr>
-	                <p>Copyright &copy; 2016 Jordan Holden</p>
-	            </div>
-	        </div>
-	    </footer>
-	</div>
-    <!-- /.container -->
+</div>
+
+<!-- Footer -->
+<div class="container">
+    <footer>
+        <div class="row" style="padding-top:10px;">
+            <div class="col-lg-12">
+                <hr>
+                <p>Copyright &copy; 2016 Jordan Holden</p>
+            </div>
+        </div>
+    </footer>
+</div>
+<!-- /.container -->
 
 </body>
 

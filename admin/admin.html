@@ -148,38 +148,63 @@
                 </div>
                 <div ng-show="items.length != 0" class="row" ng-cloak>
 
-                    <!--<li >No items in this list yet!</li>-->
-
                     <div class="col-md-3 col-sm-6 hero-feature"
                          ng-repeat="item in filteredItems = (items | filter: searchTerm) | startFrom: (currentPage-1)*numPerPage | limitTo: numPerPage">
                         <div class="thumbnail">
-                            <img class="itemImage" ng-src="{{ item.item_image }}" alt="" height="300" width="300">
+                            <h4 class="text-center">{{ item.item_name }}</h4>
+                            <img ng-src="{{ item.item_image }}" class="img-responsive">
                             <div class="caption">
-                                <center>
-                                    <h3>{{ item.item_name }}</h3>
-                                    <div>
-                                        <p class="truncate">{{ item.item_desc }}</p>
+                                <div class="row">
+                                    <div style="text-align: center" class="col-lg-12 col-md-12 col-sm-12">
+                                        <span style="margin-bottom: 3px;width: 100%;font-size:12px;">HIGHEST BID</span>
+                                        <h3 style="margin-top: 3px;"><label style="font-weight: 400">${{ item.item_price}}</label>
+                                        </h3>
                                     </div>
-                                    <p>High Bidder: {{ item.item_high_bidder }}</p>
-
-                                    <p>Current High Bid: {{ item.item_price }}</p>
-
-                                    <p>
-                                        <button type="button" ng-click="setModal(item)"
-                                                class="btn btn-primary btn-lg" data-toggle="modal"
-                                                data-target="#myModal">
-                                            Edit Item
-                                        </button>
-                                        <button type="button" ng-click="setModal2(item.items_high_bid)"
-                                                class="btn btn-default btn-lg" data-toggle="modal"
-                                                data-target="#myModal2">
-                                            Current Bidder
-                                        </button>
-                                    </p>
-                                </center>
+                                </div>
+                                <p class="truncate">{{ item.item_desc }}</p>
+                                <div class="row">
+                                    <div style="padding-left:0px; padding-right: 2px;" class="col-md-6 col-sm-6 col-xs-6">
+                                        <a style="width: 100%" class="btn btn-primary btn-product" ng-click="setModal2(item.items_high_bid)"
+                                           data-toggle="modal" data-target="#myModal2"><span
+                                                class="glyphicon glyphicon-user"></span> Bidders</a>
+                                    </div>
+                                    <div style="padding-left:2px; padding-right: 0px;" class="col-md-6 col-sm-6 col-xs-6">
+                                        <a style="width: 100%" class="btn btn-success btn-product" ng-click="setModal(item)"
+                                           data-toggle="modal" data-target="#myModal"><span
+                                                class="glyphicon glyphicon-edit"></span> Edit</a>
+                                    </div>
+                                </div>
 
                             </div>
                         </div>
+                        <!--<div class="thumbnail">-->
+                            <!--<img class="itemImage" ng-src="{{ item.item_image }}" alt="" height="300" width="300">-->
+                            <!--<div class="caption">-->
+                                <!--<center>-->
+                                    <!--<h3>{{ item.item_name }}</h3>-->
+                                    <!--<div>-->
+                                        <!--<p class="truncate">{{ item.item_desc }}</p>-->
+                                    <!--</div>-->
+                                    <!--<p>High Bidder: {{ item.item_high_bidder }}</p>-->
+
+                                    <!--<p>Current High Bid: {{ item.item_price }}</p>-->
+
+                                    <!--<p>-->
+                                        <!--<button type="button" ng-click="setModal(item)"-->
+                                                <!--class="btn btn-primary btn-lg" data-toggle="modal"-->
+                                                <!--data-target="#myModal">-->
+                                            <!--Edit Item-->
+                                        <!--</button>-->
+                                        <!--<button type="button" ng-click="setModal2(item.items_high_bid)"-->
+                                                <!--class="btn btn-default btn-lg" data-toggle="modal"-->
+                                                <!--data-target="#myModal2">-->
+                                            <!--Current Bidder-->
+                                        <!--</button>-->
+                                    <!--</p>-->
+                                <!--</center>-->
+
+                            <!--</div>-->
+                        <!--</div>-->
                     </div>
 
                 </div>
@@ -301,32 +326,41 @@
                 <h4 class="modal-title" id="myModalLabel2"><strong>Bidder Details: </strong></h4>
             </div>
             <div class="modal-body">
-                <div class="row" style="padding-bottom: 10px;">
-                    <div class="col-md-4">
-                        <label>Name</label>
-                        <p>{{ modalItem2.bids_name }}</p>
+                <table class="table table-user-information">
+                    <tbody>
+                    <tr>
+                        <td>Highest Bid</td>
+                        <td>${{ modalItem2.bids_bid }}</td>
+                    </tr>
+                    <tr>
+                        <td>Bidder's Name</td>
+                        <td>{{ modalItem2.bids_name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Bidder's Email</td>
+                        <td>{{ modalItem2.bids_email }}</td>
+                    </tr>
+                    <tr>
+                        <td>Bidder's Phone</td>
+                        <td>{{ modalItem2.bids_phone }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <a style="width: 100%" class="btn btn-primary btn-product" ng-click="setEmailModal(modalItem2)"
+                           data-toggle="modal" data-target="#myEmailModal"><span
+                                class="glyphicon glyphicon-envelope"></span> Email Bidder</a>
                     </div>
-                </div>
-                <div class="row" style="padding-bottom: 10px;">
-                    <div class="col-md-6">
-                        <label>Email</label>
-                        <p>{{ modalItem2.bids_email }}</p>
-                    </div>
-                </div>
-                <div class="row" style="padding-bottom: 10px;">
-                    <div class="col-md-6">
-                        <label>Telephone</label>
-                        <p>{{ modalItem2.bids_phone }}</p>
-                    </div>
-                </div>
-                <div class="row" style="padding-bottom: 10px;">
-                    <div class="col-md-6">
-                        <label>Current High Bid</label>
-                        <p>{{ modalItem2.bids_bid }}</p>
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <a style="width: 100%" class="btn btn-success btn-product" ng-click="setAllBidsModal(modalItem2)"
+                           data-toggle="modal" data-target="#myAllBidsModal"><span
+                                class="glyphicon glyphicon-folder-open"></span> &nbsp;See All Bids</a>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
+
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
             </div>
@@ -334,6 +368,79 @@
         <!-- No Highest bid-->
         <div ng-hide="isBid" class="modal-content">
             <p> No Highest Bid</p>
+        </div>
+    </div>
+</div>
+
+<!-- Email Bidder -->
+<div class="modal fade" id="myEmailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel2"><strong>{{ emailModal.bids_name }}</strong></h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <label style="margin-top: 15px" class="col-sm-2 control-label">Email</label><h4>{{ emailModal.bids_email }}</h4>
+                    <form role="form" name="userForm">
+                        <div class="form-group" ng-class="{ 'has-error' : userForm.message.$invalid && !userForm.message.$pristine }">
+                            <label style="margin-top: 15px" class="col-sm-2 control-label">Message</label>
+                            <div class="col-sm-10">
+                                <textarea style="margin-top: 15px; resize: vertical"  ng-model="message" class="form-control" placeholder="Write a message.." rows="4" name="message"></textarea>
+                        <span style="margin-top: 15px" ng-show="userForm.message.$invalid && !userForm.message.$pristine" class="help-block">Enter a
+                            message.</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-10 col-sm-offset-2">
+                                <button style="margin-top: 15px" ng-click="sendMail('corey@timeshifts.ca')" id="submit" name="submit" type="submit" value="Send"
+                                        class="btn btn-lg btn-primary" ng-disabled="userForm.$invalid">Send <img height="30px" src="images/default.gif" ng-show="loading"/></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- All Bidders -->
+<div class="modal fade" id="myAllBidsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel2">All Bidders On Item</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped custab">
+                    <thead>
+                    <a href="#" class="btn btn-primary btn-xs pull-right"><b>+</b> Add new categories</a>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Bid</th>
+                    </tr>
+                    </thead>
+                    <tr ng-repeat="item in allBids" ng-class-odd="odd" ng-class-even="even">
+                        <td>{{item.bids_name}}</td>
+                        <td>{{item.bids_email}}</td>
+                        <td>{{item.bids_phone}}</td>
+                        <td><strong>${{ item.bids_bid }}</strong></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
         </div>
     </div>
 </div>

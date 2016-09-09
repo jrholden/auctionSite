@@ -189,6 +189,57 @@ angular.module('myApp').controller('AdminCtrl', ['JWT', 'GetItems', '$scope', '$
         }
     };
 
+    $scope.setEmailModal = function (item) {
+        console.log(item);
+        $scope.emailModal = item;
+    };
+
+    $scope.setAllBidsModal = function (item) {
+        console.log(item);
+
+        $http({
+            url: "api/bid/getItemBids.php",
+            data: item.bids_itemId,
+            method: 'POST',
+            headers: {'Content-Type': 'application/json; charset=UTF-8'}
+        }).success(function (data) {
+            console.log(data);
+            $scope.allBids = data;
+        }).error(function (err) {
+            $scope.allBids = [];
+        });
+        
+    };
+
+    $scope.sendMail = function (email) {
+
+        $scope.loading = true;
+
+        //todo error handling check if variables are empty before creating  (alerts if empty)
+        $scope.mail = {name: "Test", email: email, message: $scope.message};
+
+        $http({
+            url: "api/contact/emailBidder.php",
+            data: $scope.mail,
+            method: 'POST',
+            headers: {'Content-Type': 'application/json; charset=UTF-8'}
+        }).success(function (data) {
+            console.log("OK " + data);
+            $scope.loading = false;
+
+            //Show message
+            $('#createSuccess').fadeIn('slow');
+            setTimeout(function () {
+                $('#createSuccess').fadeOut('slow');
+            }, 3000);
+            $scope.clearBid();
+        }).error(function (err) {
+            console.log(err);
+            $scope.loading = false;
+
+        });
+    };
+    
     $scope.clearBid = function () {
 
         $scope.userForm.$setPristine();

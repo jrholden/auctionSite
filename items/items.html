@@ -219,15 +219,9 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <div class="row">
-                        <div class="col-md-10">
-                            <h4>{{ modalItem.item_name}}</h4>
-                        </div>
-                        <div class="col-md-2">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                    aria-hidden="true">&times;</span></button>
-                        </div>
-                    </div>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel"><strong>{{ modalItem.item_name }}</strong></h4>
                 </div>
                 <div class="modal-body">
 
@@ -310,25 +304,28 @@
             </div>
 
             <div class="modal-body">
-                <div class="col-md-8">
-                    <img class="itemImage" src="{{ modalItem2.item_image }}" alt="" height="250" width="250">
-                </div>
-                <div class="col-md-4">
-                    <div class="row" style="padding-bottom: 10px;">
-                        <label><u>Name</u></label>
-                        <p>{{ modalItem2.item_name }}</p>
+                <div class="row">
+                    <div class="col-md-6" style="text-align: center">
+                        <h4 style="width: 100%">{{ modalItem2.item_name }}</h4>
+                        <img class="itemImage" src="{{ modalItem2.item_image }}" alt="" height="250" width="250">
                     </div>
-                    <div class="row" style="padding-bottom: 10px;">
-                        <label><u>Item Description</u></label>
-                        <p>{{ modalItem2.item_desc }}</p>
-                    </div>
-                    <div class="row" style="padding-bottom: 10px;">
-                        <label><u>Current High Bidder</u></label>
-                        <p>{{ modalItem2.item_high_bidder}}</p>
-                    </div>
-                    <div class="row" style="padding-bottom: 10px;">
-                        <label><u>Current High Bid</u></label>
-                        <p>{{ modalItem2.item_price}}</p>
+                    <div style="margin-top: 40px;" class="col-md-6">
+                        <table class="table table-user-information">
+                            <tbody>
+                            <tr>
+                                <td>Description</td>
+                                <td>{{ modalItem2.item_desc }}</td>
+                            </tr>
+                            <tr>
+                                <td>Highest Bidder</td>
+                                <td>{{ modalItem2.item_high_bidder}}</td>
+                            </tr>
+                            <tr>
+                                <td>Highest Bid</td>
+                                <td>${{ modalItem2.item_price}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
