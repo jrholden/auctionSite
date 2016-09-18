@@ -4,22 +4,18 @@
 'use strict';
 
 angular.module('myApp').controller('ItemsCtrl', ['GetItems', 'PlaceBid', '$scope', '$http', '$timeout', function (GetItems, PlaceBid, $scope, $http, $timeout) {
-
-    console.log("We Are ITEMS");
     $('#createSuccess').hide();
-   
 
     $scope.setModal = function (item) {
 
         $scope.modalItem = item;
-       
+
 
     };
     $scope.setModal2 = function (item) {
         $scope.modalItem2 = item;
 
     };
-
 
     $scope.getItems = function () {
         $scope.loadingItems = true;
@@ -32,11 +28,9 @@ angular.module('myApp').controller('ItemsCtrl', ['GetItems', 'PlaceBid', '$scope
         });
     };
 
-
     $scope.closeAlert = function () {
         $scope.showAlert = false;
     };
-
 
     $scope.getItemIndex = function (itemId) {
         var $index = null;
@@ -54,8 +48,7 @@ angular.module('myApp').controller('ItemsCtrl', ['GetItems', 'PlaceBid', '$scope
         }
 
     };
-
-
+    
     $scope.makeBid = function (itemId) {
         $scope.loading = true;
         var $index = $scope.getItemIndex(itemId);
@@ -69,11 +62,11 @@ angular.module('myApp').controller('ItemsCtrl', ['GetItems', 'PlaceBid', '$scope
         };
 
         PlaceBid.async($scope.bid).success(function () {
-            
-            
+
+
             $scope.loading = false;
-            
-           
+
+
             $scope.items[$index].item_price = $scope.bid.bid + ".00";
             $scope.items[$index].item_high_bidder = $scope.bid.name;
 
@@ -83,7 +76,7 @@ angular.module('myApp').controller('ItemsCtrl', ['GetItems', 'PlaceBid', '$scope
     };
 
     $scope.clearBid = function () {
-        
+
         $scope.userForm.$setPristine();
         $scope.name = '';
         $scope.phone = '';

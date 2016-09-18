@@ -8,7 +8,7 @@
 require '../jwtStuff/jwtMain.php';
 include '../database.php';
 $creds = json_decode(file_get_contents("php://input"), true);
-$secretKey = "43432323243";
+$secretKey = "43432323243767676575675757575757567567657963535309324832098495832507468453574203859047603234685468748486556657267512731857623785267513761732675238/59261753297627352765235879626742";
 if($creds['from'] === "login") {
     $token = array();
     

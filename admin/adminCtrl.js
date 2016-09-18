@@ -5,61 +5,53 @@
 
 angular.module('myApp').controller('AdminCtrl', ['JWT', 'GetItems', '$scope', '$http', '$timeout', function (JWT, GetItems, $scope, $http, $timeout) {
 
-    console.log("We Are Admin");
-
-
     $('#createSuccess').hide();
     $('#editSuccess').hide();
 
-
-
     var fileInput = document.getElementById('file');
-
-
+    
     fileInput.addEventListener('change', function (e) {
 
         var file = fileInput.files[0];
         var imageType = /image.*/;
-        
-            if (file.type.match(imageType)) {
 
-                var reader = new FileReader();
+        if (file.type.match(imageType)) {
 
-                reader.onload = function () {
-                    var canvas = document.createElement('canvas'),
-                        ctx = canvas.getContext('2d');
+            var reader = new FileReader();
+
+            reader.onload = function () {
+                var canvas = document.createElement('canvas'),
+                    ctx = canvas.getContext('2d');
 
 
-                    // create a new image from user selected file
-                    var img = new Image();
-                    img.onload = function () {
-                        // set canvas size to image size
-                        canvas.width = 350;
-                        canvas.height = 350;
+                // create a new image from user selected file
+                var img = new Image();
+                img.onload = function () {
+                    // set canvas size to image size
+                    canvas.width = 350;
+                    canvas.height = 350;
 
-                        // scale and draw image with offset
-                        ctx.drawImage(img, 0, 0, 350, 350);
-                        $scope.picture = canvas.toDataURL('image/jpeg', 0.4);
-                    };
-                    img.src = reader.result;
-
+                    // scale and draw image with offset
+                    ctx.drawImage(img, 0, 0, 350, 350);
+                    $scope.picture = canvas.toDataURL('image/jpeg', 0.4);
                 };
-                reader.readAsDataURL(file);
-            } else {
-                alert("Please submit an image!");
-                
-            }
+                img.src = reader.result;
+
+            };
+            reader.readAsDataURL(file);
+        } else {
+            alert("Please submit an image!");
+
+        }
 
     });
-    
-
 
 
     $scope.makeItem = function () {
-        
-        if($scope.picture === '' || $scope.picture === undefined || $scope.picture === null){
+
+        if ($scope.picture === '' || $scope.picture === undefined || $scope.picture === null) {
             alert("Please enter a valid picture!");
-        }else {
+        } else {
             $scope.loading = true;
 
             $scope.item = {
@@ -69,7 +61,6 @@ angular.module('myApp').controller('AdminCtrl', ['JWT', 'GetItems', '$scope', '$
                 description: $scope.description,
                 currentBidder: "No High Bidder"
             };
-            console.log($scope.item);
 
             $http({
                 url: "api/item/insertItem.php",
@@ -77,8 +68,6 @@ angular.module('myApp').controller('AdminCtrl', ['JWT', 'GetItems', '$scope', '$
                 method: 'POST',
                 headers: {'Content-Type': 'application/json; charset=UTF-8'}
             }).success(function (data) {
-
-                console.log(data);
                 //Show message
                 $('#createSuccess').fadeIn('slow');
                 setTimeout(function () {
@@ -91,7 +80,6 @@ angular.module('myApp').controller('AdminCtrl', ['JWT', 'GetItems', '$scope', '$
 
                 $scope.itemCreate = true;
             }).error(function (err) {
-                console.log("err");
             });
         }
     };
@@ -105,7 +93,6 @@ angular.module('myApp').controller('AdminCtrl', ['JWT', 'GetItems', '$scope', '$
             method: 'POST',
             headers: {'Content-Type': 'application/json; charset=UTF-8'}
         }).success(function (data) {
-            console.log(data);
             //Show message
             $('#editSuccess').fadeIn('slow');
             setTimeout(function () {
@@ -190,33 +177,30 @@ angular.module('myApp').controller('AdminCtrl', ['JWT', 'GetItems', '$scope', '$
     };
 
     $scope.setEmailModal = function (item) {
-        console.log(item);
+
         $scope.emailModal = item;
     };
 
     $scope.setAllBidsModal = function (item) {
-        console.log(item);
-
         $http({
             url: "api/bid/getItemBids.php",
             data: item.bids_itemId,
             method: 'POST',
             headers: {'Content-Type': 'application/json; charset=UTF-8'}
         }).success(function (data) {
-            console.log(data);
             $scope.allBids = data;
         }).error(function (err) {
             $scope.allBids = [];
         });
-        
+
     };
 
-    $scope.sendMail = function (email) {
+    $scope.sendMail = function (name, email) {
 
         $scope.loading = true;
 
         //todo error handling check if variables are empty before creating  (alerts if empty)
-        $scope.mail = {name: "Test", email: email, message: $scope.message};
+        $scope.mail = {name: name, email: email, message: $scope.message};
 
         $http({
             url: "api/contact/emailBidder.php",
@@ -224,7 +208,7 @@ angular.module('myApp').controller('AdminCtrl', ['JWT', 'GetItems', '$scope', '$
             method: 'POST',
             headers: {'Content-Type': 'application/json; charset=UTF-8'}
         }).success(function (data) {
-            console.log("OK " + data);
+
             $scope.loading = false;
 
             //Show message
@@ -234,12 +218,11 @@ angular.module('myApp').controller('AdminCtrl', ['JWT', 'GetItems', '$scope', '$
             }, 3000);
             $scope.clearBid();
         }).error(function (err) {
-            console.log(err);
             $scope.loading = false;
 
         });
     };
-    
+
     $scope.clearBid = function () {
 
         $scope.userForm.$setPristine();
@@ -247,7 +230,7 @@ angular.module('myApp').controller('AdminCtrl', ['JWT', 'GetItems', '$scope', '$
         $scope.price = '';
         $scope.picture = '';
         $scope.description = '';
-        $scope.file='';
+        $scope.file = '';
     };
 
     $scope.getItems = function () {
@@ -257,7 +240,7 @@ angular.module('myApp').controller('AdminCtrl', ['JWT', 'GetItems', '$scope', '$
             $scope.totalItems = data[1];
         });
     };
-  
+
     $scope.getItems();
 
 }]);

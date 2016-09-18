@@ -16,7 +16,7 @@ $mail->CharSet = "UTF-8";
 $adminEmail = "hospicepeiauction@gmail.com";
 $adminPass = "teeth4lyfe";
 $adminName = "Auction Admin";
-$adminSubject = "Hospice PEI Auction";
+$adminSubject = "Hospice PEI Auction - Winning Bid!";
 
 //get data from post and decode
 $data = json_decode(file_get_contents("php://input"), true);
@@ -49,13 +49,13 @@ $mail->SMTPSecure = "tls";
 $mail->Port = 587;
 
 //To address and name
-$mail->addAddress($adminEmail,$adminName);
+$mail->addAddress($email,$name);
 
 //From email address and name
-$mail->setFrom($email,$name);
+$mail->setFrom($adminEmail,$adminName);
 
 //Address to which recipient will reply
-$mail->addReplyTo($email,$name);
+$mail->addReplyTo($adminEmail,$adminName);
 
 //Send HTML or Plain Text email
 $mail->isHTML(true);
@@ -64,24 +64,7 @@ $mail->Subject = $adminSubject;
 $mail->Body = "<i>$message</i>";
 $mail->AltBody = "This is the plain text version of the email content";
 
-if(!$mail->send())
-{
-    echo "Mailer Error: " . $mail->ErrorInfo;
-}
-else
-{
-
-    $body = file_get_contents('../emailTemplates/emailConfirm.html');
-    //To address and name
-    $mail->addAddress($email,$name);
-    //From email address and name
-    $mail->setFrom($adminEmail,$adminName);
-    //Send HTML or Plain Text email
-    $mail->isHTML(true);
-
-    $mail->Subject = $adminSubject;
-    $mail->Body = $body;
-    $mail->AltBody = "This is the plain text version of the email content";
+ 
     if(!$mail->send())
     {
         echo "Mailer Error: " . $mail->ErrorInfo;
@@ -90,14 +73,6 @@ else
     {
         echo  "Message has been sent Successfully";
     }
-}
 
-/*//the message
-$msg = "Message from: " . $name . "\n\n Email: " . $email . "\n\n Message: " . $message . "";
 
-//if lines are longer than 70 characters wrap
-$msg = wordwrap($msg, 70);
-echo $message;
 
-// send emails
-mail("jordan_holden@live.ca", "Contact Request", $msg, "From: " . $email . "" . "\r\n");*/

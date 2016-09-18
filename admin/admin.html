@@ -191,87 +191,9 @@
 
                             </div>
                         </div>
-                        <!--<div class="thumbnail">-->
-                        <!--<img class="itemImage" ng-src="{{ item.item_image }}" alt="" height="300" width="300">-->
-                        <!--<div class="caption">-->
-                        <!--<center>-->
-                        <!--<h3>{{ item.item_name }}</h3>-->
-                        <!--<div>-->
-                        <!--<p class="truncate">{{ item.item_desc }}</p>-->
-                        <!--</div>-->
-                        <!--<p>High Bidder: {{ item.item_high_bidder }}</p>-->
-
-                        <!--<p>Current High Bid: {{ item.item_price }}</p>-->
-
-                        <!--<p>-->
-                        <!--<button type="button" ng-click="setModal(item)"-->
-                        <!--class="btn btn-primary btn-lg" data-toggle="modal"-->
-                        <!--data-target="#myModal">-->
-                        <!--Edit Item-->
-                        <!--</button>-->
-                        <!--<button type="button" ng-click="setModal2(item.items_high_bid)"-->
-                        <!--class="btn btn-default btn-lg" data-toggle="modal"-->
-                        <!--data-target="#myModal2">-->
-                        <!--Current Bidder-->
-                        <!--</button>-->
-                        <!--</p>-->
-                        <!--</center>-->
-
-                        <!--</div>-->
-                        <!--</div>-->
                     </div>
 
                 </div>
-
-
-                <!--<div class="panel-body">
-                    &lt;!&ndash; Project One &ndash;&gt;
-                    <div class="container">
-                        <div ng-show="items.length == 0">
-                            No Items
-                        </div>
-                        <div ng-show="items.length != 0" class="container">
-                            <div class="row text-center">
-                            <div id="myCarousel">
-                                &lt;!&ndash; Indicators &ndash;&gt;
-                                <ol class="carousel-indicators">
-                                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-
-                                </ol>
-                                &lt;!&ndash; Wrapper for slides &ndash;&gt;
-                                <div class="carousel-inner" role="listbox">
-                                    <div class="item" ng-class="{active:!$first}" ng-animate="'animate'" ng-repeat="item in items | filter: searchTerm" ng-cloak>
-
-
-                                            <div class="thumbnail">
-                                                <img class="itemImage" ng-src="{{ item.item_image }}" alt="">
-                                                <div class="caption">
-                                                    <h3>{{ item.item_name }}</h3>
-                                                    <center>
-                                                        <p class="truncate">{{ item.item_desc }}</p>
-                                                    </center>
-                                                    <p>
-                                                        <button type="button" ng-click="setModal(item)"
-                                                                class="btn btn-primary btn-lg" data-toggle="modal"
-                                                                data-target="#myModal">
-                                                            Edit Item
-                                                        </button>
-                                                        <button type="button" ng-click="setModal2(item.items_high_bid)"
-                                                                class="btn btn-default btn-lg" data-toggle="modal"
-                                                                data-target="#myModal2">
-                                                            Current Bidder
-                                                        </button>
-                                                    </p>
-                                                </div>
-                                            </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                            </div>
-                    </div>-->
-
 
                 <!-- /.row -->
                 <hr>
@@ -421,7 +343,7 @@
 
                         <div class="form-group">
                             <div class="col-sm-10 col-sm-offset-2">
-                                <button style="margin-top: 15px" ng-click="sendMail('corey@timeshifts.ca')" id="submit"
+                                <button style="margin-top: 15px" ng-click="sendMail(emailModal.bids_name, emailModal.bids_email)" id="submit"
                                         name="submit" type="submit" value="Send"
                                         class="btn btn-lg btn-primary" ng-disabled="userForm.$invalid">Send <img
                                         height="30px" src="images/default.gif" ng-show="loading"/></button>

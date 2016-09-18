@@ -1,15 +1,6 @@
-/**
- * Created by Corey Weber on 2016-07-03.
- */
-/*var console = {};
- console.log = function(){};*/
-
 'use strict';
 
 angular.module('myApp').controller('HomeCtrl', ['GetItems', 'PlaceBid', '$scope', '$http', function (GetItems, PlaceBid, $scope, $http) {
-
-    console.log("We Are Home");
-    
     $('#createSuccess').hide();
 
     $scope.getItems = function () {
@@ -33,12 +24,12 @@ angular.module('myApp').controller('HomeCtrl', ['GetItems', 'PlaceBid', '$scope'
 
     $scope.setModal2 = function (item) {
         $scope.modalItem2 = item;
-        
+
     };
 
     $scope.setModal = function (item) {
         $scope.modalItem = item;
-        
+
     };
 
     $scope.getItemIndex = function (itemId) {

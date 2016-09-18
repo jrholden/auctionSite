@@ -1,8 +1,6 @@
 'use strict';
 
 angular.module('myApp').controller('ContactCtrl', ['$scope', '$http', '$sce', function ($scope, $http, $sce) {
-
-    console.log("We Are Contact");
     $('#createSuccess').hide();
 
     $scope.sendMail = function () {
@@ -18,9 +16,8 @@ angular.module('myApp').controller('ContactCtrl', ['$scope', '$http', '$sce', fu
             method: 'POST',
             headers: {'Content-Type': 'application/json; charset=UTF-8'}
         }).success(function (data) {
-            console.log("OK " + data);
             $scope.loading = false;
-         
+
             //Show message
             $('#createSuccess').fadeIn('slow');
             setTimeout(function () {
@@ -28,7 +25,6 @@ angular.module('myApp').controller('ContactCtrl', ['$scope', '$http', '$sce', fu
             }, 3000);
             $scope.clearBid();
         }).error(function (err) {
-            console.log(err);
             $scope.loading = false;
 
         });

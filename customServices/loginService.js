@@ -4,12 +4,12 @@
 'use strict';
 
 angular.module('loginService', [])
-    .factory('JWT', function($http, $window) {
+    .factory('JWT', function ($http, $window) {
         var getJWT = {
-            test: function() {
+            test: function () {
                 return $window.localStorage.token;
             },
-            async: function() {
+            async: function () {
                 var creds = {
                     toke: this.test(),
                     from: "admin"
@@ -21,9 +21,9 @@ angular.module('loginService', [])
                     method: 'POST',
                     headers: {'Content-Type': 'application/json; charset=UTF-8'}
                 }).success(function () {
-                    
-                }).error(function(){
-                   
+
+                }).error(function () {
+
                     $window.location.href = '#/login';
                 });
                 // Return the promise to the controller

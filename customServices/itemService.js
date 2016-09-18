@@ -12,10 +12,8 @@ angular.module('itemService', [])
 
                     if (response.data != '0 results') {
                         var items = response.data;
-                        console.log(items);
                         var totalItems = items.length;
                         var data = [items, totalItems];
-                        //$window.sessionStorage.itemData = data;
                     } else {
                         items = [];
                         totalItems = 0;
@@ -49,7 +47,7 @@ angular.module('itemService', [])
                     setTimeout(function () {
                         $('#createSuccess').fadeOut('slow');
                     }, 3000);
-                    
+
 
                 });
                 // Return the promise to the controller
